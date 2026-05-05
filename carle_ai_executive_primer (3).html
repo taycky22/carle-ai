@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Carle | The Executive AI Primer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#1c1e22;
+  --surface:#26292f;
+  --surface-2:#2e3239;
+  --surface-3:#383c44;
+  --border:rgba(255,255,255,0.08);
+  --border-bright:rgba(255,255,255,0.16);
+  --text:#e8ecf5;
+  --text-mid:#bcc4d4;
+  --text-dim:#8a92ad;
+  --blue:#3b82f6;
+  --blue-soft:#60a8ff;
+  --purple:#8b5cf6;
+  --purple-soft:#b48cff;
+  --green:#10b981;
+  --green-soft:#5dd4a8;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --red-soft:#ff8a96;
+}
+html{
+  scroll-behavior:smooth;
+  color-scheme:dark;
+  background-color:#1c1e22;
+}
+body{
+  font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  background-color:#1c1e22 !important;
+  color:#e8ecf5;
+  line-height:1.65;
+  font-size:15.5px;
+  margin:0;
+  min-height:100vh;
+}
+
+/* HERO */
+.hero{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139,92,246,0.15), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.12), transparent 50%),
+    linear-gradient(135deg,#0a1428 0%,#1a1060 50%,#2d1b69 100%);
+  padding:88px 40px 72px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:20px;
+}
+h1.hero-title{
+  font-size:52px;font-weight:700;line-height:1.08;
+  background:linear-gradient(135deg,#fff 0%,#c0a8ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:18px;letter-spacing:-1px;
+}
+.hero-sub{
+  font-size:19px;color:#b0b8d0;max-width:680px;margin:0 auto;line-height:1.55;
+}
+.hero-time{
+  margin-top:36px;font-size:11px;color:var(--text-dim);
+  letter-spacing:2px;text-transform:uppercase;font-weight:600;
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:56px 32px;background-color:#1c1e22;}
+
+/* TOC */
+.toc{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:28px 32px;margin-bottom:56px;
+}
+.toc-label{
+  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:16px;
+}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 28px;}
+.toc-list a{
+  color:var(--text-mid);text-decoration:none;font-size:13.5px;
+  display:flex;gap:12px;padding:7px 0;transition:color .15s;
+}
+.toc-list a:hover{color:var(--blue-soft);}
+.toc-list a span{
+  color:var(--text-dim);font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:11px;min-width:20px;
+}
+
+/* SECTION */
+.section{margin-bottom:64px;scroll-margin-top:24px;}
+.section-num{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:10px;
+}
+h2.section-title{
+  font-size:32px;font-weight:700;line-height:1.2;margin-bottom:20px;
+  color:var(--text);letter-spacing:-0.5px;
+}
+.lede{
+  font-size:17px;color:#d8dde8;line-height:1.65;margin-bottom:20px;
+}
+.lede strong{color:#fff;font-weight:600;}
+.lede em{color:var(--blue-soft);font-style:normal;font-weight:500;}
+
+/* FOUNDATION GRID — the four AI companies */
+.foundation-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0;
+}
+.fnd-card{
+  background:linear-gradient(135deg,var(--surface),var(--surface-2));
+  border:1px solid var(--border-bright);border-radius:14px;
+  padding:20px 16px;text-align:center;
+}
+.fnd-name{font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.3px;}
+.fnd-product{font-size:12px;color:var(--purple-soft);margin-top:4px;font-weight:600;letter-spacing:0.5px;}
+
+/* WRAPPER STACK */
+.wrapper-stack{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.ws-row{
+  border-radius:10px;padding:18px 22px;margin:8px 0;
+}
+.ws-row.vendors{
+  background:linear-gradient(90deg,rgba(245,158,11,0.10),rgba(245,158,11,0.04));
+  border:1px solid rgba(245,158,11,0.22);
+}
+.ws-row.foundation{
+  background:linear-gradient(90deg,rgba(16,185,129,0.12),rgba(59,130,246,0.08));
+  border:1px solid rgba(16,185,129,0.25);
+}
+.ws-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.ws-row.vendors .ws-tag{color:var(--amber);}
+.ws-row.foundation .ws-tag{color:var(--green-soft);}
+.ws-list{display:flex;flex-wrap:wrap;gap:8px;}
+.ws-pill{
+  background:rgba(255,255,255,0.09);border:1px solid var(--border);
+  padding:5px 12px;border-radius:6px;font-size:12.5px;color:#fff;font-weight:500;
+}
+.ws-arrow{
+  text-align:center;color:var(--text-dim);font-size:13px;
+  margin:6px 0;letter-spacing:6px;
+}
+
+/* PAIRED CARDS */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0;}
+.pair-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 22px;position:relative;overflow:hidden;
+}
+.pair-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.pair-card.good::before{background:var(--green);}
+.pair-card.bad::before{background:var(--red);}
+.pair-card.real::before{background:var(--amber);}
+.pair-card.real .pair-tag{color:var(--amber);}
+.cost-list{margin-top:14px;list-style:none;padding-left:0;}
+.cost-list li{position:relative;padding:6px 0 6px 20px;font-size:14px;color:var(--text-mid);line-height:1.5;}
+.cost-list li::before{content:'';position:absolute;left:6px;top:14px;width:5px;height:5px;background:var(--text-dim);border-radius:50%;}
+.pair-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.pair-card.good .pair-tag{color:var(--green-soft);}
+.pair-card.bad .pair-tag{color:var(--red-soft);}
+.pair-headline{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.35;}
+.pair-body{font-size:14px;color:var(--text-mid);line-height:1.6;}
+
+/* THREE BUCKETS */
+.buckets{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+.bucket{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+}
+.bucket-marker{
+  width:54px;height:54px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.5px;
+}
+.bucket.buy .bucket-marker{background:linear-gradient(135deg,#10b981,#5dd4a8);}
+.bucket.invest .bucket-marker{background:linear-gradient(135deg,#3b82f6,#60a8ff);}
+.bucket.walk .bucket-marker{background:linear-gradient(135deg,#ef4444,#ff8a96);}
+.bucket-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.bucket.buy .bucket-tag{color:var(--green-soft);}
+.bucket.invest .bucket-tag{color:var(--blue-soft);}
+.bucket.walk .bucket-tag{color:var(--red-soft);}
+.bucket-title{font-size:17px;font-weight:600;color:#fff;margin-bottom:4px;line-height:1.35;}
+.bucket-desc{font-size:14px;color:var(--text-mid);line-height:1.55;}
+
+/* FRONT DOOR */
+.frontdoor{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:28px 24px;margin:24px 0;
+}
+.fd-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--purple-soft);text-align:center;margin-bottom:18px;
+}
+.fd-doors{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.fd-door{
+  background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(59,130,246,0.12));
+  border:1px solid rgba(139,92,246,0.4);border-radius:12px;
+  padding:24px 20px;text-align:center;
+}
+.fd-door-name{font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.5px;}
+.fd-door-who{font-size:12px;color:var(--purple-soft);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;}
+.fd-vs{
+  text-align:center;font-size:11px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:2px;font-weight:600;margin:8px 0 14px;
+}
+.fd-visit{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.fd-chip{
+  background:var(--surface-2);border:1px solid var(--border);
+  padding:7px 14px;border-radius:20px;
+  font-size:12px;color:var(--text-mid);font-weight:500;
+}
+
+/* BIG STAT */
+.stat-hero{
+  background:linear-gradient(135deg,rgba(16,185,129,0.10),rgba(59,130,246,0.06));
+  border:1px solid rgba(16,185,129,0.3);border-radius:16px;
+  padding:32px 28px;margin:24px 0;text-align:center;
+}
+.stat-num{
+  font-size:64px;font-weight:800;line-height:1;letter-spacing:-2px;
+  background:linear-gradient(135deg,#10b981,#60a8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+.stat-caption{
+  font-size:14px;color:#d8dde8;line-height:1.5;max-width:520px;margin:0 auto;
+}
+.stat-caption strong{color:#fff;font-weight:600;}
+
+/* ICEBERG */
+.iceberg{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  margin:24px 0;overflow:hidden;
+}
+.iceberg-top{
+  background:linear-gradient(180deg,rgba(96,168,255,0.12),rgba(96,168,255,0.04));
+  padding:20px 24px;border-bottom:2px dashed rgba(96,168,255,0.3);
+}
+.iceberg-bottom{
+  background:linear-gradient(180deg,rgba(20,26,46,0.6),rgba(20,26,46,0.95));
+  padding:20px 24px;
+}
+.iceberg-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.iceberg-top .iceberg-tag{color:var(--blue-soft);}
+.iceberg-bottom .iceberg-tag{color:var(--amber);}
+.iceberg-headline{font-size:15px;font-weight:600;color:#fff;margin-bottom:10px;}
+.iceberg-list{list-style:none;}
+.iceberg-list li{
+  font-size:13.5px;color:var(--text-mid);padding:4px 0;padding-left:18px;position:relative;
+}
+.iceberg-list li::before{
+  content:'';position:absolute;left:4px;top:11px;width:5px;height:5px;
+  background:var(--amber);border-radius:50%;
+}
+.iceberg-pct{font-size:13px;color:var(--text-dim);font-weight:600;}
+
+/* CURVES (SVG) */
+.curves{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.curves-svg{width:100%;height:200px;}
+.curves-legend{display:flex;justify-content:center;gap:32px;margin-top:14px;flex-wrap:wrap;}
+.curve-key{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);}
+.curve-dot{width:12px;height:3px;border-radius:2px;}
+.curve-dot.cheap{background:var(--green);}
+.curve-dot.premium{background:var(--red);}
+.curve-dot.frontier{background:var(--green);}
+.curve-dot.locked{background:var(--amber);}
+
+/* LAG BARS */
+.lag{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.lag-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;align-items:center;margin:12px 0;}
+.lag-name{font-size:13.5px;font-weight:600;color:#fff;}
+.lag-bar{height:10px;border-radius:5px;}
+.lag-bar.b1{width:100%;background:linear-gradient(90deg,#10b981,#5dd4a8);}
+.lag-bar.b2{width:85%;background:linear-gradient(90deg,#10b981,#60a8ff);}
+.lag-bar.b3{width:50%;background:linear-gradient(90deg,#f59e0b,#ef4444);}
+.lag-tag{font-size:10px;color:var(--text-mid);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+
+/* ARCH DIAGRAM */
+.arch-diagram{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+  padding:24px 20px;margin:18px 0;
+}
+.arch-tier{
+  background:linear-gradient(135deg,var(--surface-3),var(--surface-2));
+  border:1px solid var(--border-bright);border-radius:10px;
+  padding:14px 18px;margin:8px 0;display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;
+}
+.arch-tier.front{border-left:3px solid var(--purple);}
+.arch-tier.knowledge{border-left:3px solid var(--blue);}
+.arch-tier.transactions{border-left:3px solid var(--amber);}
+.arch-tier.glue{border-left:3px solid var(--green);}
+.arch-tier-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+.arch-tier.front .arch-tier-label{color:var(--purple-soft);}
+.arch-tier.knowledge .arch-tier-label{color:var(--blue-soft);}
+.arch-tier.transactions .arch-tier-label{color:var(--amber);}
+.arch-tier.glue .arch-tier-label{color:var(--green-soft);}
+.arch-tier-systems{display:flex;flex-wrap:wrap;gap:6px;}
+.arch-chip{
+  background:rgba(255,255,255,0.09);border:1px solid var(--border);
+  padding:6px 12px;border-radius:6px;font-size:12px;color:#fff;font-weight:500;
+}
+.arch-flow{
+  text-align:center;color:var(--text-dim);font-size:18px;margin:2px 0;line-height:1;letter-spacing:4px;
+}
+.carle-cloud-block{
+  background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(245,158,11,0.05));
+  border:1px solid rgba(251,191,36,0.3);border-radius:14px;
+  padding:22px 24px;margin:24px 0 18px;
+}
+.cc-label{
+  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:12px;
+}
+.cc-headline{font-size:16px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.4;}
+.cc-body{font-size:14.5px;color:#d8dde8;line-height:1.65;margin-bottom:14px;}
+.cc-body strong{color:#fff;}
+.cc-systems{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* SCORECARD */
+.scorecard{
+  background:linear-gradient(135deg,rgba(139,92,246,0.10),rgba(59,130,246,0.08));
+  border:1px solid rgba(139,92,246,0.3);border-radius:16px;
+  padding:28px;margin:24px 0;
+}
+.sc-label{
+  font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:6px;
+}
+.sc-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:18px;letter-spacing:-0.3px;}
+.sc-tests{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.sc-test{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start;
+}
+.sc-num{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(139,92,246,0.2);border:1px solid rgba(139,92,246,0.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--purple-soft);
+}
+.sc-q{font-size:14px;font-weight:600;color:#fff;line-height:1.4;margin-bottom:3px;}
+.sc-hint{font-size:12.5px;color:var(--text-mid);line-height:1.5;}
+.sc-rubric{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px;}
+.sc-r{border-radius:8px;padding:10px 12px;text-align:center;font-size:12px;font-weight:700;}
+.sc-r.buy{background:rgba(16,185,129,0.15);color:var(--green-soft);border:1px solid rgba(16,185,129,0.3);}
+.sc-r.invest{background:rgba(245,158,11,0.15);color:var(--amber);border:1px solid rgba(245,158,11,0.3);}
+.sc-r.walk{background:rgba(239,68,68,0.15);color:var(--red-soft);border:1px solid rgba(239,68,68,0.3);}
+.sc-r-score{display:block;font-size:14px;margin-bottom:2px;letter-spacing:-0.3px;}
+.sc-r-action{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+
+/* HALLWAY TEST */
+.hallway{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.hw-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:6px;
+}
+.hw-title{font-size:18px;font-weight:600;color:#fff;margin-bottom:16px;}
+.hw-qs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.hw-q{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;
+}
+.hw-q-num{font-size:11px;font-weight:800;color:var(--purple-soft);letter-spacing:1.5px;margin-bottom:8px;}
+.hw-q-text{font-size:13px;color:#fff;font-weight:600;line-height:1.4;margin-bottom:8px;}
+.hw-q-rule{font-size:12px;color:var(--text-mid);line-height:1.5;}
+.hw-q-rule em{color:var(--green-soft);font-style:normal;font-weight:600;}
+.hw-q-rule strong{color:var(--red-soft);font-weight:600;}
+
+/* DOLLAR */
+.dollar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+.dollar-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 22px;
+}
+.dollar-card.bad{border-top:3px solid var(--red);}
+.dollar-card.good{border-top:3px solid var(--green);}
+.dollar-tag{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.dollar-card.bad .dollar-tag{color:var(--red-soft);}
+.dollar-card.good .dollar-tag{color:var(--green-soft);}
+.dollar-amount{font-size:32px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.dollar-arrow{font-size:14px;color:var(--text-dim);margin:8px 0;}
+.dollar-result{font-size:14px;color:#d8dde8;line-height:1.5;}
+.dollar-result strong{color:#fff;font-weight:600;}
+
+/* TIER */
+.tier{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:16px 20px;margin:8px 0;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+}
+.tier-num{
+  width:36px;height:36px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(59,130,246,0.2));
+  border:1px solid rgba(139,92,246,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:var(--purple-soft);
+}
+.tier-body h5{font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;}
+.tier-body p{font-size:13.5px;color:var(--text-mid);line-height:1.55;}
+
+/* COMMITMENTS */
+.commitments{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+.commit{
+  background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(59,130,246,0.06));
+  border:1px solid rgba(139,92,246,0.3);border-radius:14px;
+  padding:24px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+}
+.commit-num{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#8b5cf6,#3b82f6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;
+}
+.commit-content h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.2px;}
+.commit-content p{font-size:14px;color:#d2d8e6;line-height:1.6;}
+
+/* DOC PIPELINE */
+.pipeline{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 20px;margin:24px 0;
+}
+.pipe-row{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.pipe-row:last-child{border-bottom:none;}
+.pipe-num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#10b981,#3b82f6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:#fff;
+}
+.pipe-content strong{display:block;color:#fff;font-size:14.5px;margin-bottom:3px;}
+.pipe-content span{color:var(--text-mid);font-size:13px;line-height:1.5;}
+
+/* WORKFORCE IMPACT GRID */
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+.impact-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:18px 20px;
+}
+.impact-team{
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:8px;
+}
+.impact-shift{font-size:13.5px;color:#d8dde8;line-height:1.55;}
+.impact-shift strong{color:#fff;}
+
+/* PULL */
+.pull{
+  font-size:20px;line-height:1.45;color:#fff;font-weight:500;
+  border-left:3px solid var(--purple);padding:12px 0 12px 22px;
+  margin:28px 0;letter-spacing:-0.3px;
+}
+
+/* CALLOUT */
+.callout{
+  background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.06));
+  border-left:3px solid var(--blue);border-radius:0 10px 10px 0;
+  padding:18px 22px;margin:20px 0;
+}
+.callout-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:6px;
+}
+.callout-body{font-size:14.5px;color:#d2d8e6;line-height:1.65;}
+.callout.warn{border-left-color:var(--amber);background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.04));}
+.callout.warn .callout-label{color:var(--amber);}
+.callout.win{border-left-color:var(--green);background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(59,130,246,.04));}
+.callout.win .callout-label{color:var(--green-soft);}
+
+/* ACCORDIONS */
+details{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  margin-top:14px;transition:border-color .2s;
+}
+details[open]{border-color:var(--border-bright);}
+summary{
+  list-style:none;cursor:pointer;padding:16px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-size:13px;font-weight:600;color:var(--blue-soft);
+  letter-spacing:0.3px;user-select:none;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{
+  content:'+';font-size:22px;font-weight:300;color:var(--text-dim);
+  transition:transform .25s;line-height:1;
+}
+details[open] summary::after{transform:rotate(45deg);color:var(--purple-soft);}
+summary:hover{color:#fff;}
+.deep{
+  padding:6px 26px 26px;border-top:1px solid var(--border);margin-top:0;
+  font-size:14.5px;color:#d2d8e6;line-height:1.7;
+}
+.deep p{margin:14px 0;}
+.deep h4{
+  font-size:12px;font-weight:800;color:#fff;margin:22px 0 10px;
+  text-transform:uppercase;letter-spacing:1.2px;
+}
+.deep ul{margin:10px 0 14px;padding-left:0;list-style:none;}
+.deep ul li{position:relative;padding:5px 0 5px 22px;line-height:1.6;}
+.deep ul li::before{
+  content:'';position:absolute;left:6px;top:13px;
+  width:6px;height:6px;border-radius:50%;background:var(--purple);
+}
+.deep strong{color:#fff;font-weight:600;}
+.deep em{color:var(--blue-soft);font-style:normal;font-weight:500;}
+.deep code{
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);
+  padding:1px 7px;border-radius:5px;font-size:13px;color:var(--purple-soft);
+  font-family:'SF Mono','Consolas',monospace;
+}
+
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border-bright),transparent);
+  margin:0 0 56px;
+}
+
+.footer{
+  border-top:1px solid var(--border);padding:32px;margin-top:32px;
+  text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;
+}
+.footer span{color:var(--purple-soft);}
+
+@media(max-width:680px){
+  h1.hero-title{font-size:36px;}
+  .hero{padding:64px 24px 52px;}
+  .wrap{padding:40px 22px;}
+  h2.section-title{font-size:25px;}
+  .toc-list{grid-template-columns:1fr;}
+  .pair{grid-template-columns:1fr;}
+  .fd-doors{grid-template-columns:1fr;}
+  .hw-qs{grid-template-columns:1fr;}
+  .dollar{grid-template-columns:1fr;}
+  .arch-tier{grid-template-columns:1fr;gap:8px;}
+  .sc-rubric{grid-template-columns:1fr;}
+  .bucket{grid-template-columns:1fr;text-align:center;}
+  .bucket-marker{justify-self:center;}
+  .commit{grid-template-columns:1fr;text-align:center;}
+  .commit-num{justify-self:center;}
+  .foundation-grid{grid-template-columns:1fr 1fr;}
+  .impact-grid{grid-template-columns:1fr;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  details{break-inside:avoid;border-color:#ccc;}
+  details[open] summary::after, details summary::after{content:'';}
+  .hero{background:#0a1428;-webkit-print-color-adjust:exact;}
+  .stat-num{-webkit-print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Carle Health · For Executive Leadership</div>
+  <h1 class="hero-title">AI Strategy Primer</h1>
+  <p class="hero-sub">A framework for evaluating AI sales pitches, building internal capability, and deciding where vendors fit. Built to be scanned at the surface or read in depth.</p>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <div class="toc-label">Contents</div>
+  <ul class="toc-list">
+    <li><a href="#s1"><span>01</span>The bottom line</a></li>
+    <li><a href="#s2"><span>02</span>Who actually builds AI</a></li>
+    <li><a href="#s3"><span>03</span>Where Carle people work</a></li>
+    <li><a href="#s4"><span>04</span>Three buckets of AI</a></li>
+    <li><a href="#s5"><span>05</span>Vendors are reselling raw AI</a></li>
+    <li><a href="#s6"><span>06</span>The agent builder problem</a></li>
+    <li><a href="#s7"><span>07</span>Picking the model</a></li>
+    <li><a href="#s8"><span>08</span>Build vs. buy: real math</a></li>
+    <li><a href="#s9"><span>09</span>What building actually costs</a></li>
+    <li><a href="#s10"><span>10</span>The target architecture</a></li>
+    <li><a href="#s11"><span>11</span>Documentation as the moat</a></li>
+    <li><a href="#s12"><span>12</span>Training and workforce</a></li>
+    <li><a href="#s13"><span>13</span>What we're asking for</a></li>
+  </ul>
+</div>
+
+<!-- ========== SECTION 1 ========== -->
+<div class="section" id="s1">
+  <div class="section-num">Section 01</div>
+  <h2 class="section-title">The bottom line</h2>
+  <p class="lede">Every major vendor in our stack — Epic, Workday, ServiceNow, Microsoft — has shown up in the past year with an AI roadmap and a price tag. Each pitch looks reasonable on its own. <strong>Stacked together, they describe a future where every vendor owns a different front door to our work, and Carle owns nothing connecting them.</strong></p>
+
+  <p class="pull">Get good at AI, or get steamrolled.</p>
+
+  <p class="lede">Health systems that learn to <em>build</em> with AI will outrun health systems that only <em>buy</em> AI. We need to be the first kind. This document is the framework you'll use to evaluate any AI sales pitch — not for or against any vendor, but the structural lens that makes those calls confidently.</p>
+
+  <details>
+    <summary>The honest premise behind this document</summary>
+    <div class="deep">
+      <p>AI sales conversations move faster than the technical understanding in the room. That isn't a criticism — it's the natural state when a category arrives this quickly. Vendors know it. Their decks are calibrated to land before anyone has a stable mental model to push back with.</p>
+      <p>The biggest risk to Carle right now isn't buying the wrong AI tool. It's buying lots of AI tools, each priced reasonably on its own, that together hand the brain of our enterprise to vendors we don't control. Once that's fragmented across five vendors, you can't put it back together without a multi-year migration.</p>
+      <p>The good news: the ideas you need to navigate this aren't technically complex. They're the same ideas IT uses every day. This document just translates them.</p>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 2 — WHO ACTUALLY BUILDS AI ========== -->
+<div class="section" id="s2">
+  <div class="section-num">Section 02</div>
+  <h2 class="section-title">Who actually builds AI</h2>
+  <p class="lede">There are roughly four companies in the world building frontier AI. <strong>That's it.</strong> Every other "AI product" you'll be sold is a wrapper around models from these four.</p>
+
+  <div class="foundation-grid">
+    <div class="fnd-card">
+      <div class="fnd-name">Anthropic</div>
+      <div class="fnd-product">Claude</div>
+    </div>
+    <div class="fnd-card">
+      <div class="fnd-name">OpenAI</div>
+      <div class="fnd-product">GPT</div>
+    </div>
+    <div class="fnd-card">
+      <div class="fnd-name">Google</div>
+      <div class="fnd-product">Gemini</div>
+    </div>
+    <div class="fnd-card">
+      <div class="fnd-name">Microsoft</div>
+      <div class="fnd-product">Copilot · OpenAI partner</div>
+    </div>
+  </div>
+
+  <div class="wrapper-stack">
+    <div class="ws-row vendors">
+      <div class="ws-tag">Vendors building wrappers around the above</div>
+      <div class="ws-list">
+        <span class="ws-pill">Workday Sana</span>
+        <span class="ws-pill">Epic agents</span>
+        <span class="ws-pill">ServiceNow AI</span>
+        <span class="ws-pill">Notable</span>
+        <span class="ws-pill">Sierra</span>
+        <span class="ws-pill">healthcare AI startups</span>
+      </div>
+    </div>
+    <div class="ws-arrow">▲ ▲ ▲</div>
+    <div class="ws-row foundation">
+      <div class="ws-tag">The four companies that actually build the AI</div>
+      <div class="ws-list">
+        <span class="ws-pill">Anthropic</span>
+        <span class="ws-pill">OpenAI</span>
+        <span class="ws-pill">Google</span>
+        <span class="ws-pill">Microsoft</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="pull">Vendors aren't building AI. They're reselling it. The same AI we can call directly.</p>
+
+  <p class="lede">This matters in two ways. First, when we build with raw tools — Foundry, Claude Code, Copilot Studio — we get the same intelligence the vendor wrappers do, at a fraction of the cost. Second, <strong>vendor wrappers lock in a moment-in-time version of the underlying model</strong>. The model improves; the wrapper doesn't keep pace.</p>
+
+  <details>
+    <summary>The compounding capability gap — why "buying AI" is buying yesterday's AI</summary>
+    <div class="deep">
+      <p>Foundation models update every three to six months with meaningful capability improvements. The gap between this year's frontier model and last year's is not small — it's the difference between "drafts okay summaries" and "reasons across multiple documents and flags subtle conflicts."</p>
+
+      <p>Vendor wrappers don't update at that cadence. Most vendor agent platforms ship significant releases every 6-18 months. Their underlying model often lags 12+ months behind the frontier on the day they ship. By the time we adopt their next release, the frontier has moved again.</p>
+
+      <h4>What that looks like in practice</h4>
+      <ul>
+        <li>A vendor agent demo today might be running on a foundation model from <em>last summer</em>. Plenty good for the demo. Already behind on hard tasks.</li>
+        <li>Two more frontier model releases happen during the typical vendor implementation window. We finish onboarding their AI and it's already two generations old.</li>
+        <li>The gap doesn't close. The rate of frontier improvement is accelerating, not slowing. What's a 6-month lag today is an 18-month lag in two years.</li>
+      </ul>
+
+      <h4>The compounding effect that makes this worse</h4>
+      <p>As models get more capable, building with them gets <em>easier and faster</em>. Code that took a senior engineer a month last year takes a junior engineer a week now. That curve is steepening. Internal teams using raw tools ride that curve. Vendor wrappers don't — their development velocity is constrained by the vendor's release cycle, not the underlying model's improvement.</p>
+
+      <div class="callout warn">
+        <div class="callout-label">The structural truth</div>
+        <div class="callout-body">When we buy vendor AI, we're buying a moment-in-time version of capability that gets stale. When we build with raw tools, we ride the curve. The economics get more lopsided every year, not less.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 3 ========== -->
+<div class="section" id="s3">
+  <div class="section-num">Section 03</div>
+  <h2 class="section-title">Where Carle people actually work</h2>
+  <p class="lede">Front doors are where people start their day. <strong>Clinicians live in Epic. Everyone else lives in Teams.</strong> Other systems get visited.</p>
+
+  <div class="frontdoor">
+    <div class="fd-label">The Front Doors</div>
+    <div class="fd-doors">
+      <div class="fd-door">
+        <div class="fd-door-name">Epic</div>
+        <div class="fd-door-who">Clinical Staff</div>
+      </div>
+      <div class="fd-door">
+        <div class="fd-door-name">Teams</div>
+        <div class="fd-door-who">Business Staff</div>
+      </div>
+    </div>
+    <div class="fd-vs">— Systems People Visit —</div>
+    <div class="fd-visit">
+      <span class="fd-chip">Workday</span>
+      <span class="fd-chip">ServiceNow</span>
+      <span class="fd-chip">Dynamics</span>
+      <span class="fd-chip">SharePoint</span>
+      <span class="fd-chip">Ivanti</span>
+      <span class="fd-chip">Azure</span>
+    </div>
+  </div>
+
+  <p class="lede">Most vendors selling AI are quietly trying to become a <em>new</em> front door. When a vendor positions their agent platform as "where employees go to ask any work question," that's a direct collision with where work already happens. They aren't extending their system. They're trying to relocate where work begins.</p>
+
+  <p class="lede"><strong>Epic is the front door for clinical work and that's the right answer.</strong> Epic's clinical platform is genuinely exceptional at what it's built to do, and clinicians belong inside it. The framework in this document is not anti-Epic — it's a sharper view of where each tool belongs, including Epic's clinical core.</p>
+
+  <details>
+    <summary>Why the front door question is architectural, not aesthetic</summary>
+    <div class="deep">
+      <p>The front door is decided by where people already are. The strategic question isn't <em>which tool is the front door</em> — it's <em>where the AI sits that decides which tool to call</em>. Whoever owns that AI owns how AI feels at Carle.</p>
+
+      <h4>If a vendor owns it</h4>
+      <ul>
+        <li>Every AI question goes through their pricing, their schedule, their model choice.</li>
+        <li>Their rules sit next to — or against — Carle's own AI rules.</li>
+        <li>Switching costs grow every year. Every custom thing built is locked in.</li>
+        <li>Connecting their AI to another vendor's AI requires their permission.</li>
+      </ul>
+
+      <h4>If Carle owns it</h4>
+      <ul>
+        <li>Users ask once, in Teams or Epic. Our AI decides which system to call.</li>
+        <li>We pay AI providers directly, at cost. We pick the model.</li>
+        <li>Vendor agents become helpers we call — not the boss.</li>
+        <li>Our connectors work everywhere, not just one vendor's surface.</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-label">The principle</div>
+        <div class="callout-body">Vendor systems should be reachable from our front door. They should not <em>be</em> the front door. Almost every other decision in this document follows from that one.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 4 — THREE BUCKETS ========== -->
+<div class="section" id="s4">
+  <div class="section-num">Section 04</div>
+  <h2 class="section-title">Three buckets of AI</h2>
+  <p class="lede">Every AI sales pitch falls into one of three buckets. Knowing which tells you most of what you need to know.</p>
+
+  <div class="buckets">
+    <div class="bucket buy">
+      <div class="bucket-marker">1</div>
+      <div>
+        <div class="bucket-tag">Buy</div>
+        <div class="bucket-title">AI inside one system, doing what that system already does</div>
+        <div class="bucket-desc">Workday's payroll agent inside Workday. Epic's chart-reader inside Epic. The vendor knows their data; the agent stays in its lane. <strong>Provided the capability is genuinely pre-built and standardized</strong> — not a paid custom build dressed up as a product.</div>
+      </div>
+    </div>
+    <div class="bucket invest">
+      <div class="bucket-marker">2</div>
+      <div>
+        <div class="bucket-tag">Invest</div>
+        <div class="bucket-title">Tools that are gateways to many AI models</div>
+        <div class="bucket-desc">Microsoft Copilot. Azure AI Foundry. Claude Code. These aren't AI products with one model — they're where you choose <em>any</em> model for any task. Model-agnostic. This is how Carle owns the front door.</div>
+      </div>
+    </div>
+    <div class="bucket walk">
+      <div class="bucket-marker">3</div>
+      <div>
+        <div class="bucket-tag">Walk</div>
+        <div class="bucket-title">Vendors stretching beyond their lane to be the front door</div>
+        <div class="bucket-desc">Premium prices for capability outside the vendor's actual domain, with lock-in as the side effect. Whenever a transactional vendor pitches itself as the orchestrator across systems they don't own, this bucket applies.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hallway">
+    <div class="hw-tag">The Hallway Test · 30 Seconds</div>
+    <div class="hw-title">Three questions for any AI pitch</div>
+    <div class="hw-qs">
+      <div class="hw-q">
+        <div class="hw-q-num">Q1</div>
+        <div class="hw-q-text">Whose data is the AI working on?</div>
+        <div class="hw-q-rule"><em>Theirs</em> — okay. <strong>Ours</strong> — warning.</div>
+      </div>
+      <div class="hw-q">
+        <div class="hw-q-num">Q2</div>
+        <div class="hw-q-text">Where do users actually work?</div>
+        <div class="hw-q-rule"><em>Their app</em> — okay. <strong>Somewhere else</strong> — warning.</div>
+      </div>
+      <div class="hw-q">
+        <div class="hw-q-num">Q3</div>
+        <div class="hw-q-text">Could we leave in three years?</div>
+        <div class="hw-q-rule"><em>Easily</em> — okay. <strong>Painfully</strong> — walk.</div>
+      </div>
+    </div>
+  </div>
+
+  <details>
+    <summary>The full five-test scorecard for vendor lock-in</summary>
+    <div class="deep">
+      <p>Use the hallway test for the elevator. Use the scorecard before signing.</p>
+
+      <div class="scorecard">
+        <div class="sc-label">Mental Scorecard</div>
+        <div class="sc-title">Five tests every vendor pitch should pass</div>
+        <div class="sc-tests">
+          <div class="sc-test">
+            <div class="sc-num">1</div>
+            <div>
+              <div class="sc-q">Is the data the vendor's, not ours?</div>
+              <div class="sc-hint">Sana for Workday operates on Workday's own data. Sana Enterprise wants to operate on data we own. Different categories.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">2</div>
+            <div>
+              <div class="sc-q">Is the workflow inside the vendor's surface, where users already are?</div>
+              <div class="sc-hint">A clinician in Epic is in Epic. A business user is in Teams, not Workday.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">3</div>
+            <div>
+              <div class="sc-q">Is the regulatory or compliance lift meaningful and vendor-specific?</div>
+              <div class="sc-hint">FDA pathways and HIPAA-specific architecture, yes. Standard business automation, no.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">4</div>
+            <div>
+              <div class="sc-q">Is this a commodity capability where the vendor has economy of scale we don't?</div>
+              <div class="sc-hint">Payroll, tax filing, clinical evidence libraries — yes. Knowledge lookup over our SharePoint — no.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">5</div>
+            <div>
+              <div class="sc-q">Is the switching cost in three to five years manageable?</div>
+              <div class="sc-hint">Changing a connector is fine. Rebuilding every custom agent inside their platform is not.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-rubric">
+          <div class="sc-r buy"><span class="sc-r-score">5 of 5</span><span class="sc-r-action">Buy</span></div>
+          <div class="sc-r invest"><span class="sc-r-score">3–4 of 5</span><span class="sc-r-action">Investigate</span></div>
+          <div class="sc-r walk"><span class="sc-r-score">0–2 of 5</span><span class="sc-r-action">Walk</span></div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">The pattern to watch</div>
+        <div class="callout-body">When a vendor with deep institutional buy-in tries to expand beyond their lane into orchestration, they price accordingly and count on the fact that ripping it out later will be too painful. The pattern repeats across every major vendor category. Recognizing it early is most of the battle.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 5 — VENDORS RESELLING ========== -->
+<div class="section" id="s5">
+  <div class="section-num">Section 05</div>
+  <h2 class="section-title">Vendors are reselling raw AI</h2>
+  <p class="lede">As Section 02 laid out: Workday's AI, Epic's AI, and most enterprise AI features are built on top of Anthropic, OpenAI, Google, and Microsoft. The vendors aren't building the AI — they're licensing it from the same providers Carle can license directly.</p>
+
+  <p class="pull">Workday wants thirty consultants on site to configure their AI. Carle's engineers can build the same thing in Claude Code in a fraction of the time, on the same underlying models, without the markup.</p>
+
+  <details>
+    <summary>What the vendor actually adds — and what it's worth</summary>
+    <div class="deep">
+      <h4>Vendor-added value</h4>
+      <ul>
+        <li><strong>Prebuilt skills inside their system.</strong> A Workday agent that already knows how to read a Workday absence balance is genuinely useful. <em>Worth something — but only inside their system.</em></li>
+        <li><strong>UI integration.</strong> The AI shows up where users already work in that vendor's product. <em>Worth something, but only if users actually live there.</em></li>
+        <li><strong>Implementation consultants.</strong> Teams of vendor reps on-site to configure things. <em>Mostly a cost. The need for that level of implementation tells you how much of the prebuilt skills actually fit a typical customer.</em></li>
+        <li><strong>The actual AI model.</strong> The same Claude or GPT we could call directly. <em>Marked up significantly.</em></li>
+      </ul>
+
+      <h4>The Workday receipt example</h4>
+      <p>Carle's expense receipt coding in Workday: every month, ninety-five percent of receipts are identical to the prior month. Workday provides no native pattern matching to suggest the prior month's coding. There's no way to fix this <em>inside</em> Workday — their automation primitives don't support it.</p>
+      <p>From outside Workday, using their REST APIs and Claude Code, this is a one-week build. The shallowness of vendor automations isn't the exception — it's the rule.</p>
+
+      <div class="callout win">
+        <div class="callout-label">The reframe</div>
+        <div class="callout-body">We're not deciding between "build" and "buy." We're deciding between paying a vendor to call Anthropic and OpenAI for us, or calling them ourselves. The model is the same model. The question is who keeps the margin and who controls the configuration.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>The RAG sweet spot — where building decisively wins</summary>
+    <div class="deep">
+      <p>RAG — retrieval-augmented generation — is the AI pattern where an agent answers a question by first looking up information from a knowledge base, then using it to generate the answer. Knowledge assistants. Policy lookups. "Ask anything about our company" tools. It's the most common enterprise AI use case. It's also where the build math is most clearly in Carle's favor.</p>
+
+      <h4>What RAG actually requires</h4>
+      <ul>
+        <li>A place where knowledge is stored and governed — <em>SharePoint with E5/Entra access controls.</em> ✓</li>
+        <li>An embedding model — <em>commodity, native to Foundry.</em> ✓</li>
+        <li>A vector store — <em>commodity, built into Foundry.</em> ✓</li>
+        <li>A retrieval algorithm — <em>commodity.</em> ✓</li>
+        <li>A wrapper that puts retrieved chunks in front of an LLM — <em>this is the actual engineering, and it's small.</em></li>
+      </ul>
+
+      <h4>What vendors are selling under "AI Knowledge Assistant"</h4>
+      <p>The pitch is "we'll ingest your documents and make them searchable by AI." The structural problem: <strong>Carle's documents are already searchable.</strong> Microsoft Search, Copilot, and Foundry already index SharePoint natively, with our own access controls already enforced. Vendors offering to re-index our knowledge base inside their platform are charging premium prices to redo work that has already been done — and creating a parallel governance surface that adds compliance burden rather than reducing it.</p>
+
+      <div class="callout win">
+        <div class="callout-label">The clear rule</div>
+        <div class="callout-body">For RAG over Carle's own knowledge, building isn't aggressive. It's the obvious move. Paying vendors to re-index knowledge we've already centralized and governed is one of the few areas of vendor AI pricing that's difficult to defend in any scenario.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 6 — AGENT BUILDERS ========== -->
+<div class="section" id="s6">
+  <div class="section-num">Section 06</div>
+  <h2 class="section-title">The agent builder problem</h2>
+  <p class="lede">Workday and Epic are both selling "agent builders" — low-code tools where staff build custom AI agents inside the vendor's product. Faster. Easier. No engineering required. <strong>Every dollar of effort spent building inside a vendor's tool becomes vendor lock-in.</strong></p>
+
+  <p class="lede">The vendor agent builders are also visibly behind the raw tools. Not by a little. By a lot.</p>
+
+  <div class="lag">
+    <div class="lag-row">
+      <div class="lag-name">Claude Code</div>
+      <div class="lag-bar b1"></div>
+      <div class="lag-tag">At the frontier</div>
+    </div>
+    <div class="lag-row">
+      <div class="lag-name">Copilot Studio · Foundry</div>
+      <div class="lag-bar b2"></div>
+      <div class="lag-tag">Close behind</div>
+    </div>
+    <div class="lag-row">
+      <div class="lag-name">Epic / Workday agent builders</div>
+      <div class="lag-bar b3"></div>
+      <div class="lag-tag">Significantly behind</div>
+    </div>
+  </div>
+
+  <details>
+    <summary>Why Epic and Workday agent builders are not equivalent</summary>
+    <div class="deep">
+      <h4>Epic — a defensible exception, narrowly</h4>
+      <p>Epic's clinical core is exceptional. The data model is complex, the APIs are restricted, and production work requires Epic-trained analysts — that's all true precisely <em>because</em> Epic has invested deeply in clinical workflow correctness. For narrow clinical use cases that need deep Epic context — chart parsing, in-basket triage — Epic's agent builder is sometimes the least-bad option. We accept this for a small, specific scope.</p>
+
+      <p>What we don't extrapolate: Epic's <em>non-clinical expansion software</em>. The CRM-style tools, the marketing platforms, the engagement products that Epic is selling alongside the clinical core. These are demonstrably less mature than purpose-built alternatives, and the same agent-builder argument doesn't apply to them. Building Carle-specific automation in Epic non-clinical software is the same trap as building it in Workday.</p>
+
+      <h4>Workday — not the same case</h4>
+      <p>Workday is not a closed system. Their data and actions are reachable through well-documented REST APIs. There's no technical reason a Carle-built agent in Foundry can't do what a Workday-built agent does. The argument for building in Workday is convenience. Convenience purchased with permanent lock-in is the most expensive convenience there is.</p>
+
+      <div class="callout">
+        <div class="callout-label">The doctrine</div>
+        <div class="callout-body">Build with raw tools first. Use vendor agent builders only where the vendor's closed system makes outside integration genuinely infeasible. Apply per use case, not per vendor.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Workday's data is reachable today — without buying Sana</summary>
+    <div class="deep">
+      <p>This is the part that turns the conversation.</p>
+      <ul>
+        <li>Workday has had REST APIs for years. Every piece of Workday data and most actions are reachable programmatically.</li>
+        <li>Workday does <em>not</em> currently offer an official MCP server. Their VP of Agent System of Record said at DevCon 2025 that MCP and A2A are coming. Future tense.</li>
+        <li>Third parties already wrap Workday as MCP — Composio, Knit, Merge, Zapier, CData. Working products today.</li>
+      </ul>
+
+      <h4>Three options for Carle</h4>
+      <ul>
+        <li><strong>Option 1:</strong> Wait for Workday's official MCP server.</li>
+        <li><strong>Option 2:</strong> Use a third-party MCP wrapper today. Pragmatic.</li>
+        <li><strong>Option 3:</strong> Build a Workday connector inside <code>carle_ai_toolkit</code> using their existing APIs. Owned by Carle. Portable.</li>
+      </ul>
+
+      <p>Option 3 is architecturally consistent. The receipt-coding example fits perfectly: a one-week build that does what Workday's own platform won't.</p>
+
+      <div class="callout win">
+        <div class="callout-label">Translation</div>
+        <div class="callout-body">We don't need Workday's permission to use Workday data with AI. Their APIs are open enough. The question is whether we let them charge us a premium to use those same APIs through their wrapper, or build the wrapper ourselves.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Pre-built we buy. Custom-built we don't.</summary>
+    <div class="deep">
+      <p>Workday's original value proposition coming out of COVID was that it brought standardized, best-practice processes from across its customer base. Buy Workday, adopt the industry-standard way of doing HR and finance, stop maintaining bespoke complexity.</p>
+
+      <p>The custom-development model that has emerged inside Workday's platform — paying Workday or its implementation partners to build Carle-specific automation inside Workday — works against that original value proposition. <strong>The vendor that was supposed to bring us standardization is now monetizing the avoidance of it.</strong></p>
+
+      <h4>The clean rule</h4>
+      <ul>
+        <li><strong>Pre-built and standardized vendor capability.</strong> Payroll engine. Tax filing. Standard absence management. Year-end and monthly close automations. <em>Buy it.</em> Vendor scale is real. Adoption forces healthy standardization.</li>
+        <li><strong>Custom-built vendor capability.</strong> Consulting hours to automate Carle-specific processes the vendor could ship as standard. <em>Don't buy it.</em></li>
+      </ul>
+
+      <h4>The math, illustrated</h4>
+      <div class="dollar">
+        <div class="dollar-card bad">
+          <div class="dollar-tag">Vendor consulting</div>
+          <div class="dollar-amount">$200K</div>
+          <div class="dollar-arrow">→</div>
+          <div class="dollar-result"><strong>1 problem solved</strong> — no reusable asset. Knowledge leaves with the consultant. Next request starts from zero.</div>
+        </div>
+        <div class="dollar-card good">
+          <div class="dollar-tag">Internal engineering</div>
+          <div class="dollar-amount">$200K</div>
+          <div class="dollar-arrow">→</div>
+          <div class="dollar-result"><strong>1 problem solved + reusable connector.</strong> Next ten problems cost ~$5K each. Knowledge stays at Carle.</div>
+        </div>
+      </div>
+
+      <p>Vendor consultants are often genuinely capable. The argument is that pay-per-customization is incompatible with the scale of work a mid-size health system needs to automate. Carle has too many small, specific automations to fund any of them at consultant rates.</p>
+
+      <div class="callout">
+        <div class="callout-label">The position to hold</div>
+        <div class="callout-body">We are willing buyers of pre-built, standardized vendor capability. We are not willing buyers of vendor consulting to custom-build automation that the vendor could and should be shipping as standard.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 7 — PICKING THE MODEL ========== -->
+<div class="section" id="s7">
+  <div class="section-num">Section 07</div>
+  <h2 class="section-title">Picking the model</h2>
+  <p class="lede"><strong>When we pick the model, we control cost AND capability. When a vendor picks the model, they control both.</strong> This is the single most underestimated lever in enterprise AI strategy.</p>
+
+  <div class="curves">
+    <svg class="curves-svg" viewBox="0 0 600 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="cheapGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#10b981" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="premGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <line x1="40" y1="180" x2="580" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <line x1="40" y1="20" x2="40" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <text x="40" y="195" fill="#a0a8c0" font-size="10" font-family="sans-serif">Today</text>
+      <text x="540" y="195" fill="#a0a8c0" font-size="10" font-family="sans-serif">3 years</text>
+      <text x="10" y="30" fill="#a0a8c0" font-size="10" font-family="sans-serif">$$$</text>
+      <text x="10" y="175" fill="#a0a8c0" font-size="10" font-family="sans-serif">$</text>
+      <path d="M 40 100 Q 200 130 580 165" stroke="url(#cheapGrad)" stroke-width="3" fill="none"/>
+      <path d="M 40 80 Q 200 60 580 30" stroke="url(#premGrad)" stroke-width="3" fill="none"/>
+      <text x="450" y="155" fill="#5dd4a8" font-size="11" font-weight="600" font-family="sans-serif">Cheap → cheaper</text>
+      <text x="450" y="50" fill="#ff8a96" font-size="11" font-weight="600" font-family="sans-serif">Premium → premium</text>
+    </svg>
+    <div class="curves-legend">
+      <div class="curve-key"><div class="curve-dot cheap"></div>Commodity AI (lookups, retrieval, simple Q&amp;A)</div>
+      <div class="curve-key"><div class="curve-dot premium"></div>Frontier AI (multi-step reasoning, complex agents)</div>
+    </div>
+  </div>
+
+  <p class="lede">Basic AI is becoming a commodity, like electricity. Premium AI stays expensive. <strong>The cost curve is splitting, and the gap is widening.</strong> When we own the routing, we send cheap tasks to cheap models and reserve premium models for tasks that earn the cost. <em>When a vendor owns the routing, we pay one rate per call regardless. They keep the difference.</em></p>
+
+  <details>
+    <summary>The cost lever — owning the front door means owning the AI bill</summary>
+    <div class="deep">
+      <p>Modern AI providers offer tiered models. Price differences between tiers are often 10x or more. An AI front door that Carle controls can route every question to the right tier:</p>
+      <ul>
+        <li><em>"What's my PTO balance?"</em> — cheap model. Cents.</li>
+        <li><em>"Summarize this 30-page policy and flag conflicts with our handbook."</em> — balanced. A few dollars.</li>
+        <li><em>"Reason through this complex prior-auth across patient history, payer rules, and current Epic data."</em> — premium. Earns its cost because the alternative is a clinician's time.</li>
+      </ul>
+
+      <h4>What you can't do inside a vendor agent platform</h4>
+      <p>Vendor platforms typically don't expose model selection. One rate per call. The vendor either uses one model for everything (cheap tasks subsidize expensive ones) or charges premium for everything (you overpay on every call). Either way, the lever doesn't exist for the customer.</p>
+
+      <div class="callout">
+        <div class="callout-label">The concrete consequence</div>
+        <div class="callout-body">A vendor charging $X per agent interaction is charging $X whether the call needed a penny of AI or fifty cents. They keep the difference. We could keep the difference instead — but only if we own the front door that routes the call.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>The capability lever — vendor wrappers freeze AI in a moment in time</summary>
+    <div class="deep">
+      <p>This is the second half of the model selection lever, and the more important one over a five-year horizon.</p>
+
+      <p>Foundation models from Anthropic, OpenAI, Google, and Microsoft update every three to six months with meaningful capability improvements. Vendor wrappers ship significant releases every 6-18 months. By the time a vendor's "AI module" reaches us, the underlying model is often 12+ months behind the frontier.</p>
+
+      <h4>The compounding gap, in concrete terms</h4>
+      <ul>
+        <li>A vendor agent today might be running on a foundation model from last summer. The frontier has had two major capability jumps since then.</li>
+        <li>By the time we onboard the vendor's next release, two more frontier jumps have happened.</li>
+        <li>Each jump isn't incremental — they're step changes. The difference between current frontier and 18-month-old models is the difference between "drafts plausible summaries" and "reasons across multiple documents and flags subtle contradictions."</li>
+      </ul>
+
+      <h4>Where capability lag hurts most</h4>
+      <p>For commodity tasks (PTO balance, policy retrieval), the lag is irrelevant — last year's models do this fine. For frontier tasks (multi-step reasoning, cross-system orchestration, complex decision support), the lag is the difference between viable and not viable.</p>
+
+      <p>The strategic implication compounds with the cost argument: when vendors own the model, they pick a model that's "good enough" for their typical customer's use case at a price that protects their margin. We can't tune for our actual highest-value cases. They tune for their median customer's lowest-stakes use case.</p>
+
+      <div class="callout warn">
+        <div class="callout-label">The capability story most vendors won't tell you</div>
+        <div class="callout-body">Buying vendor AI is buying yesterday's AI. It works for what it works for. It won't keep up. The gap doesn't close — it widens, because the rate of frontier improvement is accelerating, not slowing.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 8 — BUILD VS BUY MATH ========== -->
+<div class="section" id="s8">
+  <div class="section-num">Section 08</div>
+  <h2 class="section-title">Build vs. buy: the real math</h2>
+  <p class="lede">When you account honestly for hidden costs, building strategic AI in-house comes out roughly <strong>30:1 cheaper</strong> than buying equivalent capability from an agentic platform vendor.</p>
+
+  <div class="stat-hero">
+    <div class="stat-num">30 : 1</div>
+    <div class="stat-caption"><strong>The build advantage</strong> — once hidden costs are priced in. Works because we already own the kitchen: Azure, Fabric, Dataverse, the engineering team, and the connector library.</div>
+  </div>
+
+  <div class="iceberg">
+    <div class="iceberg-top">
+      <div class="iceberg-tag">Visible to vendor pricing</div>
+      <div class="iceberg-headline">License fee <span class="iceberg-pct">— 20-30% of true cost</span></div>
+    </div>
+    <div class="iceberg-bottom">
+      <div class="iceberg-tag">Hidden — Carle pays anyway</div>
+      <div class="iceberg-headline">Operational reality <span class="iceberg-pct">— 70-80% of true cost</span></div>
+      <ul class="iceberg-list">
+        <li>Cyber review, BAA work, ongoing monitoring</li>
+        <li>Integration to identity, data, downstream systems</li>
+        <li>Configuration and admin (in vendor's UI, on their schedule)</li>
+        <li>Institutional knowledge (someone has to be the expert)</li>
+      </ul>
+    </div>
+  </div>
+
+  <details>
+    <summary>What 30:1 means in practical terms</summary>
+    <div class="deep">
+      <p>Conservative model: <em>internal labor support runs about half the headline tool cost annually.</em> A $500K vendor tool implies roughly $250K/year in internal Carle labor to support it. That cost is rarely in the vendor evaluation.</p>
+
+      <ul>
+        <li>The same engineering team that would integrate a vendor agent platform is already on payroll. Building uses their time. Buying does not save it.</li>
+        <li>Connectors built once (the <code>carle_ai_toolkit</code>) are reusable across every future agent. The second, third, and fourth agent get 60% or more cheaper to build.</li>
+        <li>We pay AI providers at cost, not the vendor's markup.</li>
+        <li>No license fee. No annual renewal. No erosion of negotiating leverage over time.</li>
+      </ul>
+
+      <div class="callout win">
+        <div class="callout-label">The honest framing</div>
+        <div class="callout-body">Internal build is dramatically cheaper because we already own the kitchen and someone is already paid to be in it. The 30:1 ratio is real because the alternative is paying a vendor's markup on capability we have to maintain anyway.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Wait is a valid answer for non-critical work</summary>
+    <div class="deep">
+      <p>Vendor pitches almost always include urgency framing. The reality is that <strong>most business automation has compounding return on investment but not urgent timing</strong>. Six months of patience is rarely the difference between competitive advantage and obsolescence; it's usually the difference between buying expensively now and building affordably later.</p>
+
+      <p>A useful discipline before approving any AI-related contract: <em>"What specifically breaks if we wait six months?"</em> Concrete answers — clinical safety, regulatory compliance, immediate revenue impact, hard external deadline — deserve fast action. Vague answers usually deserve patience.</p>
+
+      <h4>What "wait" actually buys us</h4>
+      <ul>
+        <li>Capability becomes cheaper as models improve and tooling matures.</li>
+        <li>Internal capacity catches up; connectors built for one project become available for the next.</li>
+        <li>Vendor pricing pressure works in our favor as competitors enter the market.</li>
+        <li>We avoid sunk cost in immature solutions.</li>
+      </ul>
+
+      <p>Wait is not the same as do nothing. The IT Self-Service Agent is shipping. The connector library is being built. The documentation pipeline is starting. Wait applies specifically to net-new vendor commitments for non-critical work.</p>
+
+      <div class="callout">
+        <div class="callout-label">The discipline</div>
+        <div class="callout-body">Before any AI-related contract: what specifically breaks if we wait six months? Concrete answer — proceed. Vague answer — default to wait. Most of the urgency is manufactured.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 9 — ARCHITECTURE ========== -->
+<!-- ========== SECTION 09 — WHAT BUILDING ACTUALLY COSTS ========== -->
+<div class="section" id="s9">
+  <div class="section-num">Section 09</div>
+  <h2 class="section-title">What building actually costs</h2>
+  <p class="lede">The build-heavy strategy has real costs. Acknowledging them honestly makes the strategy stronger, not weaker. <strong>Some of those costs are genuinely different from what a vendor would charge. Some are the same costs with a different label.</strong> The honest accounting matters — because the executive team and any incoming CTO will pressure-test exactly this.</p>
+
+  <div class="pair">
+    <div class="pair-card real">
+      <div class="pair-tag">Real Differential Costs</div>
+      <div class="pair-headline">What we genuinely pay more for when we build</div>
+      <ul class="cost-list">
+        <li>Dev team reliance and opportunity cost</li>
+        <li>Continuity / key-person risk</li>
+        <li>Quality testing breadth (vendor scale)</li>
+        <li>Skill currency burden</li>
+      </ul>
+    </div>
+    <div class="pair-card good">
+      <div class="pair-tag">Same as Buying</div>
+      <div class="pair-headline">Costs we'd pay either way — different label</div>
+      <ul class="cost-list">
+        <li>Monitoring burden</li>
+        <li>Documentation maintenance</li>
+        <li>Cyber review and BAA work</li>
+        <li>Help desk and incident response</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="pull">Build costs are real. They're just different costs than the ones a vendor invoice shows.</p>
+
+  <p class="lede">The implication isn't "stop building." It's <strong>"build deliberately, where capability compounds, with explicit budgeting for the differential costs."</strong> Vendors aren't free either — every vendor invoice is half the picture. And vendor agent builders are their own cost center: every hour staff spend learning Workday Build or Epic's agent tooling is an hour invested in vendor-specific skills that don't transfer.</p>
+
+  <details>
+    <summary>How these costs shape the strategy (not invalidate it)</summary>
+    <div class="deep">
+      <h4>Where to build, despite the costs</h4>
+      <ul>
+        <li><strong>Compounding capability.</strong> The connector library, RAG infrastructure, orchestration layer. These pay back across every future agent built on top of them.</li>
+        <li><strong>Frontier work.</strong> Multi-step reasoning, cross-system orchestration. Vendor lag here is decisive — capability matters more than cost.</li>
+        <li><strong>Cross-system processes.</strong> The documentation moat layer. Nobody else will build it for us at any reasonable price.</li>
+      </ul>
+
+      <h4>Where to buy, despite the build advantage</h4>
+      <ul>
+        <li><strong>Narrow Bucket 1 commodity inside the vendor's lane.</strong> Payroll, tax filing, year-end close. Dev opportunity cost too high to justify a custom build for capability the vendor already does well.</li>
+        <li><strong>Genuine economy-of-scale work.</strong> Anything where vendor scale on compliance, regulation, or evidence libraries is real and not replicable internally.</li>
+        <li><strong>Mature, slow-changing capabilities.</strong> Where the model lag concern is minimal because the underlying problem doesn't benefit from frontier capability.</li>
+      </ul>
+
+      <h4>How to mitigate the differential costs</h4>
+      <ul>
+        <li><strong>Dev team reliance.</strong> Pick the highest-compounding builds first. Every connector becomes infrastructure for the next agent. If a build doesn't compound, treat it as a buy candidate.</li>
+        <li><strong>Continuity risk.</strong> Formal handoff protocols. Layered documentation as first-class deliverable. Probably +1 senior engineer in the budget — cheaper than rebuilding institutional knowledge after a departure.</li>
+        <li><strong>Quality testing breadth.</strong> Accept it. We won't replicate vendor scale on this. Mitigate with phased rollouts, heavy observability, explicit error budgets, and visible kill switches.</li>
+        <li><strong>Skill currency.</strong> Formal upskilling plan with quarterly review. Budget time for team training, not just delivery. The team that ships an agent and the team that maintains it next year both need to stay current.</li>
+      </ul>
+
+      <h4>Why vendor agent builders aren't a "free alternative"</h4>
+      <p>The pitch for vendor agent builders is that they save engineering time. They do — at the cost of staff training time. Workday Build requires staff to learn Workday-specific tooling and idioms. Epic's agent builder requires Epic-trained analyst skills. Both are non-transferable: when staff leave, the skill leaves with them, and what stays behind is locked inside the vendor's platform.</p>
+      <p>By contrast, training staff on Claude Code or Foundry produces general engineering skills that transfer across systems and survive vendor transitions. The "we'll save engineering time" pitch redirects cost from the engineering team to the rest of the staff — and creates skill assets the vendor effectively owns.</p>
+
+      <h4>Why these are nothingburgers</h4>
+      <ul>
+        <li><strong>Monitoring.</strong> We monitor every vendor SaaS today. Uptime, integration health, license compliance, vendor security posture. Internal agents add monitoring effort, but the marginal increase over what we already do is small.</li>
+        <li><strong>Documentation.</strong> We document our integrations to vendor tools, our customizations, our exception paths. Internal builds shift the documentation focus, not the workload meaningfully.</li>
+        <li><strong>Cyber review.</strong> Every vendor gets reviewed; internal builds get reviewed by the same team, with the same processes. Different surface, similar effort.</li>
+        <li><strong>Help desk and incident response.</strong> When a vendor agent fails, the ticket comes to us anyway. Internal failures route through the same channel. Volume might differ; type doesn't.</li>
+      </ul>
+
+      <div class="callout win">
+        <div class="callout-label">The balanced framing</div>
+        <div class="callout-body">Internal builds aren't free. They're cheaper than vendor alternatives and they create compounding capability — but they require explicit investment in continuity, observability, and team development. The 30:1 ratio holds when those costs are budgeted. It collapses when they're ignored.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="s10">
+  <div class="section-num">Section 10</div>
+  <h2 class="section-title">The target architecture</h2>
+  <p class="lede"><strong>Teams is where work begins. Workday and Epic are where transactions happen. Dataverse is where business knowledge lives.</strong> AI ties them together.</p>
+  <p class="lede">A staff member asks a question in Teams. Carle's AI looks up the policy in Dataverse, calls Workday to do the transaction, returns the answer in Teams. Three systems, one experience. The user doesn't need to know which system did what.</p>
+  <p class="lede">Alongside the production architecture, <strong>Carle Cloud</strong> is our research-grade innovation surface — where capability is proven before it joins the production stack. Designed so Carle's analytics and AI futures are never single-threaded through any vendor's roadmap.</p>
+
+  <details>
+    <summary>The four-layer architecture (technical view)</summary>
+    <div class="deep">
+      <p>Open this for the full system map. Each layer has a clear role; AI is what makes them act as one.</p>
+
+      <div class="arch-diagram">
+        <div class="arch-tier front">
+          <div class="arch-tier-label">Front Door</div>
+          <div class="arch-tier-systems">
+            <span class="arch-chip">Microsoft Teams</span>
+            <span class="arch-chip">Epic (clinical)</span>
+            <span class="arch-chip">Copilot</span>
+          </div>
+        </div>
+        <div class="arch-flow">▼ ▼ ▼</div>
+        <div class="arch-tier knowledge">
+          <div class="arch-tier-label">Knowledge</div>
+          <div class="arch-tier-systems">
+            <span class="arch-chip">Dataverse (structured)</span>
+            <span class="arch-chip">SharePoint (documents)</span>
+            <span class="arch-chip">Fabric (analytics)</span>
+          </div>
+        </div>
+        <div class="arch-flow">▼ ▼ ▼</div>
+        <div class="arch-tier transactions">
+          <div class="arch-tier-label">Transactions</div>
+          <div class="arch-tier-systems">
+            <span class="arch-chip">Workday</span>
+            <span class="arch-chip">Epic / FHIR</span>
+            <span class="arch-chip">Dynamics</span>
+            <span class="arch-chip">Ivanti</span>
+            <span class="arch-chip">Intune</span>
+          </div>
+        </div>
+        <div class="arch-flow">▼ ▼ ▼</div>
+        <div class="arch-tier glue">
+          <div class="arch-tier-label">Glue Layer</div>
+          <div class="arch-tier-systems">
+            <span class="arch-chip">carle_ai_toolkit</span>
+            <span class="arch-chip">MCP servers</span>
+            <span class="arch-chip">A2A protocols</span>
+            <span class="arch-chip">REST APIs</span>
+            <span class="arch-chip">Foundry orchestration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carle-cloud-block">
+        <div class="cc-label">Parallel · Carle Cloud (Innovation Surface)</div>
+        <div class="cc-headline">Where capability is proven before joining the production stack</div>
+        <div class="cc-body">Research, the College of Medicine, and the development team experiment here with frontier model evaluation, bleeding-edge clinical AI, and research-grade analytics that aren't yet ready for production routing. <strong>Capability graduates from Carle Cloud into the production architecture as it matures.</strong> The Fabric F-SKU capacity already partially earmarked for Catalyst and Power BI workloads serves a dual role — production analytics today, strategic optionality if any vendor's analytics roadmap stalls.</div>
+        <div class="cc-systems">
+          <span class="arch-chip">Microsoft Fabric (research-grade)</span>
+          <span class="arch-chip">C4HC research environment</span>
+          <span class="arch-chip">Frontier model evaluation</span>
+          <span class="arch-chip">Clinical AI POCs</span>
+        </div>
+      </div>
+
+      <h4>Why this is different from "buy more software"</h4>
+      <p>Most enterprise software strategies look like a list of products: a CRM, an ITSM, an HRIS, an EHR. Users have to know which product handles which task. Each has its own AI now. None of them talk to each other.</p>
+      <p>This architecture is different. The user knows one place: Teams. They ask a question in plain English. The AI figures out which system to call. The complexity stays inside the architecture, not on the user's desk.</p>
+
+      <div class="callout win">
+        <div class="callout-label">The strategic prize</div>
+        <div class="callout-body">A documented Carle is a Carle that can be augmented by AI. Without the knowledge layer, this whole architecture is hollow. That's why the next section matters as much as this one.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 10 — DOCUMENTATION AS THE MOAT ========== -->
+<div class="section" id="s11">
+  <div class="section-num">Section 11</div>
+  <h2 class="section-title">Documentation as the strategic moat</h2>
+  <p class="lede">Vendor verticals automate their bread-and-butter — payroll, year-end close, in-basket triage. <strong>The valuable automation lives in the layer outside that</strong>: cross-system processes, exception handling, judgment-light work that spans Workday and Dynamics and SharePoint and email. That layer is where cash sprawl happens — vendors charge premium to orchestrate processes that aren't really theirs.</p>
+
+  <p class="lede"><strong>The alternative to cash sprawl is documentation.</strong> If Carle systematically documents how we actually run, AI agents can act on that knowledge. The agents we build then handle the cross-system layer that no vendor will sell us at a reasonable price. This is the moat — the thing competitors and vendors can't replicate.</p>
+
+  <div class="pipeline">
+    <div class="pipe-row">
+      <div class="pipe-num">1</div>
+      <div class="pipe-content">
+        <strong>Capture</strong>
+        <span>Tools like Scribe record how staff actually do the work. Output goes into structured docs, not someone's head.</span>
+      </div>
+    </div>
+    <div class="pipe-row">
+      <div class="pipe-num">2</div>
+      <div class="pipe-content">
+        <strong>Centralize</strong>
+        <span>Captured documentation lands in SharePoint (unstructured) and Dataverse (structured rules and triggers). Governed by E5/Entra.</span>
+      </div>
+    </div>
+    <div class="pipe-row">
+      <div class="pipe-num">3</div>
+      <div class="pipe-content">
+        <strong>Analyze</strong>
+        <span>AI processes the captured documentation, identifies patterns, surfaces exceptions, structures the implicit knowledge.</span>
+      </div>
+    </div>
+    <div class="pipe-row">
+      <div class="pipe-num">4</div>
+      <div class="pipe-content">
+        <strong>Automate</strong>
+        <span>Agents built on top of that knowledge handle the work. Each new agent reuses the same knowledge base — marginal cost approaches zero.</span>
+      </div>
+    </div>
+  </div>
+
+  <details>
+    <summary>The honest version: prove the loop before scaling</summary>
+    <div class="deep">
+      <p>The pipeline above is the right destination. The path to it has real risks worth naming up front.</p>
+
+      <h4>Three things that must be true for this to work</h4>
+      <ul>
+        <li><strong>Sequencing matters.</strong> Six months to deeply document <em>5-10 highest-value cross-system processes</em> is achievable. Six months to document "critical processes" broadly is not — a 10,000-person system has hundreds depending on who you ask. Pick the high-value handful first.</li>
+        <li><strong>Documentation without standardization is risk.</strong> Capturing the current state without aligning on the target state means we encode workarounds and the agent automates them perfectly. Process owners need to commit to what the right process should look like, not just what it currently is.</li>
+        <li><strong>Prove the loop on one process before scaling.</strong> Pick a single cross-system process, document it deeply, build the agent, measure the impact. Use that as the reference case. Health systems have done documentation pushes before — Six Sigma, Lean, process mapping initiatives — and most produce binders no one reads. The thing that's different now is AI can act on the documentation. That's only true if we prove the act-on part concretely first.</li>
+      </ul>
+
+      <h4>Realistic phasing</h4>
+      <ul>
+        <li><strong>Months 1-3:</strong> Pick three highest-value cross-system processes that aren't owned by vendor verticals (exception-heavy, judgment-light, span 2+ systems). Document one deeply. Get process-owner buy-in on target state.</li>
+        <li><strong>Months 3-6:</strong> Build the first agent against that one process. Measure: time saved, error rate, FTE time freed.</li>
+        <li><strong>Months 6-12:</strong> Scale to the next 5 processes only if the first one is running stably and producing measurable value.</li>
+        <li><strong>Year 2+:</strong> Expand the documentation program more broadly, with the playbook proven and the engineering patterns established.</li>
+      </ul>
+
+      <h4>What this is not</h4>
+      <ul>
+        <li><em>Mass documentation for its own sake.</em> Writing every process down without quality control creates a graveyard worse than no documentation, because agents retrieve and act on stale information.</li>
+        <li><em>Documentation in vendor systems.</em> Process docs trapped in Epic, Workday, ServiceNow are reachable only when those vendors decide to expose them.</li>
+        <li><em>Replacing what's already in a system of record.</em> Workday holds the truth for HR data. We document the processes <em>around</em> Workday — exception handling, cross-system handoffs.</li>
+      </ul>
+
+      <div class="callout win">
+        <div class="callout-label">Why this is the moat</div>
+        <div class="callout-body">Vendor verticals will keep automating their bread and butter. They won't automate the cross-system layer because they don't own it. The orgs that systematically document and automate that layer will run leaner and faster than the ones that buy ten vendor AI products to paper over it. That's the moat. It's also the alternative to cash sprawl.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 11 — TRAINING & WORKFORCE ========== -->
+<div class="section" id="s12">
+  <div class="section-num">Section 12</div>
+  <h2 class="section-title">Training and workforce</h2>
+  <p class="lede">Not everyone needs to know how to build AI. <strong>Everyone working with AI needs to know what they're working with.</strong> Four tiers, scaled to actual exposure — not credentialing.</p>
+
+  <div class="tier">
+    <div class="tier-num">1</div>
+    <div class="tier-body">
+      <h5>People who use AI to help them work</h5>
+      <p>Lookups, summarization, drafting. The AI suggests; the human decides. Floor for everyone at Carle.</p>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="tier-num">2</div>
+    <div class="tier-body">
+      <h5>People who let AI take small actions for them</h5>
+      <p>Agents that schedule, draft and queue, route tickets — under human oversight.</p>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="tier-num">3</div>
+    <div class="tier-body">
+      <h5>People who supervise AI that runs by itself</h5>
+      <p>Continuous-running agents — call center triage, ticket categorization, in-basket routing. Human supervises the agent, not each call.</p>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="tier-num">4</div>
+    <div class="tier-body">
+      <h5>People who build their own AI tools</h5>
+      <p>Citizen developers using Claude Code, Copilot Studio, Power Automate. Workforce multiplier with governance proportional to capability.</p>
+    </div>
+  </div>
+
+  <p class="lede">The harder questions are downstream of the tiers themselves: <strong>how does training scale as agents take on real work, what new specialist roles do we need, how do adjacent IT teams change, and how do we evaluate workforce impact honestly?</strong></p>
+
+  <details>
+    <summary>How training works when everyone is using agents</summary>
+    <div class="deep">
+      <p>Most health system training is one-and-done credentials. AI fluency doesn't work that way — capability changes too fast for the "take the course, pass the quiz, never look at it again" model. The training program has to be a continuous craft, not a credential.</p>
+
+      <h4>Delivery model</h4>
+      <ul>
+        <li><strong>Tier 1 — broad workforce.</strong> Mandatory short modules at onboarding plus quarterly refreshers as new agents come online. Heavy use of "show, don't lecture" — short videos of agents in action with annotated decision points.</li>
+        <li><strong>Tier 2-3 — supervised agent users.</strong> Cohort-based training tied to specific agent rollouts. When the IT Self-Service Agent goes live, the IT and HR teams interacting with it get a focused 2-hour session, not a generic AI course.</li>
+        <li><strong>Tier 4 — citizen developers.</strong> A small handpicked cohort of 6-10 people running a structured 12-month program: real projects, real mentorship from the engineering team, explicit governance gates before anything goes to production. Not a broadly available training tier yet — that's an FY27 goal at earliest.</li>
+      </ul>
+
+      <h4>Specialist roles we'll need</h4>
+      <ul>
+        <li><strong>AI orchestration architect</strong> — owns the front-door layer, model routing, connector library. This is a new role, probably one or two people, deeply technical.</li>
+        <li><strong>AI safety and governance officer</strong> — sits between cyber, compliance, and the engineering team. Gate-keeper on agent deployment, monitoring policy compliance, owning the response to incidents.</li>
+        <li><strong>AI training and adoption lead</strong> — designs the tiers, runs the cohort programs, measures uptake. Not a Tier 1 trainer — a strategist for how the workforce moves up the tiers.</li>
+        <li><strong>Possibly: prompt engineering / agent QA leads</strong> for high-stakes workflows. These may be folded into existing engineering roles rather than dedicated headcount.</li>
+      </ul>
+
+      <p>This is not a giant new department — it's three to five named roles, some of which Carle has informally already. Formalizing them lets the organization plan around them.</p>
+
+      <div class="callout">
+        <div class="callout-label">The honest scale picture</div>
+        <div class="callout-body">Citizen development is going to happen at Carle whether we plan for it or not. Staff with Claude Code access can build production-relevant tools today. The choice is between providing a structured Tier 4 path with sensible guardrails or pretending it doesn't exist while it spreads as shadow IT.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>How agent-to-agent architecture supplements the workforce AI burden</summary>
+    <div class="deep">
+      <p>Prompt engineering as a discipline is volatile. The "right way" to prompt changes every six months as new model versions ship. Knowledge management <em>for AI consumption</em> is a discipline still being figured out industry-wide. <strong>Training thousands of staff — or contracting consultants — to do these things well is training and paying for skills on a moving target.</strong></p>
+
+      <p>Agent-to-agent (A2A) architecture redistributes that burden. Instead of every Carle staff member learning to prompt-engineer Workday's agent or Epic's agent directly, our orchestrator becomes the translation layer. Users ask questions in plain English; the orchestrator handles the prompt engineering, knowledge selection, and vendor-specific formatting on their behalf. <strong>Carle's agent supplements the FTE AI config weight that vendor pitches typically assume Carle staff will absorb.</strong></p>
+
+      <h4>What this means for the training tiers</h4>
+      <ul>
+        <li><strong>Tier 1 users</strong> — need to know how to ask questions clearly. They don't need deep prompt engineering skill; the orchestrator handles that.</li>
+        <li><strong>Tier 2-3 users</strong> — need to understand agent capabilities and oversight, not how to construct prompts. The orchestrator provides standardized translation.</li>
+        <li><strong>Tier 4 (citizen developers)</strong> — stays narrow. A small concentrated cohort with deep skill, because the broad workforce isn't dependent on prompt fluency for daily work.</li>
+        <li><strong>Dev team and AI orchestration architect</strong> — carry the concentrated technical burden. This is where prompt engineering, A2A protocol fluency, and knowledge engineering live.</li>
+      </ul>
+
+      <h4>Why this strengthens the front-door argument</h4>
+      <p>If our orchestrator is the A2A peer to Workday's agent, Epic's agent, and any future vendor agent, those vendor agents become downstream resources we delegate to — not user-facing surfaces our staff have to learn. The user's experience is consistent regardless of which vendor agent ultimately answers the question. That's the value of owning the front door, made concrete.</p>
+
+      <h4>What this does to the FTE picture</h4>
+      <p>The vendor pitch typically assumes Carle staff will become skilled at configuring and prompting the vendor's AI. A2A architecture supplements that burden — Carle's orchestrator does the configuration work that vendor pitches assume FTE will do. The result is fewer hours of FTE time spent on AI configuration, redirected toward higher-judgment work.</p>
+
+      <div class="callout win">
+        <div class="callout-label">The workforce framing</div>
+        <div class="callout-body">A2A architecture centralizes AI fluency in the orchestration layer. The broad workforce stays focused on judgment work; the dev team and orchestration architect carry the technical burden. We supplement the AI configuration weight that vendors expect FTE to absorb — with our own agent doing the heavy lifting.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>How adjacent IT teams change</summary>
+    <div class="deep">
+      <p>Agent adoption doesn't just affect the people using agents. It changes the work of every team that supports the systems agents touch. Naming this honestly helps the directors of those teams plan rather than react.</p>
+
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-team">HelpDesk</div>
+          <div class="impact-shift">Tickets shift from <em>"how do I do X"</em> to <strong>"the agent did X wrong, can you fix it"</strong>. Volume of routine tickets drops; complexity of remaining tickets rises. New skills needed: reading agent traces, escalation paths, agent-vs-user error triage.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-team">IT Systems</div>
+          <div class="impact-shift">Agent monitoring becomes a new ops responsibility. <strong>Drift detection, performance baselines, observability tooling.</strong> Existing patching and uptime work continues — agents add a new dimension on top.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-team">Knowledge Management</div>
+          <div class="impact-shift">Their world transforms most. Become the <strong>curators of agent training data.</strong> SharePoint and Dataverse content is what agents read. Documentation quality directly determines agent quality. Their role moves from "organize knowledge" to "engineer knowledge for AI consumption."</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-team">Cybersecurity</div>
+          <div class="impact-shift">New attack surface — agents that can take actions in production systems are high-value targets. <strong>Prompt injection, data exfiltration, agent impersonation</strong> become standard threats. Steve's team gets a new monitoring discipline on top of existing work.</div>
+        </div>
+      </div>
+
+      <p>BioMed is the team most insulated from agent changes in the near term — clinical device management has its own regulatory regime that doesn't change because Carle adopted RAG over SharePoint. Indirectly, BioMed will eventually need to think about clinical agent governance, but that's downstream of clinical agent adoption itself.</p>
+
+      <div class="callout">
+        <div class="callout-label">The crossover work</div>
+        <div class="callout-body">Each adjacent team needs a designated AI liaison who maintains literacy on what agents are doing in their domain. Not full-time roles — part of existing leads' responsibilities. Gives every team a person to call when something agent-related crosses their lane.</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Workforce planning when AI does real work</summary>
+    <div class="deep">
+      <p>Workday's vertical demos showed eyebrow-raising things — year-end and monthly close automations that genuinely reduce work. <strong>That capability is real and shouldn't be dismissed.</strong> The honest question is what it means for our workforce.</p>
+
+      <h4>The careful answer to "when do we cut FTE"</h4>
+      <p>This is workforce planning that requires HR partnership — it isn't an IT decision. The framework that holds up under scrutiny:</p>
+
+      <ul>
+        <li><strong>AI eliminates work before it eliminates workers.</strong> Initially, automation reduces effort within existing roles. People do less data entry and more judgment work. They do less repetitive lookup and more exception handling.</li>
+        <li><strong>True FTE reduction requires sustained automation handling 80%+ of a role's work, plus a deliberate decision not to backfill</strong>. Both conditions have to be met. The first usually takes 12-18 months of agent operation to assess fairly.</li>
+        <li><strong>Track task automation, not headcount projection.</strong> What percentage of a role's tasks does the agent handle reliably? Watch for natural attrition. Retrain and redeploy where possible. Reduce headcount as a last resort, with HR partnership.</li>
+        <li><strong>Some role consolidation is inevitable over multi-year horizons</strong>. Pretending otherwise is dishonest. The right framing is "AI changes what work needs doing — workforce changes follow that, deliberately, on a multi-year timeline."</li>
+      </ul>
+
+      <h4>How surviving roles change</h4>
+      <ul>
+        <li><strong>Less typing, more deciding.</strong> The agent drafts; the human approves, edits, or rejects.</li>
+        <li><strong>Less data entry, more pattern recognition.</strong> The agent surfaces anomalies; the human investigates.</li>
+        <li><strong>Less "do the work," more "verify the agent did the work."</strong> Quality control moves up the seniority ladder.</li>
+        <li><strong>More cross-functional fluency.</strong> When agents handle the routine work in one domain, surviving roles span more domains.</li>
+      </ul>
+
+      <h4>The honest CTO answer for leadership</h4>
+      <p>Workday's year-end close automation is impressive and we should evaluate buying it on Bucket 1 terms. The bigger workforce question — what happens to the finance team when 60% of close work is automated — is a workforce planning conversation that needs HR, finance leadership, and IT in the room together. <strong>Don't let the vendor demo set the workforce planning timeline.</strong> That's our decision, on our schedule.</p>
+
+      <div class="callout warn">
+        <div class="callout-label">What faster-than-assumed actually looks like</div>
+        <div class="callout-body">Vendor verticals are demonstrating real capability today. Internal builds will demonstrate similar capability within 12-18 months. The workforce planning conversation needs to start now, not when the agents are already running. The cost of being unprepared is much higher than the cost of planning for change that takes longer than expected.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 12 — WHAT WE'RE ASKING FOR ========== -->
+<div class="section" id="s13">
+  <div class="section-num">Section 13</div>
+  <h2 class="section-title">What we're asking for</h2>
+  <p class="lede">If Carle is going to be the kind of health system that <em>builds</em> with AI rather than only <em>buys</em> AI, three things need to be true.</p>
+
+  <div class="commitments">
+    <div class="commit">
+      <div class="commit-num">1</div>
+      <div class="commit-content">
+        <h4>Architectural authority over AI decisions</h4>
+        <p>No new AI platform, agent builder commitment, or significant AI-related contract gets signed without architectural review against this framework. Same gate-keeping posture cybersecurity already has — not just advisory input.</p>
+      </div>
+    </div>
+    <div class="commit">
+      <div class="commit-num">2</div>
+      <div class="commit-content">
+        <h4>Discipline on horizontal vendor AI</h4>
+        <p>Bucket 1 (vertical AI inside vendor systems) is fair game. Bucket 3 (vendors stretching beyond their lane) is not. The default answer is no. The vendor carries the burden of proof for any exception.</p>
+      </div>
+    </div>
+    <div class="commit">
+      <div class="commit-num">3</div>
+      <div class="commit-content">
+        <h4>Investment in documentation, training, and our own tooling</h4>
+        <p>Without documented processes, AI agents have nothing to operate on. Without trained staff, we can't use AI safely. Without our own connector library and orchestrator, we don't actually own the front door.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="pull">Vendors are reselling raw AI. The same AI we can call directly. The question is whether we let them keep the margin and the model selection — or whether we keep both ourselves.</p>
+
+  <details>
+    <summary>What each commitment unlocks</summary>
+    <div class="deep">
+      <p><strong>Architectural authority</strong> means we stop making AI decisions one vendor pitch at a time. We stop accumulating fragmentation across five vendors. We stop signing contracts that look fine in isolation but together pin us to other people's roadmaps.</p>
+      <p><strong>Discipline on horizontal vendor AI</strong> means our AI dollars compound — every dollar spent strengthens infrastructure that supports the next initiative — instead of disappearing into license renewals. It means we keep negotiating leverage, because every vendor knows we have an internal alternative.</p>
+      <p><strong>Investment in documentation, training, and tooling</strong> means the AI capability we build is actually usable by the workforce. All three together turn AI from a budget line into a competitive advantage.</p>
+      <p>None of this is a five-year transformation. The IT Self-Service Agent ships this year. The MCP refactor is right after. The documentation pipeline starts the moment Scribe licenses are provisioned. Each piece compounds with the next.</p>
+
+      <div class="callout">
+        <div class="callout-label">The closing thought</div>
+        <div class="callout-body">Get good at AI, or get steamrolled. The technology is moving too fast for "wait and see" — the foundation models from Anthropic, OpenAI, Google, and Microsoft are improving every quarter, and the gap between building on raw tools and buying vendor wrappers is widening, not closing. Carle has the team, the infrastructure, and the strategic clarity to build. What we need is institutional permission to act on it.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+</div>
+
+<div class="footer">
+  <span>Carle Health · Enterprise Digital Solutions</span> · Executive AI Primer · 2026
+</div>
+
+</body>
+</html>
