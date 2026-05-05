@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Carle | The Executive AI Primer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#1c1e22;
+  --surface:#26292f;
+  --surface-2:#2e3239;
+  --surface-3:#383c44;
+  --border:rgba(255,255,255,0.08);
+  --border-bright:rgba(255,255,255,0.16);
+  --text:#e8ecf5;
+  --text-mid:#bcc4d4;
+  --text-dim:#8a92ad;
+  --blue:#3b82f6;
+  --blue-soft:#60a8ff;
+  --purple:#8b5cf6;
+  --purple-soft:#b48cff;
+  --green:#10b981;
+  --green-soft:#5dd4a8;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --red-soft:#ff8a96;
+}
+html{
+  scroll-behavior:smooth;
+  color-scheme:dark;
+  background-color:#1c1e22;
+}
+body{
+  font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  background-color:#1c1e22 !important;
+  color:#e8ecf5;
+  line-height:1.65;
+  font-size:15.5px;
+  margin:0;
+  min-height:100vh;
+}
+
+/* HERO */
+.hero{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139,92,246,0.15), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.12), transparent 50%),
+    linear-gradient(135deg,#0a1428 0%,#1a1060 50%,#2d1b69 100%);
+  padding:88px 40px 72px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:20px;
+}
+h1.hero-title{
+  font-size:52px;font-weight:700;line-height:1.08;
+  background:linear-gradient(135deg,#fff 0%,#c0a8ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:18px;letter-spacing:-1px;
+}
+.hero-sub{
+  font-size:19px;color:#b0b8d0;max-width:680px;margin:0 auto;line-height:1.55;
+}
+.hero-time{
+  margin-top:36px;font-size:11px;color:var(--text-dim);
+  letter-spacing:2px;text-transform:uppercase;font-weight:600;
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:56px 32px;background-color:#1c1e22;}
+
+/* TOC */
+.toc{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:28px 32px;margin-bottom:56px;
+}
+.toc-label{
+  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:16px;
+}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 28px;}
+.toc-list a{
+  color:var(--text-mid);text-decoration:none;font-size:13.5px;
+  display:flex;gap:12px;padding:7px 0;transition:color .15s;
+}
+.toc-list a:hover{color:var(--blue-soft);}
+.toc-list a span{
+  color:var(--text-dim);font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:11px;min-width:20px;
+}
+
+/* SECTION */
+.section{margin-bottom:64px;scroll-margin-top:24px;}
+.section-num{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:10px;
+}
+h2.section-title{
+  font-size:32px;font-weight:700;line-height:1.2;margin-bottom:20px;
+  color:var(--text);letter-spacing:-0.5px;
+}
+.lede{
+  font-size:17px;color:#d8dde8;line-height:1.65;margin-bottom:20px;
+}
+.lede strong{color:#fff;font-weight:600;}
+.lede em{color:var(--blue-soft);font-style:normal;font-weight:500;}
+
+/* FOUNDATION GRID — the four AI companies */
+.foundation-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0;
+}
+.fnd-card{
+  background:linear-gradient(135deg,var(--surface),var(--surface-2));
+  border:1px solid var(--border-bright);border-radius:14px;
+  padding:20px 16px;text-align:center;
+}
+.fnd-name{font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.3px;}
+.fnd-product{font-size:12px;color:var(--purple-soft);margin-top:4px;font-weight:600;letter-spacing:0.5px;}
+
+/* WRAPPER STACK */
+.wrapper-stack{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.ws-row{
+  border-radius:10px;padding:18px 22px;margin:8px 0;
+}
+.ws-row.vendors{
+  background:linear-gradient(90deg,rgba(245,158,11,0.10),rgba(245,158,11,0.04));
+  border:1px solid rgba(245,158,11,0.22);
+}
+.ws-row.foundation{
+  background:linear-gradient(90deg,rgba(16,185,129,0.12),rgba(59,130,246,0.08));
+  border:1px solid rgba(16,185,129,0.25);
+}
+.ws-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.ws-row.vendors .ws-tag{color:var(--amber);}
+.ws-row.foundation .ws-tag{color:var(--green-soft);}
+.ws-list{display:flex;flex-wrap:wrap;gap:8px;}
+.ws-pill{
+  background:rgba(255,255,255,0.09);border:1px solid var(--border);
+  padding:5px 12px;border-radius:6px;font-size:12.5px;color:#fff;font-weight:500;
+}
+.ws-arrow{
+  text-align:center;color:var(--text-dim);font-size:13px;
+  margin:6px 0;letter-spacing:6px;
+}
+
+/* PAIRED CARDS */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0;}
+.pair-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 22px;position:relative;overflow:hidden;
+}
+.pair-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.pair-card.good::before{background:var(--green);}
+.pair-card.bad::before{background:var(--red);}
+.pair-card.real::before{background:var(--amber);}
+.pair-card.real .pair-tag{color:var(--amber);}
+.cost-list{margin-top:14px;list-style:none;padding-left:0;}
+.cost-list li{position:relative;padding:6px 0 6px 20px;font-size:14px;color:var(--text-mid);line-height:1.5;}
+.cost-list li::before{content:'';position:absolute;left:6px;top:14px;width:5px;height:5px;background:var(--text-dim);border-radius:50%;}
+.pair-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.pair-card.good .pair-tag{color:var(--green-soft);}
+.pair-card.bad .pair-tag{color:var(--red-soft);}
+.pair-headline{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.35;}
+.pair-body{font-size:14px;color:var(--text-mid);line-height:1.6;}
+
+/* THREE BUCKETS */
+.buckets{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+.bucket{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+}
+.bucket-marker{
+  width:54px;height:54px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.5px;
+}
+.bucket.buy .bucket-marker{background:linear-gradient(135deg,#10b981,#5dd4a8);}
+.bucket.invest .bucket-marker{background:linear-gradient(135deg,#3b82f6,#60a8ff);}
+.bucket.walk .bucket-marker{background:linear-gradient(135deg,#ef4444,#ff8a96);}
+.bucket-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.bucket.buy .bucket-tag{color:var(--green-soft);}
+.bucket.invest .bucket-tag{color:var(--blue-soft);}
+.bucket.walk .bucket-tag{color:var(--red-soft);}
+.bucket-title{font-size:17px;font-weight:600;color:#fff;margin-bottom:4px;line-height:1.35;}
+.bucket-desc{font-size:14px;color:var(--text-mid);line-height:1.55;}
+
+/* FRONT DOOR */
+.frontdoor{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:28px 24px;margin:24px 0;
+}
+.fd-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--purple-soft);text-align:center;margin-bottom:18px;
+}
+.fd-doors{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.fd-door{
+  background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(59,130,246,0.12));
+  border:1px solid rgba(139,92,246,0.4);border-radius:12px;
+  padding:24px 20px;text-align:center;
+}
+.fd-door-name{font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.5px;}
+.fd-door-who{font-size:12px;color:var(--purple-soft);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;}
+.fd-vs{
+  text-align:center;font-size:11px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:2px;font-weight:600;margin:8px 0 14px;
+}
+.fd-visit{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.fd-chip{
+  background:var(--surface-2);border:1px solid var(--border);
+  padding:7px 14px;border-radius:20px;
+  font-size:12px;color:var(--text-mid);font-weight:500;
+}
+
+/* BIG STAT */
+.stat-hero{
+  background:linear-gradient(135deg,rgba(16,185,129,0.10),rgba(59,130,246,0.06));
+  border:1px solid rgba(16,185,129,0.3);border-radius:16px;
+  padding:32px 28px;margin:24px 0;text-align:center;
+}
+.stat-num{
+  font-size:64px;font-weight:800;line-height:1;letter-spacing:-2px;
+  background:linear-gradient(135deg,#10b981,#60a8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+.stat-caption{
+  font-size:14px;color:#d8dde8;line-height:1.5;max-width:520px;margin:0 auto;
+}
+.stat-caption strong{color:#fff;font-weight:600;}
+
+/* ICEBERG */
+.iceberg{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  margin:24px 0;overflow:hidden;
+}
+.iceberg-top{
+  background:linear-gradient(180deg,rgba(96,168,255,0.12),rgba(96,168,255,0.04));
+  padding:20px 24px;border-bottom:2px dashed rgba(96,168,255,0.3);
+}
+.iceberg-bottom{
+  background:linear-gradient(180deg,rgba(20,26,46,0.6),rgba(20,26,46,0.95));
+  padding:20px 24px;
+}
+.iceberg-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.iceberg-top .iceberg-tag{color:var(--blue-soft);}
+.iceberg-bottom .iceberg-tag{color:var(--amber);}
+.iceberg-headline{font-size:15px;font-weight:600;color:#fff;margin-bottom:10px;}
+.iceberg-list{list-style:none;}
+.iceberg-list li{
+  font-size:13.5px;color:var(--text-mid);padding:4px 0;padding-left:18px;position:relative;
+}
+.iceberg-list li::before{
+  content:'';position:absolute;left:4px;top:11px;width:5px;height:5px;
+  background:var(--amber);border-radius:50%;
+}
+.iceberg-pct{font-size:13px;color:var(--text-dim);font-weight:600;}
+
+/* CURVES (SVG) */
+.curves{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.curves-svg{width:100%;height:200px;}
+.curves-legend{display:flex;justify-content:center;gap:32px;margin-top:14px;flex-wrap:wrap;}
+.curve-key{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);}
+.curve-dot{width:12px;height:3px;border-radius:2px;}
+.curve-dot.cheap{background:var(--green);}
+.curve-dot.premium{background:var(--red);}
+.curve-dot.frontier{background:var(--green);}
+.curve-dot.locked{background:var(--amber);}
+
+/* LAG BARS */
+.lag{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.lag-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;align-items:center;margin:12px 0;}
+.lag-name{font-size:13.5px;font-weight:600;color:#fff;}
+.lag-bar{height:10px;border-radius:5px;}
+.lag-bar.b1{width:100%;background:linear-gradient(90deg,#10b981,#5dd4a8);}
+.lag-bar.b2{width:85%;background:linear-gradient(90deg,#10b981,#60a8ff);}
+.lag-bar.b3{width:50%;background:linear-gradient(90deg,#f59e0b,#ef4444);}
+.lag-tag{font-size:10px;color:var(--text-mid);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+
+/* ARCH DIAGRAM */
+.arch-diagram{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+  padding:24px 20px;margin:18px 0;
+}
+.arch-tier{
+  background:linear-gradient(135deg,var(--surface-3),var(--surface-2));
+  border:1px solid var(--border-bright);border-radius:10px;
+  padding:14px 18px;margin:8px 0;display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;
+}
+.arch-tier.front{border-left:3px solid var(--purple);}
+.arch-tier.knowledge{border-left:3px solid var(--blue);}
+.arch-tier.transactions{border-left:3px solid var(--amber);}
+.arch-tier.glue{border-left:3px solid var(--green);}
+.arch-tier-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+.arch-tier.front .arch-tier-label{color:var(--purple-soft);}
+.arch-tier.knowledge .arch-tier-label{color:var(--blue-soft);}
+.arch-tier.transactions .arch-tier-label{color:var(--amber);}
+.arch-tier.glue .arch-tier-label{color:var(--green-soft);}
+.arch-tier-systems{display:flex;flex-wrap:wrap;gap:6px;}
+.arch-chip{
+  background:rgba(255,255,255,0.09);border:1px solid var(--border);
+  padding:6px 12px;border-radius:6px;font-size:12px;color:#fff;font-weight:500;
+}
+.arch-flow{
+  text-align:center;color:var(--text-dim);font-size:18px;margin:2px 0;line-height:1;letter-spacing:4px;
+}
+.carle-cloud-block{
+  background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(245,158,11,0.05));
+  border:1px solid rgba(251,191,36,0.3);border-radius:14px;
+  padding:22px 24px;margin:24px 0 18px;
+}
+.cc-label{
+  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:12px;
+}
+.cc-headline{font-size:16px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.4;}
+.cc-body{font-size:14.5px;color:#d8dde8;line-height:1.65;margin-bottom:14px;}
+.cc-body strong{color:#fff;}
+.cc-systems{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* SCORECARD */
+.scorecard{
+  background:linear-gradient(135deg,rgba(139,92,246,0.10),rgba(59,130,246,0.08));
+  border:1px solid rgba(139,92,246,0.3);border-radius:16px;
+  padding:28px;margin:24px 0;
+}
+.sc-label{
+  font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:6px;
+}
+.sc-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:18px;letter-spacing:-0.3px;}
+.sc-tests{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.sc-test{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start;
+}
+.sc-num{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(139,92,246,0.2);border:1px solid rgba(139,92,246,0.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--purple-soft);
+}
+.sc-q{font-size:14px;font-weight:600;color:#fff;line-height:1.4;margin-bottom:3px;}
+.sc-hint{font-size:12.5px;color:var(--text-mid);line-height:1.5;}
+.sc-rubric{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px;}
+.sc-r{border-radius:8px;padding:10px 12px;text-align:center;font-size:12px;font-weight:700;}
+.sc-r.buy{background:rgba(16,185,129,0.15);color:var(--green-soft);border:1px solid rgba(16,185,129,0.3);}
+.sc-r.invest{background:rgba(245,158,11,0.15);color:var(--amber);border:1px solid rgba(245,158,11,0.3);}
+.sc-r.walk{background:rgba(239,68,68,0.15);color:var(--red-soft);border:1px solid rgba(239,68,68,0.3);}
+.sc-r-score{display:block;font-size:14px;margin-bottom:2px;letter-spacing:-0.3px;}
+.sc-r-action{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+
+/* HALLWAY TEST */
+.hallway{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin:24px 0;
+}
+.hw-tag{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:6px;
+}
+.hw-title{font-size:18px;font-weight:600;color:#fff;margin-bottom:16px;}
+.hw-qs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.hw-q{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;
+}
+.hw-q-num{font-size:11px;font-weight:800;color:var(--purple-soft);letter-spacing:1.5px;margin-bottom:8px;}
+.hw-q-text{font-size:13px;color:#fff;font-weight:600;line-height:1.4;margin-bottom:8px;}
+.hw-q-rule{font-size:12px;color:var(--text-mid);line-height:1.5;}
+.hw-q-rule em{color:var(--green-soft);font-style:normal;font-weight:600;}
+.hw-q-rule strong{color:var(--red-soft);font-weight:600;}
+
+/* DOLLAR */
+.dollar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+.dollar-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 22px;
+}
+.dollar-card.bad{border-top:3px solid var(--red);}
+.dollar-card.good{border-top:3px solid var(--green);}
+.dollar-tag{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.dollar-card.bad .dollar-tag{color:var(--red-soft);}
+.dollar-card.good .dollar-tag{color:var(--green-soft);}
+.dollar-amount{font-size:32px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.dollar-arrow{font-size:14px;color:var(--text-dim);margin:8px 0;}
+.dollar-result{font-size:14px;color:#d8dde8;line-height:1.5;}
+.dollar-result strong{color:#fff;font-weight:600;}
+
+/* TIER */
+.tier{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:16px 20px;margin:8px 0;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+}
+.tier-num{
+  width:36px;height:36px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(59,130,246,0.2));
+  border:1px solid rgba(139,92,246,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:var(--purple-soft);
+}
+.tier-body h5{font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;}
+.tier-body p{font-size:13.5px;color:var(--text-mid);line-height:1.55;}
+
+/* COMMITMENTS */
+.commitments{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+.commit{
+  background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(59,130,246,0.06));
+  border:1px solid rgba(139,92,246,0.3);border-radius:14px;
+  padding:24px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+}
+.commit-num{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#8b5cf6,#3b82f6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;
+}
+.commit-content h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.2px;}
+.commit-content p{font-size:14px;color:#d2d8e6;line-height:1.6;}
+
+/* DOC PIPELINE */
+.pipeline{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 20px;margin:24px 0;
+}
+.pipe-row{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.pipe-row:last-child{border-bottom:none;}
+.pipe-num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#10b981,#3b82f6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:#fff;
+}
+.pipe-content strong{display:block;color:#fff;font-size:14.5px;margin-bottom:3px;}
+.pipe-content span{color:var(--text-mid);font-size:13px;line-height:1.5;}
+
+/* WORKFORCE IMPACT GRID */
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+.impact-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:18px 20px;
+}
+.impact-team{
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:8px;
+}
+.impact-shift{font-size:13.5px;color:#d8dde8;line-height:1.55;}
+.impact-shift strong{color:#fff;}
+
+/* PULL */
+.pull{
+  font-size:20px;line-height:1.45;color:#fff;font-weight:500;
+  border-left:3px solid var(--purple);padding:12px 0 12px 22px;
+  margin:28px 0;letter-spacing:-0.3px;
+}
+
+/* CALLOUT */
+.callout{
+  background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.06));
+  border-left:3px solid var(--blue);border-radius:0 10px 10px 0;
+  padding:18px 22px;margin:20px 0;
+}
+.callout-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:6px;
+}
+.callout-body{font-size:14.5px;color:#d2d8e6;line-height:1.65;}
+.callout.warn{border-left-color:var(--amber);background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.04));}
+.callout.warn .callout-label{color:var(--amber);}
+.callout.win{border-left-color:var(--green);background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(59,130,246,.04));}
+.callout.win .callout-label{color:var(--green-soft);}
+
+/* ACCORDIONS */
+details{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  margin-top:14px;transition:border-color .2s;
+}
+details[open]{border-color:var(--border-bright);}
+summary{
+  list-style:none;cursor:pointer;padding:16px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-size:13px;font-weight:600;color:var(--blue-soft);
+  letter-spacing:0.3px;user-select:none;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{
+  content:'+';font-size:22px;font-weight:300;color:var(--text-dim);
+  transition:transform .25s;line-height:1;
+}
+details[open] summary::after{transform:rotate(45deg);color:var(--purple-soft);}
+summary:hover{color:#fff;}
+.deep{
+  padding:6px 26px 26px;border-top:1px solid var(--border);margin-top:0;
+  font-size:14.5px;color:#d2d8e6;line-height:1.7;
+}
+.deep p{margin:14px 0;}
+.deep h4{
+  font-size:12px;font-weight:800;color:#fff;margin:22px 0 10px;
+  text-transform:uppercase;letter-spacing:1.2px;
+}
+.deep ul{margin:10px 0 14px;padding-left:0;list-style:none;}
+.deep ul li{position:relative;padding:5px 0 5px 22px;line-height:1.6;}
+.deep ul li::before{
+  content:'';position:absolute;left:6px;top:13px;
+  width:6px;height:6px;border-radius:50%;background:var(--purple);
+}
+.deep strong{color:#fff;font-weight:600;}
+.deep em{color:var(--blue-soft);font-style:normal;font-weight:500;}
+.deep code{
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);
+  padding:1px 7px;border-radius:5px;font-size:13px;color:var(--purple-soft);
+  font-family:'SF Mono','Consolas',monospace;
+}
+
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border-bright),transparent);
+  margin:0 0 56px;
+}
+
+.footer{
+  border-top:1px solid var(--border);padding:32px;margin-top:32px;
+  text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;
+}
+.footer span{color:var(--purple-soft);}
+
+@media(max-width:680px){
+  h1.hero-title{font-size:36px;}
+  .hero{padding:64px 24px 52px;}
+  .wrap{padding:40px 22px;}
+  h2.section-title{font-size:25px;}
+  .toc-list{grid-template-columns:1fr;}
+  .pair{grid-template-columns:1fr;}
+  .fd-doors{grid-template-columns:1fr;}
+  .hw-qs{grid-template-columns:1fr;}
+  .dollar{grid-template-columns:1fr;}
+  .arch-tier{grid-template-columns:1fr;gap:8px;}
+  .sc-rubric{grid-template-columns:1fr;}
+  .bucket{grid-template-columns:1fr;text-align:center;}
+  .bucket-marker{justify-self:center;}
+  .commit{grid-template-columns:1fr;text-align:center;}
+  .commit-num{justify-self:center;}
+  .foundation-grid{grid-template-columns:1fr 1fr;}
+  .impact-grid{grid-template-columns:1fr;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  details{break-inside:avoid;border-color:#ccc;}
+  details[open] summary::after, details summary::after{content:'';}
+  .hero{background:#0a1428;-webkit-print-color-adjust:exact;}
+  .stat-num{-webkit-print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Carle Health · For Executive Leadership</div>
+  <h1 class="hero-title">AI Strategy Primer</h1>
+  <p class="hero-sub">A framework for evaluating AI sales pitches, building internal capability, and deciding where vendors fit. Built to be scanned at the surface or read in depth.</p>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <div class="toc-label">Contents</div>
+  <ul class="toc-list">
+    <li><a href="#s1"><span>01</span>The bottom line</a></li>
+    <li><a href="#s2"><span>02</span>Who actually builds AI</a></li>
+    <li><a href="#s3"><span>03</span>Where Carle people work</a></li>
+    <li><a href="#s4"><span>04</span>Three buckets of AI</a></li>
+    <li><a href="#s5"><span>05</span>Vendors are reselling raw AI</a></li>
+    <li><a href="#s6"><span>06</span>The agent builder problem</a></li>
+    <li><a href="#s7"><span>07</span>Picking the model</a></li>
+    <li><a href="#s8"><span>08</span>Build vs. buy: real math</a></li>
+    <li><a href="#s9"><span>09</span>What building actually costs</a></li>
+    <li><a href="#s10"><span>10</span>The target architecture</a></li>
+    <li><a href="#s11"><span>11</span>Documentation as the moat</a></li>
+    <li><a href="#s12"><span>12</span>Training and workforce</a></li>
+    <li><a href="#s13"><span>13</span>What we're asking for</a></li>
+  </ul>
+</div>
+
+<!-- ========== SECTION 1 ========== -->
+<div class="section" id="s1">
+  <div class="section-num">Section 01</div>
+  <h2 class="section-title">The bottom line</h2>
+  <p class="lede">Every major vendor in our stack — Epic, Workday, ServiceNow, Microsoft — has shown up in the past year with an AI roadmap and a price tag. Each pitch looks reasonable on its own.[...]
+
+  <p class="pull">Get good at AI, or get steamrolled.</p>
+
+  <p class="lede">Health systems that learn to <em>build</em> with AI will outrun health systems that only <em>buy</em> AI. We need to be the first kind. This document is the framework you'll use to e[...]
+
+  <details>
+    <summary>The honest premise behind this document</summary>
+    <div class="deep">
+      <p>AI sales conversations move faster than the technical understanding in the room. That isn't a criticism — it's the natural state when a category arrives this quickly. Vendors know it. Their[...]
+      <p>The biggest risk to Carle right now isn't buying the wrong AI tool. It's buying lots of AI tools, each priced reasonably on its own, that together hand the brain of our enterprise to vendors [...]
+      <p>The good news: the ideas you need to navigate this aren't technically complex. They're the same ideas IT uses every day. This document just translates them.</p>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 2 — WHO ACTUALLY BUILDS AI ========== -->
+<div class="section" id="s2">
+  <div class="section-num">Section 02</div>
+  <h2 class="section-title">Who actually builds AI</h2>
+  <p class="lede">There are roughly four companies in the world building frontier AI. <strong>That's it.</strong> Every other "AI product" you'll be sold is a wrapper around models from these four.</p[...]
+
+  <div class="foundation-grid">
+    <div class="fnd-card">
+      <div class="fnd-name">Anthropic</div>
+      <div class="fnd-product">Claude</div>
+    </div>
+    <div class="fnd-card">
+      <div class="fnd-name">OpenAI</div>
+      <div class="fnd-product">GPT</div>
+    </div>
+    <div class="fnd-card">
+      <div class="fnd-name">Google</div>
+      <div class="fnd-product">Gemini</div>
+    </div>
+    <div class="fnd-card">
+      <div class="fnd-name">Microsoft</div>
+      <div class="fnd-product">Copilot · OpenAI partner</div>
+    </div>
+  </div>
+
+  <div class="wrapper-stack">
+    <div class="ws-row vendors">
+      <div class="ws-tag">Vendors building wrappers around the above</div>
+      <div class="ws-list">
+        <span class="ws-pill">Workday Sana</span>
+        <span class="ws-pill">Epic agents</span>
+        <span class="ws-pill">ServiceNow AI</span>
+        <span class="ws-pill">Notable</span>
+        <span class="ws-pill">Sierra</span>
+        <span class="ws-pill">healthcare AI startups</span>
+      </div>
+    </div>
+    <div class="ws-arrow">▲ ▲ ▲</div>
+    <div class="ws-row foundation">
+      <div class="ws-tag">The four companies that actually build the AI</div>
+      <div class="ws-list">
+        <span class="ws-pill">Anthropic</span>
+        <span class="ws-pill">OpenAI</span>
+        <span class="ws-pill">Google</span>
+        <span class="ws-pill">Microsoft</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="pull">Vendors aren't building AI. They're reselling it. The same AI we can call directly.</p>
+
+  <p class="lede">This matters in two ways. First, when we build with raw tools — Foundry, Claude Code, Copilot Studio — we get the same intelligence the vendor wrappers do, at a fraction of the c[...]
+
+  <details>
+    <summary>The compounding capability gap — why "buying AI" is buying yesterday's AI</summary>
+    <div class="deep">
+      <p>Foundation models update every three to six months with meaningful capability improvements. The gap between this year's frontier model and last year's is not small — it's the difference bet[...]
+
+      <p>Vendor wrappers don't update at that cadence. Most vendor agent platforms ship significant releases every 6-18 months. Their underlying model often lags 12+ months behind the frontier on the [...]
+
+      <h4>What that looks like in practice</h4>
+      <ul>
+        <li>A vendor agent demo today might be running on a foundation model from <em>last summer</em>. Plenty good for the demo. Already behind on hard tasks.</li>
+        <li>Two more frontier model releases happen during the typical vendor implementation window. We finish onboarding their AI and it's already two generations old.</li>
+        <li>The gap doesn't close. The rate of frontier improvement is accelerating, not slowing. What's a 6-month lag today is an 18-month lag in two years.</li>
+      </ul>
+
+      <h4>The compounding effect that makes this worse</h4>
+      <p>As models get more capable, building with them gets <em>easier and faster</em>. Code that took a senior engineer a month last year takes a junior engineer a week now. That curve is steepening[...]
+
+      <div class="callout warn">
+        <div class="callout-label">The structural truth</div>
+        <div class="callout-body">When we buy vendor AI, we're buying a moment-in-time version of capability that gets stale. When we build with raw tools, we ride the curve. The economics get more lo[...]
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 3 ========== -->
+<div class="section" id="s3">
+  <div class="section-num">Section 03</div>
+  <h2 class="section-title">Where Carle people actually work</h2>
+  <p class="lede">Front doors are where people start their day. <strong>Clinicians live in Epic. Everyone else lives in Teams.</strong> Other systems get visited.</p>
+
+  <div class="frontdoor">
+    <div class="fd-label">The Front Doors</div>
+    <div class="fd-doors">
+      <div class="fd-door">
+        <div class="fd-door-name">Epic</div>
+        <div class="fd-door-who">Clinical Staff</div>
+      </div>
+      <div class="fd-door">
+        <div class="fd-door-name">Teams</div>
+        <div class="fd-door-who">Business Staff</div>
+      </div>
+    </div>
+    <div class="fd-vs">— Systems People Visit —</div>
+    <div class="fd-visit">
+      <span class="fd-chip">Workday</span>
+      <span class="fd-chip">ServiceNow</span>
+      <span class="fd-chip">Dynamics</span>
+      <span class="fd-chip">SharePoint</span>
+      <span class="fd-chip">Ivanti</span>
+      <span class="fd-chip">Azure</span>
+    </div>
+  </div>
+
+  <p class="lede">Most vendors selling AI are quietly trying to become a <em>new</em> front door. When a vendor positions their agent platform as "where employees go to ask any work question," that's [...]
+
+  <p class="lede"><strong>Epic is the front door for clinical work and that's the right answer.</strong> Epic's clinical platform is genuinely exceptional at what it's built to do, and clinicians belo[...]
+
+  <details>
+    <summary>Why the front door question is architectural, not aesthetic</summary>
+    <div class="deep">
+      <p>The front door is decided by where people already are. The strategic question isn't <em>which tool is the front door</em> — it's <em>where the AI sits that decides which tool to call</em>. [...]
+
+      <h4>If a vendor owns it</h4>
+      <ul>
+        <li>Every AI question goes through their pricing, their schedule, their model choice.</li>
+        <li>Their rules sit next to — or against — Carle's own AI rules.</li>
+        <li>Switching costs grow every year. Every custom thing built is locked in.</li>
+        <li>Connecting their AI to another vendor's AI requires their permission.</li>
+      </ul>
+
+      <h4>If Carle owns it</h4>
+      <ul>
+        <li>Users ask once, in Teams or Epic. Our AI decides which system to call.</li>
+        <li>We pay AI providers directly, at cost. We pick the model.</li>
+        <li>Vendor agents become helpers we call — not the boss.</li>
+        <li>Our connectors work everywhere, not just one vendor's surface.</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-label">The principle</div>
+        <div class="callout-body">Vendor systems should be reachable from our front door. They should not <em>be</em> the front door. Almost every other decision in this document follows from that one[...]
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 4 — THREE BUCKETS ========== -->
+<div class="section" id="s4">
+  <div class="section-num">Section 04</div>
+  <h2 class="section-title">Three buckets of AI</h2>
+  <p class="lede">Every AI sales pitch falls into one of three buckets. Knowing which tells you most of what you need to know.</p>
+
+  <div class="buckets">
+    <div class="bucket buy">
+      <div class="bucket-marker">1</div>
+      <div>
+        <div class="bucket-tag">Buy</div>
+        <div class="bucket-title">AI inside one system, doing what that system already does</div>
+        <div class="bucket-desc">Workday's payroll agent inside Workday. Epic's chart-reader inside Epic. The vendor knows their data; the agent stays in its lane. <strong>Provided the capability is g[...]
+      </div>
+    </div>
+    <div class="bucket invest">
+      <div class="bucket-marker">2</div>
+      <div>
+        <div class="bucket-tag">Invest</div>
+        <div class="bucket-title">Tools that are gateways to many AI models</div>
+        <div class="bucket-desc">Microsoft Copilot. Azure AI Foundry. Claude Code. These aren't AI products with one model — they're where you choose <em>any</em> model for any task. Model-agnostic.[...]
+      </div>
+    </div>
+    <div class="bucket walk">
+      <div class="bucket-marker">3</div>
+      <div>
+        <div class="bucket-tag">Walk</div>
+        <div class="bucket-title">Vendors stretching beyond their lane to be the front door</div>
+        <div class="bucket-desc">Premium prices for capability outside the vendor's actual domain, with lock-in as the side effect. Whenever a transactional vendor pitches itself as the orchestrator a[...]
+      </div>
+    </div>
+  </div>
+
+  <div class="hallway">
+    <div class="hw-tag">The Hallway Test · 30 Seconds</div>
+    <div class="hw-title">Three questions for any AI pitch</div>
+    <div class="hw-qs">
+      <div class="hw-q">
+        <div class="hw-q-num">Q1</div>
+        <div class="hw-q-text">Whose data is the AI working on?</div>
+        <div class="hw-q-rule"><em>Theirs</em> — okay. <strong>Ours</strong> — warning.</div>
+      </div>
+      <div class="hw-q">
+        <div class="hw-q-num">Q2</div>
+        <div class="hw-q-text">Where do users actually work?</div>
+        <div class="hw-q-rule"><em>Their app</em> — okay. <strong>Somewhere else</strong> — warning.</div>
+      </div>
+      <div class="hw-q">
+        <div class="hw-q-num">Q3</div>
+        <div class="hw-q-text">Could we leave in three years?</div>
+        <div class="hw-q-rule"><em>Easily</em> — okay. <strong>Painfully</strong> — walk.</div>
+      </div>
+    </div>
+  </div>
+
+  <details>
+    <summary>The full five-test scorecard for vendor lock-in</summary>
+    <div class="deep">
+      <p>Use the hallway test for the elevator. Use the scorecard before signing.</p>
+
+      <div class="scorecard">
+        <div class="sc-label">Mental Scorecard</div>
+        <div class="sc-title">Five tests every vendor pitch should pass</div>
+        <div class="sc-tests">
+          <div class="sc-test">
+            <div class="sc-num">1</div>
+            <div>
+              <div class="sc-q">Is the data the vendor's, not ours?</div>
+              <div class="sc-hint">Sana for Workday operates on Workday's own data. Sana Enterprise wants to operate on data we own. Different categories.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">2</div>
+            <div>
+              <div class="sc-q">Is the workflow inside the vendor's surface, where users already are?</div>
+              <div class="sc-hint">A clinician in Epic is in Epic. A business user is in Teams, not Workday.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">3</div>
+            <div>
+              <div class="sc-q">Is the regulatory or compliance lift meaningful and vendor-specific?</div>
+              <div class="sc-hint">FDA pathways and HIPAA-specific architecture, yes. Standard business automation, no.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">4</div>
+            <div>
+              <div class="sc-q">Is this a commodity capability where the vendor has economy of scale we don't?</div>
+              <div class="sc-hint">Payroll, tax filing, clinical evidence libraries — yes. Knowledge lookup over our SharePoint — no.</div>
+            </div>
+          </div>
+          <div class="sc-test">
+            <div class="sc-num">5</div>
+            <div>
+              <div class="sc-q">Is the switching cost in three to five years manageable?</div>
+              <div class="sc-hint">Changing a connector is fine. Rebuilding every custom agent inside their platform is not.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-rubric">
+          <div class="sc-r buy"><span class="sc-r-score">5 of 5</span><span class="sc-r-action">Buy</span></div>
+          <div class="sc-r invest"><span class="sc-r-score">3–4 of 5</span><span class="sc-r-action">Investigate</span></div>
+          <div class="sc-r walk"><span class="sc-r-score">0–2 of 5</span><span class="sc-r-action">Walk</span></div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">The pattern to watch</div>
+        <div class="callout-body">When a vendor with deep institutional buy-in tries to expand beyond their lane into orchestration, they price accordingly and count on the fact that ripping it out la[...]
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 5 — VENDORS RESELLING ========== -->
+<div class="section" id="s5">
+  <div class="section-num">Section 05</div>
+  <h2 class="section-title">Vendors are reselling raw AI</h2>
+  <p class="lede">As Section 02 laid out: Workday's AI, Epic's AI, and most enterprise AI features are built on top of Anthropic, OpenAI, Google, and Microsoft. The vendors aren't building the AI — [...]
+
+  <p class="pull">Workday wants thirty consultants on site to configure their AI. Carle's engineers can build the same thing in Claude Code in a fraction of the time, on the same underlying models, wi[...]
+
+  <details>
+    <summary>What the vendor actually adds — and what it's worth</summary>
+    <div class="deep">
+      <h4>Vendor-added value</h4>
+      <ul>
+        <li><strong>Prebuilt skills inside their system.</strong> A Workday agent that already knows how to read a Workday absence balance is genuinely useful. <em>Worth something — but only inside [...]
+        <li><strong>UI integration.</strong> The AI shows up where users already work in that vendor's product. <em>Worth something, but only if users actually live there.</em></li>
+        <li><strong>Implementation consultants.</strong> Teams of vendor reps on-site to configure things. <em>Mostly a cost. The need for that level of implementation tells you how much of the prebui[...]
+        <li><strong>The actual AI model.</strong> The same Claude or GPT we could call directly. <em>Marked up significantly.</em></li>
+      </ul>
+
+      <h4>The Workday receipt coding example</h4>
+      <p>Carle's expense receipt coding in Workday: every month, ninety-five percent of receipts are identical to the prior month. Workday provides no native pattern matching to suggest the prior mont[...]
+      <p>From outside Workday, using their REST APIs and Claude Code, this is a one-week build. The shallowness of vendor automations isn't the exception — it's the rule.</p>
+
+      <div class="callout win">
+        <div class="callout-label">The reframe</div>
+        <div class="callout-body">We're not deciding between "build" and "buy." We're deciding between paying a vendor to call Anthropic and OpenAI for us, or calling them ourselves. The model is the [...]
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>The RAG sweet spot — where building decisively wins</summary>
+    <div class="deep">
+      <p>RAG — retrieval-augmented generation — is the AI pattern where an agent answers a question by first looking up information from a knowledge base, then using it to generate the answer. Kno[...]
+
+      <h4>What RAG actually requires</h4>
+      <ul>
+        <li>A place where knowledge is stored and governed — <em>SharePoint with E5/Entra access controls.</em> ✓</li>
+        <li>An embedding model — <em>commodity, native to Foundry.</em> ✓</li>
+        <li>A vector store — <em>commodity, built into Foundry.</em> ✓</li>
+        <li>A retrieval algorithm — <em>commodity.</em> ✓</li>
+        <li>A wrapper that puts retrieved chunks in front of an LLM — <em>this is the actual engineering, and it's small.</em></li>
+      </ul>
+
+      <h4>What vendors are selling under "AI Knowledge Assistant"</h4>
+      <p>The pitch is "we'll ingest your documents and make them searchable by AI." The structural problem: <strong>Carle's documents are already searchable.</strong> Microsoft Search, Copilot, and Fo[...]
+
+      <div class="callout win">
+        <div class="callout-label">The clear rule</div>
+        <div class="callout-body">For RAG over Carle's own knowledge, building isn't aggressive. It's the obvious move. Paying vendors to re-index knowledge we've already centralized and governed is o[...]
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 6 — AGENT BUILDERS ========== -->
+<div class="section" id="s6">
+  <div class="section-num">Section 06</div>
+  <h2 class="section-title">The agent builder problem</h2>
+  <p class="lede">Workday and Epic are both selling "agent builders" — low-code tools where staff build custom AI agents inside the vendor's product. Faster. Easier. No engineering required. <strong[...]
+
+  <p class="lede">The vendor agent builders are also visibly behind the raw tools. Not by a little. By a lot.</p>
+
+  <div class="lag">
+    <div class="lag-row">
+      <div class="lag-name">Claude Code</div>
+      <div class="lag-bar b1"></div>
+      <div class="lag-tag">At the frontier</div>
+    </div>
+    <div class="lag-row">
+      <div class="lag-name">Copilot Studio · Foundry</div>
+      <div class="lag-bar b2"></div>
+      <div class="lag-tag">Close behind</div>
+    </div>
+    <div class="lag-row">
+      <div class="lag-name">Epic / Workday agent builders</div>
+      <div class="lag-bar b3"></div>
+      <div class="lag-tag">Significantly behind</div>
+    </div>
+  </div>
+
+  <details>
+    <summary>Why Epic and Workday agent builders are not equivalent</summary>
+    <div class="deep">
+      <h4>Epic — a defensible exception, narrowly</h4>
+      <p>Epic's clinical core is exceptional. The data model is complex, the APIs are restricted, and production work requires Epic-trained analysts — that's all true precisely <em>because</em> Epic[...]
+
+      <p>What we don't extrapolate: Epic's <em>non-clinical expansion software</em>. The CRM-style tools, the marketing platforms, the engagement products that Epic is selling alongside the clinical c[...]
+
+      <h4>Workday — not the same case</h4>
+      <p>Workday is not a closed system. Their data and actions are reachable through well-documented REST APIs. There's no technical reason a Carle-built agent in Foundry can't do what a Workday-buil[...]
+
+      <div class="callout">
+        <div class="callout-label">The doctrine</div>
+        <div class="callout-body">Build with raw tools first. Use vendor agent builders only where the vendor's closed system makes outside integration genuinely infeasible. Apply per use case, not pe[...]
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Workday's data is reachable today — without buying Sana</summary>
+    <div class="deep">
+      <p>This is the part that turns the conversation.</p>
+      <ul>
+        <li>Workday has had REST APIs for years. Every piece of Workday data and most actions are reachable programmatically.</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>Built for Carle Health, 2026. <span>AI Strategy & Architecture</span></p>
+</div>
+
+</body>
+</html>
