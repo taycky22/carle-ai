@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Carle | AI Cost & Capability</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#1c1e22;
+  --surface:#26292f;
+  --surface-2:#2e3239;
+  --surface-3:#383c44;
+  --border:rgba(255,255,255,0.08);
+  --border-bright:rgba(255,255,255,0.16);
+  --text:#e8ecf5;
+  --text-mid:#bcc4d4;
+  --text-dim:#8a92ad;
+  --blue:#3b82f6;
+  --blue-soft:#60a8ff;
+  --purple:#8b5cf6;
+  --purple-soft:#b48cff;
+  --teal:#14b8a6;
+  --teal-soft:#5eead4;
+  --green:#10b981;
+  --green-soft:#5dd4a8;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --red-soft:#ff8a96;
+}
+html{scroll-behavior:smooth;color-scheme:dark;background-color:#1c1e22;}
+body{
+  font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  background-color:#1c1e22 !important;
+  color:#e8ecf5;line-height:1.65;font-size:15.5px;margin:0;min-height:100vh;
+}
+
+.hero{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(20,184,166,0.14), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.10), transparent 50%),
+    linear-gradient(135deg,#0a1f1c 0%,#0f2a45 50%,#1a3d3a 100%);
+  padding:88px 40px 72px;text-align:center;border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--teal-soft);margin-bottom:20px;
+}
+h1.hero-title{
+  font-size:48px;font-weight:700;line-height:1.08;
+  background:linear-gradient(135deg,#fff 0%,#5eead4 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:18px;letter-spacing:-1px;
+}
+.hero-sub{font-size:19px;color:#c8cdd8;max-width:680px;margin:0 auto;line-height:1.55;}
+
+/* SITE NAV */
+.site-nav{background:#26292f;border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:50;}
+.site-nav-inner{max-width:920px;margin:0 auto;padding:0 32px;display:flex;gap:0;align-items:center;}
+.site-nav a{
+  color:var(--text-mid);text-decoration:none;padding:14px 18px;
+  font-size:13px;font-weight:600;letter-spacing:0.3px;
+  border-bottom:2px solid transparent;transition:color .15s, border-color .15s;
+}
+.site-nav a:hover{color:#fff;}
+.site-nav a.active{color:var(--teal-soft);border-bottom-color:var(--teal);}
+.site-nav-brand{
+  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);padding:14px 18px 14px 0;margin-right:auto;
+}
+@media(max-width:680px){
+  .site-nav-inner{padding:0 18px;flex-wrap:wrap;}
+  .site-nav-brand{display:none;}
+  .site-nav a{padding:12px 12px;font-size:12px;}
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:56px 32px;}
+
+.section{margin-bottom:64px;scroll-margin-top:80px;}
+.section-num{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal-soft);margin-bottom:10px;
+}
+h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20px;letter-spacing:-0.5px;}
+.lede{font-size:17px;color:#d8dde8;line-height:1.7;margin-bottom:18px;}
+.lede strong{color:#fff;font-weight:600;}
+.lede em{color:var(--teal-soft);font-style:normal;font-weight:500;}
+
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border-bright),transparent);
+  margin:0 0 56px;
+}
+
+/* PULL */
+.pull{
+  font-size:20px;line-height:1.5;color:#fff;font-weight:500;
+  border-left:3px solid var(--teal);padding:10px 0 10px 22px;
+  margin:28px 0;letter-spacing:-0.3px;
+}
+
+/* COST FLOW VISUAL */
+.cost-flow{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:32px 28px;margin:24px 0;
+}
+.cost-flow-tag{
+  font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--teal-soft);margin-bottom:6px;text-align:center;
+}
+.cost-flow-title{font-size:18px;font-weight:600;color:#fff;text-align:center;margin-bottom:24px;}
+.cost-rows{display:flex;flex-direction:column;gap:10px;}
+.cost-row{
+  display:grid;grid-template-columns:200px 1fr 100px;gap:16px;align-items:center;
+  padding:12px 0;
+}
+.cost-label{
+  font-size:13px;
+}
+.cost-label strong{display:block;color:#fff;font-size:14px;font-weight:600;margin-bottom:2px;}
+.cost-label span{color:var(--text-dim);font-size:12px;}
+.cost-bar-track{
+  height:14px;background:rgba(255,255,255,0.04);border-radius:7px;overflow:hidden;
+  position:relative;
+}
+.cost-bar-fill{
+  height:100%;border-radius:7px;display:flex;align-items:center;padding-left:12px;
+  font-size:11px;font-weight:700;color:#fff;
+}
+.cost-bar-fill.tier1{width:8%;background:linear-gradient(90deg,#10b981,#5dd4a8);}
+.cost-bar-fill.tier2{width:18%;background:linear-gradient(90deg,#3b82f6,#60a8ff);}
+.cost-bar-fill.tier3{width:55%;background:linear-gradient(90deg,#f59e0b,#fbbf24);}
+.cost-bar-fill.tier4{width:90%;background:linear-gradient(90deg,#ef4444,#ff8a96);}
+.cost-val{
+  text-align:right;font-size:14px;font-weight:700;color:#fff;
+}
+.cost-val span{display:block;font-size:11px;color:var(--text-dim);font-weight:500;margin-top:2px;}
+.cost-flow-caption{
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--border);
+  text-align:center;font-size:13px;color:var(--text-mid);line-height:1.6;
+}
+.cost-flow-caption strong{color:#fff;}
+.cost-flow-caption em{color:var(--teal-soft);font-style:normal;font-weight:600;}
+
+/* LEVERS GRID — the centerpiece */
+.levers-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0;
+}
+.lever{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px 24px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+}
+.lever-num{
+  font-size:48px;font-weight:800;line-height:1;letter-spacing:-2px;
+  width:90px;
+}
+.lever-num.green{
+  background:linear-gradient(135deg,#10b981,#5dd4a8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.lever-num.teal{
+  background:linear-gradient(135deg,#14b8a6,#5eead4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.lever-num.blue{
+  background:linear-gradient(135deg,#3b82f6,#60a8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.lever-num.gold{
+  background:linear-gradient(135deg,#f59e0b,#fbbf24);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.lever-content h4{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.2px;}
+.lever-content p{font-size:13.5px;color:var(--text-mid);line-height:1.6;}
+.lever-content em{color:var(--teal-soft);font-style:normal;font-weight:500;}
+
+/* SCENARIO CARDS */
+.scenarios{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0;
+}
+.scenario{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;
+}
+.scenario-head{
+  padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
+}
+.scenario.a .scenario-head{background:linear-gradient(135deg,rgba(59,130,246,0.18),rgba(59,130,246,0.06));border-bottom:2px solid var(--blue);}
+.scenario.b .scenario-head{background:linear-gradient(135deg,rgba(16,185,129,0.18),rgba(16,185,129,0.06));border-bottom:2px solid var(--green);}
+.scenario-letter{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;
+}
+.scenario.a .scenario-letter{background:linear-gradient(135deg,#3b82f6,#60a8ff);}
+.scenario.b .scenario-letter{background:linear-gradient(135deg,#10b981,#5dd4a8);}
+.scenario-tag{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
+.scenario.a .scenario-tag{color:var(--blue-soft);}
+.scenario.b .scenario-tag{color:var(--green-soft);}
+.scenario-title{font-size:14.5px;font-weight:600;color:#fff;line-height:1.4;}
+.scenario-body{padding:16px 22px 20px;}
+.scenario-body ul{list-style:none;}
+.scenario-body li{
+  position:relative;padding:8px 0 8px 20px;font-size:13.5px;color:var(--text-mid);line-height:1.55;
+}
+.scenario-body li::before{
+  content:'';position:absolute;left:4px;top:14px;width:6px;height:6px;border-radius:50%;
+}
+.scenario.a .scenario-body li::before{background:var(--blue);}
+.scenario.b .scenario-body li::before{background:var(--green);}
+.scenario-winner{
+  margin-top:14px;padding:10px 14px;border-radius:8px;
+  font-size:13px;font-weight:600;
+}
+.scenario.a .scenario-winner{background:rgba(59,130,246,0.12);color:var(--blue-soft);}
+.scenario.b .scenario-winner{background:rgba(16,185,129,0.12);color:var(--green-soft);}
+
+.scenario-connector{
+  text-align:center;padding:18px 0;margin:8px 0;
+}
+.scenario-connector-line{
+  height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);
+  margin-bottom:12px;
+}
+.scenario-connector-text{
+  font-size:14px;color:#fff;font-weight:600;letter-spacing:-0.2px;
+}
+.scenario-connector-text em{color:var(--teal-soft);font-style:normal;}
+
+/* ELECTRICITY METAPHOR */
+.metaphor{
+  background:linear-gradient(135deg,rgba(20,184,166,0.10),rgba(59,130,246,0.06));
+  border:1px solid rgba(20,184,166,0.25);border-radius:14px;
+  padding:24px 28px;margin:28px 0;
+  display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:center;
+}
+.metaphor-icon{font-size:48px;text-align:center;}
+.metaphor-title{font-size:14px;font-weight:700;color:var(--teal-soft);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.metaphor-body{font-size:14.5px;color:#d8dde8;line-height:1.6;}
+.metaphor-body strong{color:#fff;}
+
+/* WORKFORCE TIERS */
+.workforce{margin:28px 0;}
+.wf-tier{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:0;margin-bottom:14px;display:grid;grid-template-columns:140px 1fr 130px;
+  overflow:hidden;
+}
+.wf-stamp{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 16px;border-right:1px solid var(--border);
+  font-weight:800;letter-spacing:-0.5px;line-height:1;text-align:center;
+}
+.wf-tier.act .wf-stamp{background:linear-gradient(135deg,rgba(239,68,68,0.18),rgba(239,68,68,0.05));color:#ff8a96;}
+.wf-tier.trans .wf-stamp{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(245,158,11,0.05));color:#fbbf24;}
+.wf-tier.aug .wf-stamp{background:linear-gradient(135deg,rgba(16,185,129,0.18),rgba(16,185,129,0.05));color:#5dd4a8;}
+.wf-stamp-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;opacity:0.85;}
+.wf-stamp-name{font-size:24px;font-weight:800;letter-spacing:-1px;}
+.wf-content{padding:20px 24px;}
+.wf-roles{
+  font-size:13.5px;color:var(--text-mid);line-height:1.6;margin-bottom:10px;
+}
+.wf-roles strong{color:#fff;font-weight:600;}
+.wf-action{
+  font-size:13.5px;color:#d8dde8;line-height:1.55;
+}
+.wf-action strong{color:#fff;}
+.wf-meta{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 16px;border-left:1px solid var(--border);text-align:center;
+}
+.wf-time{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;letter-spacing:-0.3px;}
+.wf-horizon{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;font-weight:600;line-height:1.4;}
+
+/* CEILING NOTE */
+.ceiling{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 24px;margin:24px 0;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;
+}
+.ceiling-cell h5{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--text-dim);margin-bottom:8px;
+}
+.ceiling-cell p{font-size:13px;color:var(--text-mid);line-height:1.55;}
+
+/* DECISIONS */
+.decisions{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+.decision{
+  background:linear-gradient(135deg,rgba(20,184,166,0.08),rgba(59,130,246,0.05));
+  border:1px solid rgba(20,184,166,0.3);border-radius:14px;
+  padding:24px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+}
+.decision-num{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,#14b8a6,#3b82f6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;color:#fff;letter-spacing:-1px;
+}
+.decision-content h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.2px;}
+.decision-content p{font-size:14px;color:#d2d8e6;line-height:1.6;}
+
+/* CALLOUT */
+.callout{
+  background:linear-gradient(135deg,rgba(20,184,166,.10),rgba(59,130,246,.06));
+  border-left:3px solid var(--teal);border-radius:0 10px 10px 0;
+  padding:18px 22px;margin:22px 0;
+}
+.callout-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal-soft);margin-bottom:6px;
+}
+.callout-body{font-size:14.5px;color:#d2d8e6;line-height:1.65;}
+
+/* FOOTER */
+.footer{
+  border-top:1px solid var(--border);padding:32px;margin-top:32px;
+  text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;
+}
+.footer span{color:var(--teal-soft);}
+
+@media(max-width:680px){
+  h1.hero-title{font-size:34px;}
+  .hero{padding:64px 24px 52px;}
+  .wrap{padding:40px 22px;}
+  h2.section-title{font-size:24px;}
+  .levers-grid{grid-template-columns:1fr;}
+  .scenarios{grid-template-columns:1fr;}
+  .ceiling{grid-template-columns:1fr;}
+  .cost-row{grid-template-columns:1fr;gap:6px;}
+  .wf-tier{grid-template-columns:1fr;}
+  .wf-stamp{border-right:none;border-bottom:1px solid var(--border);padding:14px;}
+  .wf-meta{border-left:none;border-top:1px solid var(--border);padding:14px;}
+  .lever{grid-template-columns:1fr;}
+  .decision{grid-template-columns:1fr;}
+  .metaphor{grid-template-columns:1fr;text-align:center;}
+}
+@media print{
+  .site-nav{display:none;}
+  body{background:#fff;color:#000;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Carle Health · AI Cost &amp; Capability</div>
+  <h1 class="hero-title">AI Cost: Where the Money Actually Goes</h1>
+  <p class="hero-sub">The pricing model behind every AI sales pitch — and the levers we have to control it. For executives who need the financial picture before signing anything.</p>
+</div>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <span class="site-nav-brand">Carle AI Strategy</span>
+    <a href="index.html">Primer</a>
+    <a href="workday.html">Workday</a>
+    <a href="ai-cost.html" class="active">AI Cost</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ========== SECTION 01 ========== -->
+<div class="section">
+  <div class="section-num">Section 01</div>
+  <h2 class="section-title">Where the cost actually comes from</h2>
+  <p class="lede">AI feels like a soft cost in early conversations. <strong>It becomes a hard cost the moment any agent goes into production</strong> — and the bill scales with usage. Most enterprise AI sales conversations leave executives with no real picture of what the recurring cost looks like, because vendors structure their pricing to obscure exactly that.</p>
+
+  <p class="lede">The good news: AI pricing has clearer mechanics than most enterprise software. Once you understand the four cost levers — and which ones we control — the financial picture stops being mysterious.</p>
+
+  <div class="cost-flow">
+    <div class="cost-flow-tag">The Pricing Reality</div>
+    <div class="cost-flow-title">What different AI tasks actually cost</div>
+    <div class="cost-rows">
+      <div class="cost-row">
+        <div class="cost-label">
+          <strong>Cached knowledge lookup</strong>
+          <span>Cheap model + prompt cache</span>
+        </div>
+        <div class="cost-bar-track"><div class="cost-bar-fill tier1">~$0.03</div></div>
+        <div class="cost-val">~$0.03<span>per 1M tokens</span></div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">
+          <strong>Conversational AI</strong>
+          <span>Cheap tier · General questions</span>
+        </div>
+        <div class="cost-bar-track"><div class="cost-bar-fill tier2">$0.25</div></div>
+        <div class="cost-val">$0.25<span>per 1M input</span></div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">
+          <strong>Agentic reasoning</strong>
+          <span>Mid tier · Most agent work</span>
+        </div>
+        <div class="cost-bar-track"><div class="cost-bar-fill tier3">$3.00</div></div>
+        <div class="cost-val">$3.00<span>per 1M input</span></div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">
+          <strong>Complex reasoning</strong>
+          <span>Premium tier · Hard problems</span>
+        </div>
+        <div class="cost-bar-track"><div class="cost-bar-fill tier4">$5.00</div></div>
+        <div class="cost-val">$5.00<span>per 1M input</span></div>
+      </div>
+    </div>
+    <div class="cost-flow-caption">
+      <strong>Routing matters more than tier prices.</strong> An organization that always uses the premium tier pays premium rates. An organization that routes commodity tasks to commodity models pays a fraction. <em>Routing is only available when you control the orchestration layer.</em>
+    </div>
+  </div>
+
+  <p class="pull">The vendor charges $X per agent interaction whether the call needed a penny of AI or fifty cents. They keep the difference.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 02 — THE FOUR LEVERS ========== -->
+<div class="section">
+  <div class="section-num">Section 02</div>
+  <h2 class="section-title">Four levers we control</h2>
+  <p class="lede">Owning the orchestration layer means owning four cost levers that vendor agent platforms don't expose to customers. <strong>Together, these compound.</strong> The blended cost of AI at Carle is structurally lower than what equivalent vendor pricing would deliver — not because we negotiated harder, but because we own the levers.</p>
+
+  <div class="levers-grid">
+    <div class="lever">
+      <div class="lever-num green">85%</div>
+      <div class="lever-content">
+        <h4>Prompt caching</h4>
+        <p>System context — policies, SOPs, SharePoint knowledge — gets cached at the session level. Each subsequent reuse costs about <em>10 cents on the dollar</em> compared to full inference. The more we use it, the cheaper it gets.</p>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="lever-num gold">60%</div>
+      <div class="lever-content">
+        <h4>Model tier routing</h4>
+        <p>Cheap models for high-volume simple tasks. Mid-tier for most agentic work. Premium only for genuinely complex reasoning. Blended cost approaches the cheapest tier — quality stays at premium where it matters. <em>The single biggest lever.</em></p>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="lever-num blue">50%</div>
+      <div class="lever-content">
+        <h4>Batch API discount</h4>
+        <p>Non-real-time work — nightly analytics, document processing, bulk enrichment — routed through batch endpoints at <em>half price</em>. No quality penalty. Just requires async-first architecture, which we already have.</p>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="lever-num teal">∞</div>
+      <div class="lever-content">
+        <h4>Platform compounding</h4>
+        <p>Agent 1 builds connectors. Agents 2, 3, 4 reuse them. By Agent 5, marginal build cost approaches zero. <em>Vendor platforms show no platform effects</em> — Agent 5 in their tool costs as much as Agent 1.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Why this matters for any AI buying decision</div>
+    <div class="callout-body">When a vendor quotes $X per agent interaction, ask: <em>which of these four levers does this pricing expose to us?</em> If the answer is "none" — and it almost always is — they keep all the savings these levers generate. We pay full retail. The four levers are the difference between <strong>AI as commodity utility</strong> and <strong>AI as recurring vendor margin</strong>.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 03 — TWO SCENARIOS ========== -->
+<div class="section">
+  <div class="section-num">Section 03</div>
+  <h2 class="section-title">Two futures, one architecture</h2>
+  <p class="lede">Nobody knows exactly where AI pricing goes over the next five years. The good news for Carle: <strong>we don't have to predict it.</strong> The architecture we're building wins under either of the two scenarios that experts are debating.</p>
+
+  <div class="scenarios">
+    <div class="scenario a">
+      <div class="scenario-head">
+        <div class="scenario-letter">A</div>
+        <div>
+          <div class="scenario-tag">Scenario A</div>
+          <div class="scenario-title">Premium AI stays expensive. Commodity AI gets cheap.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <ul>
+          <li>High-volume tasks route to commodity models. Knowledge lookups approach near-zero marginal cost.</li>
+          <li>Premium inference reserved for cases with calculable ROI: prior auth, complex scheduling, clinical reasoning.</li>
+          <li>Carle's orchestration layer makes the routing decision — vendors can't, because they don't expose model selection.</li>
+          <li>Knowledge centralization compounds: better retrieval means smaller context means lower cost per interaction.</li>
+        </ul>
+        <div class="scenario-winner">✓ Carle wins through cost control by architecture, not vendor negotiation</div>
+      </div>
+    </div>
+    <div class="scenario b">
+      <div class="scenario-head">
+        <div class="scenario-letter">B</div>
+        <div>
+          <div class="scenario-tag">Scenario B</div>
+          <div class="scenario-title">All AI gets cheaper. Premium capability democratizes.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <ul>
+          <li>Commodity layer migrates toward zero cost. Freed budget reinvested in advanced agentic capability.</li>
+          <li>Organizations with owned orchestration move at their own speed. Vendor-dependent organizations move at vendor speed.</li>
+          <li>Workforce transformation accelerates. Role transitions in high-volume positions become economically obvious.</li>
+          <li>Carle's platform advantage compounds — every agent reuses infrastructure that's already paid for.</li>
+        </ul>
+        <div class="scenario-winner">✓ Carle wins through deployment speed and platform compounding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-connector">
+    <div class="scenario-connector-line"></div>
+    <div class="scenario-connector-text">In either scenario, <em>the routing layer wins</em>.</div>
+    <div class="scenario-connector-line"></div>
+  </div>
+
+  <div class="metaphor">
+    <div class="metaphor-icon">⚡</div>
+    <div>
+      <div class="metaphor-title">The Electricity Metaphor</div>
+      <div class="metaphor-body">In the early 1900s, factories owned generators. Only large operations could afford the capital cost. When centralized grids arrived, power became commodity — but the industrial machines running on that power stayed expensive. <strong>Basic AI inference is becoming the electricity. Agentic capability is the industrial machine. Carle is building the wiring before the grid finishes coming online.</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 04 — WORKFORCE EXPOSURE ========== -->
+<div class="section">
+  <div class="section-num">Section 04</div>
+  <h2 class="section-title">Three workforce exposure tiers</h2>
+  <p class="lede">The honest workforce question isn't whether AI replaces white-collar work — it's <strong>which roles are at the level current AI can handle, which face transition pressure within 2-4 years, and which require infrastructure that doesn't exist yet at scale</strong>. The framing matters: AI eliminates <em>work</em> before it eliminates <em>workers</em>, and the timing differs by category.</p>
+
+  <div class="workforce">
+    <div class="wf-tier act">
+      <div class="wf-stamp">
+        <div class="wf-stamp-label">Tier 1</div>
+        <div class="wf-stamp-name">Act<br>Now</div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-roles"><strong>Examples:</strong> Call center · Scheduling coordination · Prior auth prep · Patient intake routing · Tier-1 IT support</div>
+        <div class="wf-action"><strong>Current AI is sufficient.</strong> The technology to augment these roles meaningfully already exists, and the ROI is calculable today. Build toward augmentation and attrition-based reduction, with HR partnership on the workforce side. Waiting carries a compounding delay cost relative to organizations already moving.</div>
+      </div>
+      <div class="wf-meta">
+        <div class="wf-time">Now</div>
+        <div class="wf-horizon">Current AI<br>Current cost</div>
+      </div>
+    </div>
+
+    <div class="wf-tier trans">
+      <div class="wf-stamp">
+        <div class="wf-stamp-label">Tier 2</div>
+        <div class="wf-stamp-name">Trans-<br>form</div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-roles"><strong>Examples:</strong> Technical writers · Process coordinators · Data analysts · Junior developers · Documentation specialists</div>
+        <div class="wf-action"><strong>Transform in place or face redundancy.</strong> A 2-4 year window exists to shift these staff toward AI governance, agent operations, knowledge engineering, and prompt engineering roles. Many will succeed at the transition. Some will need to be redeployed. The choice is in the timeline, not the eventual outcome.</div>
+      </div>
+      <div class="wf-meta">
+        <div class="wf-time">2–4 yrs</div>
+        <div class="wf-horizon">Transition<br>required</div>
+      </div>
+    </div>
+
+    <div class="wf-tier aug">
+      <div class="wf-stamp">
+        <div class="wf-stamp-label">Tier 3</div>
+        <div class="wf-stamp-name">Aug-<br>ment</div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-roles"><strong>Examples:</strong> Physicians · Senior engineers · Strategic leadership · Clinical decision-makers · Architects</div>
+        <div class="wf-action"><strong>AI augments judgment, doesn't replace it.</strong> The cost and reliability bar for full replacement of complex judgment doesn't exist at scale today and the path to it isn't clear. Invest in AI fluency for these roles, not workforce planning. The agent makes them faster; the human still owns the decision.</div>
+      </div>
+      <div class="wf-meta">
+        <div class="wf-time">Long horizon</div>
+        <div class="wf-horizon">Infrastructure<br>ceiling</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ceiling">
+    <div class="ceiling-cell">
+      <h5>Power Grid Constraint</h5>
+      <p>Data center power is triggering grid-level interventions in Virginia, Ireland, Singapore, and the Netherlands. Microsoft paused some data center leases in 2025. AI capacity scaling is now an electricity problem.</p>
+    </div>
+    <div class="ceiling-cell">
+      <h5>HBM Memory Shortage</h5>
+      <p>Large-scale AI inference requires HBM3/HBM3e memory, manufactured almost exclusively by SK Hynix and Samsung. New fab capacity takes 3-4 years to come online. The GPU shortage is downstream of this.</p>
+    </div>
+    <div class="ceiling-cell">
+      <h5>Pacing Incentives</h5>
+      <p>AI vendors derive enterprise revenue from organizations whose budgets are held by the workers being augmented. Soft incentive exists to pace displacement — allowing budget redirection rather than elimination.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 05 — THREE DECISIONS ========== -->
+<div class="section">
+  <div class="section-num">Section 05</div>
+  <h2 class="section-title">Three decisions for leadership</h2>
+  <p class="lede">If the cost mechanics, the architecture levers, and the workforce tiers all check out, the strategy collapses to three concrete executive decisions. None of these require new technology. <strong>All three require institutional permission to act.</strong></p>
+
+  <div class="decisions">
+    <div class="decision">
+      <div class="decision-num">1</div>
+      <div class="decision-content">
+        <h4>Act on Tier 1 roles now — with HR in the room</h4>
+        <p>Current AI is sufficient for call center, scheduling coordination, and prior auth prep. Pilot now. Measure honestly. Move to augmentation-and-attrition with HR partnership on the workforce side. Waiting carries a compounding delay cost against health systems already moving.</p>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="decision-num">2</div>
+      <div class="decision-content">
+        <h4>Open the Tier 2 transition window now</h4>
+        <p>The 2-4 year window to retrain mid-level staff into AI operations, governance, and engineering roles is open today. It will not stay open. Identify candidates, fund the transition program, set explicit milestones. The choice is in the timing — not the outcome.</p>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="decision-num">3</div>
+      <div class="decision-content">
+        <h4>Establish AI cost governance before spend reaches the CFO desk</h4>
+        <p>Usage-based AI billing means agent costs reach finance leadership within 12-18 months. Define token budget allocations per agent and per department now. Build the cost dashboards. Make AI spend visible before it becomes a reactive conversation. The governance is cheap; the alternative is expensive surprise.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="pull">Vendors are reselling raw AI. We can call the same models directly, route them ourselves, and keep the margin and the model selection. The four levers compound. The architecture wins under either scenario. The workforce transition is a planning problem, not a technology problem.</p>
+
+  <div class="callout">
+    <div class="callout-label">The closing thought</div>
+    <div class="callout-body">AI cost isn't a black box once you see the levers. The pricing has clear mechanics. The architecture choices have predictable consequences. The workforce transitions have clear tier boundaries. <strong>What's missing isn't information — it's the institutional decision to act on what we already know.</strong></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span>Carle Health · Enterprise Digital Solutions</span> · AI Cost &amp; Capability · 2026
+</div>
+
+</body>
+</html>
