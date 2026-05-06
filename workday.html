@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Carle | Working with Workday</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#1c1e22;
+  --surface:#26292f;
+  --surface-2:#2e3239;
+  --surface-3:#383c44;
+  --border:rgba(255,255,255,0.08);
+  --border-bright:rgba(255,255,255,0.16);
+  --text:#e8ecf5;
+  --text-mid:#bcc4d4;
+  --text-dim:#8a92ad;
+  --blue:#3b82f6;
+  --blue-soft:#60a8ff;
+  --purple:#8b5cf6;
+  --purple-soft:#b48cff;
+  --green:#10b981;
+  --green-soft:#5dd4a8;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --red-soft:#ff8a96;
+}
+html{scroll-behavior:smooth;color-scheme:dark;background-color:#1c1e22;}
+body{
+  font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  background-color:#1c1e22 !important;
+  color:#e8ecf5;line-height:1.65;font-size:15.5px;margin:0;min-height:100vh;
+}
+
+/* HERO */
+.hero{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(245,158,11,0.12), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.10), transparent 50%),
+    linear-gradient(135deg,#1f1810 0%,#2a2418 50%,#1a1f2e 100%);
+  padding:88px 40px 72px;text-align:center;border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:20px;
+}
+h1.hero-title{
+  font-size:48px;font-weight:700;line-height:1.08;
+  background:linear-gradient(135deg,#fff 0%,#fcd34d 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:18px;letter-spacing:-1px;
+}
+.hero-sub{font-size:19px;color:#c8cdd8;max-width:680px;margin:0 auto;line-height:1.55;}
+
+/* SITE NAV */
+.site-nav{background:#26292f;border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:50;}
+.site-nav-inner{max-width:920px;margin:0 auto;padding:0 32px;display:flex;gap:0;align-items:center;}
+.site-nav a{
+  color:var(--text-mid);text-decoration:none;padding:14px 18px;
+  font-size:13px;font-weight:600;letter-spacing:0.3px;
+  border-bottom:2px solid transparent;transition:color .15s, border-color .15s;
+}
+.site-nav a:hover{color:#fff;}
+.site-nav a.active{color:#fcd34d;border-bottom-color:#f59e0b;}
+.site-nav-brand{
+  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);padding:14px 18px 14px 0;margin-right:auto;
+}
+@media(max-width:680px){
+  .site-nav-inner{padding:0 18px;flex-wrap:wrap;}
+  .site-nav-brand{display:none;}
+  .site-nav a{padding:12px 12px;font-size:12px;}
+}
+
+.wrap{max-width:880px;margin:0 auto;padding:56px 32px;}
+
+.section{margin-bottom:64px;scroll-margin-top:80px;}
+.section-num{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:10px;
+}
+h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20px;letter-spacing:-0.5px;}
+.lede{font-size:17px;color:#d8dde8;line-height:1.7;margin-bottom:18px;}
+.lede strong{color:#fff;font-weight:600;}
+.lede em{color:#fcd34d;font-style:normal;font-weight:500;}
+
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border-bright),transparent);
+  margin:0 0 56px;
+}
+
+/* PIPELINE VISUAL */
+.pipeline-viz{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:32px 28px;margin:32px 0 28px;
+}
+.pipeline-tag{
+  font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:6px;text-align:center;
+}
+.pipeline-title{
+  font-size:18px;font-weight:600;color:#fff;text-align:center;margin-bottom:24px;
+}
+.pipeline-flow{
+  display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:stretch;
+}
+.pipe-stage{
+  background:linear-gradient(135deg,var(--surface-2),var(--surface-3));
+  border:1px solid var(--border-bright);border-radius:14px;
+  padding:20px 18px;text-align:center;display:flex;flex-direction:column;justify-content:flex-start;
+}
+.pipe-stage.draft{border-top:3px solid var(--blue);}
+.pipe-stage.stage{border-top:3px solid var(--purple);}
+.pipe-stage.publish{border-top:3px solid #fcd34d;}
+.pipe-stage-tag{
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.pipe-stage.draft .pipe-stage-tag{color:var(--blue-soft);}
+.pipe-stage.stage .pipe-stage-tag{color:var(--purple-soft);}
+.pipe-stage.publish .pipe-stage-tag{color:#fcd34d;}
+.pipe-stage-name{
+  font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-0.3px;
+}
+.pipe-stage-role{
+  font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:10px;
+}
+.pipe-stage-desc{font-size:13px;color:var(--text-mid);line-height:1.5;}
+.pipe-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:var(--text-dim);font-weight:300;line-height:1;
+}
+.pipeline-caption{
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--border);
+  text-align:center;font-size:13px;color:var(--text-mid);line-height:1.6;
+}
+.pipeline-caption strong{color:#fff;font-weight:600;}
+.pipeline-caption em{color:#fcd34d;font-style:normal;font-weight:600;}
+@media(max-width:680px){
+  .pipeline-flow{grid-template-columns:1fr;}
+  .pipe-arrow{transform:rotate(90deg);padding:4px 0;}
+}
+
+/* TONE BOX — what this is/isn't */
+.tone-box{
+  background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(59,130,246,0.06));
+  border:1px solid rgba(245,158,11,0.25);border-radius:14px;
+  padding:24px 28px;margin:28px 0;
+}
+.tone-tag{
+  font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:10px;
+}
+.tone-body{font-size:15px;color:#d8dde8;line-height:1.65;}
+.tone-body strong{color:#fff;}
+
+/* TWO-COL CONTRAST */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+.split-col{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 24px;
+}
+.split-col.good{border-top:3px solid var(--green);}
+.split-col.bad{border-top:3px solid var(--red);}
+.split-tag{
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.split-col.good .split-tag{color:var(--green-soft);}
+.split-col.bad .split-tag{color:var(--red-soft);}
+.split-headline{font-size:16px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.4;}
+.split-body{font-size:14px;color:var(--text-mid);line-height:1.6;}
+
+/* MUTUAL FIT VISUAL — overlapping commitment */
+.mutual{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:32px 24px;margin:28px 0;
+}
+.mutual-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;}
+.mutual-side{
+  background:var(--surface-2);border:1px solid var(--border-bright);border-radius:12px;
+  padding:20px;text-align:center;
+}
+.mutual-side-tag{
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:#fcd34d;margin-bottom:8px;
+}
+.mutual-side-headline{font-size:15px;font-weight:600;color:#fff;line-height:1.4;}
+.mutual-link{
+  font-size:24px;color:#fcd34d;text-align:center;font-weight:300;
+}
+.mutual-bottom{
+  margin-top:18px;padding-top:18px;border-top:1px solid var(--border);
+  text-align:center;font-size:14px;color:var(--text-mid);line-height:1.55;
+}
+.mutual-bottom strong{color:#fff;}
+
+/* AGENT CARDS */
+.agents{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+.agent-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:20px 24px;
+}
+.agent-name{
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:6px;
+}
+.agent-title{font-size:16px;font-weight:600;color:#fff;margin-bottom:6px;line-height:1.4;}
+.agent-body{font-size:14px;color:var(--text-mid);line-height:1.6;}
+
+/* WORKFORCE — same / different */
+.workforce-shift{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;margin:24px 0;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+}
+.ws-from, .ws-to{padding:22px 24px;}
+.ws-from{
+  background:rgba(239,68,68,0.05);border-right:1px solid var(--border);
+}
+.ws-to{
+  background:rgba(16,185,129,0.05);
+}
+.ws-arrow-row{
+  text-align:center;font-size:11px;color:var(--text-dim);
+  letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:12px 0 6px;
+}
+.ws-tag{
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.ws-from .ws-tag{color:var(--red-soft);}
+.ws-to .ws-tag{color:var(--green-soft);}
+.ws-body{font-size:14px;color:#d8dde8;line-height:1.6;}
+.ws-body strong{color:#fff;}
+
+/* TRAINING TIERS — light version */
+.tt{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:14px 20px;margin:8px 0;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+}
+.tt-num{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(245,158,11,0.3),rgba(59,130,246,0.2));
+  border:1px solid rgba(245,158,11,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:#fcd34d;
+}
+.tt-body strong{display:block;font-size:14.5px;color:#fff;margin-bottom:2px;}
+.tt-body span{font-size:13.5px;color:var(--text-mid);line-height:1.5;}
+
+/* CALLOUT */
+.callout{
+  background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.06));
+  border-left:3px solid var(--blue);border-radius:0 10px 10px 0;
+  padding:18px 22px;margin:22px 0;
+}
+.callout-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:6px;
+}
+.callout-body{font-size:14.5px;color:#d2d8e6;line-height:1.65;}
+.callout.warn{border-left-color:var(--amber);background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(239,68,68,.04));}
+.callout.warn .callout-label{color:var(--amber);}
+.callout.win{border-left-color:var(--green);background:linear-gradient(135deg,rgba(16,185,129,.10),rgba(59,130,246,.04));}
+.callout.win .callout-label{color:var(--green-soft);}
+
+/* PULL */
+.pull{
+  font-size:20px;line-height:1.5;color:#fff;font-weight:500;
+  border-left:3px solid #fcd34d;padding:10px 0 10px 22px;
+  margin:28px 0;letter-spacing:-0.3px;
+}
+
+/* FOOTER */
+.footer{
+  border-top:1px solid var(--border);padding:32px;margin-top:32px;
+  text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;
+}
+.footer span{color:#fcd34d;}
+
+@media(max-width:680px){
+  h1.hero-title{font-size:34px;}
+  .hero{padding:64px 24px 52px;}
+  .wrap{padding:40px 22px;}
+  h2.section-title{font-size:24px;}
+  .split{grid-template-columns:1fr;}
+  .mutual-grid{grid-template-columns:1fr;}
+  .mutual-link{transform:rotate(90deg);padding:8px 0;}
+  .workforce-shift{grid-template-columns:1fr;}
+  .ws-from{border-right:none;border-bottom:1px solid var(--border);}
+}
+@media print{
+  .site-nav{display:none;}
+  body{background:#fff;color:#000;}
+  .hero{background:#1f1810;-webkit-print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Carle Health · Working with Workday</div>
+  <h1 class="hero-title">Working with Workday</h1>
+  <p class="hero-sub">How Carle and Workday partner well together — where to lean in, where to bridge, and what staff using Workday's AI agents will actually experience.</p>
+</div>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <span class="site-nav-brand">Carle AI Strategy</span>
+    <a href="index.html">Primer</a>
+    <a href="workday.html" class="active">Workday</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ========== SECTION 01 ========== -->
+<div class="section">
+  <div class="section-num">Section 01</div>
+  <h2 class="section-title">The relationship, in one paragraph</h2>
+  <p class="lede">Workday is a strong partner for Carle, and the relationship has more room to grow well than most vendor relationships do. <strong>Workday's open architecture and willingness to meet customers in the middle make this a partnership we can actually build on</strong> — not a vendor we have to defend ourselves against.</p>
+
+  <p class="lede">Where this gets practical: Workday is best when it stays in its lane and does what it does deeply. Their vertical AI agents — for HR, finance, supply chain, contracting — are mature in the areas Workday already owns. Those are the places we should lean in. The places to be more cautious are where Workday wants to extend beyond its lane and become the connecting tissue across systems it doesn't own. That's not adversarial; it's just where the partnership gets harder, and where Carle should step in with our own architecture.</p>
+
+  <div class="tone-box">
+    <div class="tone-tag">In Plain Terms</div>
+    <div class="tone-body"><strong>Carle and Workday partner best when each does what it does well.</strong> Workday runs the systems of record. Carle's orchestration layer connects Workday to the rest of the enterprise. Both sides win when they stop trying to do each other's jobs.</div>
+  </div>
+
+  <div class="pipeline-viz">
+    <div class="pipeline-tag">Where Workday Sits in Carle's Knowledge Pipeline</div>
+    <div class="pipeline-title">Different surfaces, different jobs</div>
+    <div class="pipeline-flow">
+      <div class="pipe-stage draft">
+        <div class="pipe-stage-tag">Stage 1 · Active</div>
+        <div class="pipe-stage-name">SharePoint</div>
+        <div class="pipe-stage-role">Working Surface</div>
+        <div class="pipe-stage-desc">Where most business knowledge lives — policies, procedures, how-to content, benefits explanations, captured process notes, day-to-day collaboration. Most content stays here.</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-stage stage">
+        <div class="pipe-stage-tag">Stage 2 · Refined</div>
+        <div class="pipe-stage-name">Dataverse</div>
+        <div class="pipe-stage-role">Staging Surface</div>
+        <div class="pipe-stage-desc">Structured rules, decision tables, configuration that AI agents need to act on. Bridge between unstructured knowledge and transactional systems.</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-stage publish">
+        <div class="pipe-stage-tag">Stage 3 · Canonical</div>
+        <div class="pipe-stage-name">Workday</div>
+        <div class="pipe-stage-role">System of Record</div>
+        <div class="pipe-stage-desc">Where transactional data lives — PTO submissions, payroll, HR records, financial transactions, contracts, purchase orders. Not for general knowledge.</div>
+      </div>
+    </div>
+    <div class="pipeline-caption">
+      <strong>Only knowledge that needs to become a system-of-record transaction graduates to Workday</strong> — PTO requests, expense submissions, performance reviews, payroll changes, purchase orders. <em>General knowledge — policies, procedures, how-to content, benefits explanations — lives in SharePoint and stays there.</em> Agents read from the surface that actually holds the answer.
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 02 ========== -->
+<div class="section">
+  <div class="section-num">Section 02</div>
+  <h2 class="section-title">Where to lean in, where to bridge</h2>
+  <p class="lede">The framework for any Workday AI capability is whether it stays inside Workday's natural strengths or stretches into territory better handled elsewhere.</p>
+
+  <div class="split">
+    <div class="split-col good">
+      <div class="split-tag">Lean In</div>
+      <div class="split-headline">Workday's vertical AI agents</div>
+      <div class="split-body">Mature, in-domain capability. HR, finance, payroll, contracting, supply chain. These are pre-built, standardized, and improve when adopted. Buying them forces helpful standardization on Carle and reduces the custom-build burden.</div>
+    </div>
+    <div class="split-col bad">
+      <div class="split-tag">Bridge, Don't Buy</div>
+      <div class="split-headline">Cross-system orchestration</div>
+      <div class="split-body">Where work spans Workday and several other systems, Carle's orchestration layer handles the connection. Carle builds an agent that talks to Workday's agent. No custom Workday consulting; no vendor-specific automation that doesn't transfer.</div>
+    </div>
+  </div>
+
+  <div class="mutual">
+    <div class="mutual-grid">
+      <div class="mutual-side">
+        <div class="mutual-side-tag">Workday</div>
+        <div class="mutual-side-headline">Vertical depth in HR, finance, contracting, supply chain</div>
+      </div>
+      <div class="mutual-link">↔</div>
+      <div class="mutual-side">
+        <div class="mutual-side-tag">Carle</div>
+        <div class="mutual-side-headline">Orchestration across all the systems Workday doesn't own</div>
+      </div>
+    </div>
+    <div class="mutual-bottom">
+      <strong>Carle's agents talk to Workday's agents.</strong> Carle handles the connection to everything else. Both sides get to focus on what they do well.
+    </div>
+  </div>
+
+  <p class="lede">This is what people sometimes call "agent-to-agent" architecture. The simpler version: <em>each system has a representative that knows it inside and out, and they coordinate behind the scenes when something needs them to work together</em>. Users don't see the coordination — they just get an answer.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 03 ========== -->
+<div class="section">
+  <div class="section-num">Section 03</div>
+  <h2 class="section-title">What Workday's AI actually is</h2>
+  <p class="lede">Workday is rolling out agents in several focused areas. The pattern is consistent: <strong>each agent stays inside one functional area and is designed to make the staff who already work in that area more effective.</strong> They aren't general-purpose AI assistants. They're specialists.</p>
+
+  <div class="agents">
+    <div class="agent-card">
+      <div class="agent-name">HR Domain</div>
+      <div class="agent-title">Recruiting, talent, transactional HR</div>
+      <div class="agent-body">Screening, onboarding workflows, internal mobility, PTO submissions, status checks. Works on Workday's transactional data — what people actually use Workday for. <em>Not general policy or benefits content lookups</em> — those queries route to SharePoint via Carle's orchestrator instead.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-name">Finance Domain</div>
+      <div class="agent-title">Close cycles, expense, transactions</div>
+      <div class="agent-body">The eyebrow-raising stuff: month-end and year-end close acceleration, expense report processing, transaction reconciliation. Where Workday's vertical depth genuinely shows.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-name">Supply Chain Domain</div>
+      <div class="agent-title">Procurement, supplier management</div>
+      <div class="agent-body">Procurement workflows, supplier evaluation, purchase order routing. Strongest where Workday already has good visibility into Carle's vendor relationships.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-name">Legal & Contracting</div>
+      <div class="agent-title">Contract drafting, review, lifecycle</div>
+      <div class="agent-body">Drafting assistance, contract review, lifecycle tracking. Mature in the parts of contracting that touch Workday-native data; less so for processes that span multiple systems.</div>
+    </div>
+  </div>
+
+  <p class="lede">Maturity varies between these. Some are production-ready today; others look polished in demos but are earlier in real-world deployment. <strong>The right discipline before adopting any of them is asking for customer references at health systems Carle's size — specifically for the agent in question, not Sana broadly.</strong> Demo polish and production maturity aren't the same thing.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 04 ========== -->
+<div class="section">
+  <div class="section-num">Section 04</div>
+  <h2 class="section-title">What this means for staff using Workday</h2>
+  <p class="lede">The honest answer to "how does AI change the work?" — for staff using Workday — is that <strong>it changes what work needs doing before it changes who does it</strong>. The pattern is consistent across functions:</p>
+
+  <div class="workforce-shift">
+    <div class="ws-from">
+      <div class="ws-tag">Less Of</div>
+      <div class="ws-body">
+        <strong>Repetitive data entry.</strong> Filling in the same fields, coding the same expense lines, routing the same approvals.<br><br>
+        <strong>Manual lookup.</strong> Searching for policies, finding the right form, tracking down approvers.<br><br>
+        <strong>Status checking.</strong> Where is this requisition? Did that contract get countersigned? Has my time off been approved?
+      </div>
+    </div>
+    <div class="ws-to">
+      <div class="ws-tag">More Of</div>
+      <div class="ws-body">
+        <strong>Reviewing what the agent did.</strong> Approving, editing, or rejecting agent-drafted output. Quality control moves up the seniority ladder.<br><br>
+        <strong>Exception handling.</strong> The agent does the routine 80%; humans handle the cases the agent flags as unusual.<br><br>
+        <strong>Judgment work.</strong> Strategy, negotiation, relationship-building — the parts of the job that genuinely require human context.
+      </div>
+    </div>
+  </div>
+
+  <p class="lede">For the Workday team specifically, this changes day-to-day work in two visible ways:</p>
+
+  <div class="callout">
+    <div class="callout-label">What changes for the team</div>
+    <div class="callout-body">
+      <strong>1. New first line of response.</strong> When an agent makes a wrong call, a workflow needs adjustment, or a new exception case appears, the Workday team is the operational owner.<br><br>
+      <strong>2. Configuration depth becomes central.</strong> Each new agent has its own configuration model. Tuning agents for Carle's specific processes becomes a key skill, alongside existing Workday administration work.
+    </div>
+  </div>
+
+  <p class="lede">The Workday team's work shifts from configuration and administration toward agent supervision, exception design, and bridging between agents and the staff using them. Different skill mix than the team has historically needed.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 05 ========== -->
+<div class="section">
+  <div class="section-num">Section 05</div>
+  <h2 class="section-title">What training looks like</h2>
+  <p class="lede">The tier model that runs through Carle's broader AI strategy applies here. <strong>Most Workday users stay at Tier 1 or 2.</strong> The Workday team itself sits higher up — closer to Tier 3, with some of the team eventually reaching Tier 4 (citizen development) for the configuration-heavy work.</p>
+
+  <div class="tt">
+    <div class="tt-num">1</div>
+    <div class="tt-body">
+      <strong>Most Workday users</strong>
+      <span>Ask questions in plain English. Approve agent-drafted work. Know when to escalate. No prompt engineering required — the orchestrator handles that.</span>
+    </div>
+  </div>
+  <div class="tt">
+    <div class="tt-num">2</div>
+    <div class="tt-body">
+      <strong>Power users (HR partners, finance leads)</strong>
+      <span>Use agents to take small actions on their behalf. Understand what the agent will and won't do without confirmation. Read agent reasoning when something looks off.</span>
+    </div>
+  </div>
+  <div class="tt">
+    <div class="tt-num">3</div>
+    <div class="tt-body">
+      <strong>The Workday team itself</strong>
+      <span>Supervise agents that operate continuously inside Workday. Own configuration, monitor for drift, design exception paths. This is where the deepest training investment goes.</span>
+    </div>
+  </div>
+  <div class="tt">
+    <div class="tt-num">4</div>
+    <div class="tt-body">
+      <strong>A small subset (over time)</strong>
+      <span>Build their own automations using the agent configuration tools. Bridge between business needs and what the agents do. Optional — and probably 12-18 months out, not immediate.</span>
+    </div>
+  </div>
+
+  <p class="lede">The mechanism is straightforward: <em>agents handle the parts of work that don't require human judgment, freeing capacity for the parts that do.</em> The judgment work stays with the human; the routine work moves to the agent.</p>
+
+  <div class="callout win">
+    <div class="callout-label">Why the broad workforce doesn't need deep AI training</div>
+    <div class="callout-body">Carle's orchestration layer does the prompt engineering and translation work. Staff ask questions in plain English. The agent handles the technical translation. The deep AI fluency lives in a small, focused team — not spread thinly across thousands of people who'd struggle to keep current as the technology evolves.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 06 ========== -->
+<div class="section">
+  <div class="section-num">Section 06</div>
+  <h2 class="section-title">A few specific lines to hold</h2>
+  <p class="lede">Most of the partnership runs smoothly. There are a small number of patterns worth recognizing as warning signs — not because Workday is doing anything wrong, but because the structure of vendor sales conversations sometimes pulls toward the wrong answer for Carle.</p>
+
+  <div class="callout warn">
+    <div class="callout-label">When a Workday rep proposes custom development</div>
+    <div class="callout-body">For Carle-specific automation that Workday can't ship as a standard feature, the answer is usually <em>"let's see if Carle can build an agent for that instead"</em> — not <em>"let's pay Workday consulting to build it inside Workday."</em> Vendor-built customizations don't transfer, lock us into the platform, and cost premium consulting rates. A Carle-built agent is portable, owned by us, and serves multiple systems.</div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-label">When a Workday agent wants to reach into other systems</div>
+    <div class="callout-body">If a Workday agent needs data from SharePoint, Dynamics, Epic, or another non-Workday system to do its job, the right pattern is <em>Carle's agent provides that data</em> — not <em>Workday builds a pipeline into the other system</em>. Same outcome, very different long-term cost. Carle's connector to that system already exists or is on the roadmap; Workday building the same connection means we maintain it inside their platform forever.</div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-label">When the conversation shifts toward Sana Enterprise</div>
+    <div class="callout-body">Sana for Workday — agents inside Workday, on Workday data — is in the lean-in category. <em>Sana Enterprise</em> — Sana as the orchestration layer for all employee work, including non-Workday systems — is a different conversation. That's where Workday is stretching beyond its lane, and where Carle's own orchestration layer is the right answer instead. Worth being clear which one is on the table.</div>
+  </div>
+
+  <p class="lede">These lines exist to preserve the structural strengths of the partnership — Workday's vertical depth, Carle's cross-system reach. <strong>The relationship works because both sides stay in their lane.</strong></p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 07 ========== -->
+<div class="section">
+  <div class="section-num">Section 07</div>
+  <h2 class="section-title">What a good partnership looks like</h2>
+  <p class="lede">If we get this right over the next eighteen months, here's what the Workday relationship should look like:</p>
+
+  <p class="pull">Workday handles HR, finance, supply chain, and contracting deeply. Carle handles the connections to everything else. Staff don't see the seam — they just get answers.</p>
+
+  <ul style="list-style:none;padding:0;margin:24px 0;">
+    <li style="padding:10px 0 10px 22px;position:relative;color:#d8dde8;line-height:1.65;font-size:15px;">
+      <span style="position:absolute;left:0;top:14px;width:8px;height:8px;background:var(--green-soft);border-radius:50%;display:block;"></span>
+      <strong style="color:#fff;">Three to five Workday vertical AI agents in production</strong> — chosen based on maturity audit and Carle's actual workflow needs, not vendor sales priorities.
+    </li>
+    <li style="padding:10px 0 10px 22px;position:relative;color:#d8dde8;line-height:1.65;font-size:15px;">
+      <span style="position:absolute;left:0;top:14px;width:8px;height:8px;background:var(--green-soft);border-radius:50%;display:block;"></span>
+      <strong style="color:#fff;">Carle's agents talking to Workday's agents</strong> through standard protocols (A2A, MCP) — not custom integrations that we maintain forever.
+    </li>
+    <li style="padding:10px 0 10px 22px;position:relative;color:#d8dde8;line-height:1.65;font-size:15px;">
+      <span style="position:absolute;left:0;top:14px;width:8px;height:8px;background:var(--green-soft);border-radius:50%;display:block;"></span>
+      <strong style="color:#fff;">A trained, focused Workday team</strong> serving as the expert bridge between agents and the staff who use them. Smaller than what a full deployment of every Workday product would require, but with deeper expertise.
+    </li>
+    <li style="padding:10px 0 10px 22px;position:relative;color:#d8dde8;line-height:1.65;font-size:15px;">
+      <span style="position:absolute;left:0;top:14px;width:8px;height:8px;background:var(--green-soft);border-radius:50%;display:block;"></span>
+      <strong style="color:#fff;">Clean conversations with Workday's account team</strong> grounded in a shared understanding of where each side adds value. Less friction, faster decisions, better partnership.
+    </li>
+    <li style="padding:10px 0 10px 22px;position:relative;color:#d8dde8;line-height:1.65;font-size:15px;">
+      <span style="position:absolute;left:0;top:14px;width:8px;height:8px;background:var(--green-soft);border-radius:50%;display:block;"></span>
+      <strong style="color:#fff;">Staff who experience AI as helpful, not threatening</strong> — because they're spending less time on data entry and more time on the work that actually requires their judgment.
+    </li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-label">The closing thought</div>
+    <div class="callout-body">Working with Workday isn't a fight. It's a partnership where both sides have to understand what they bring. Workday brings deep vertical capability in HR, finance, contracting, and supply chain. Carle brings everything else and the connecting tissue between them. <strong>When each side does what it's best at, the people using both end up better off.</strong></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span>Carle Health · Enterprise Digital Solutions</span> · Working with Workday · 2026
+</div>
+
+</body>
+</html>
