@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Carle | The Strategy at a Glance</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#1c1e22;
+  --surface:#26292f;
+  --surface-2:#2e3239;
+  --surface-3:#383c44;
+  --border:rgba(255,255,255,0.08);
+  --border-bright:rgba(255,255,255,0.16);
+  --text:#e8ecf5;
+  --text-mid:#bcc4d4;
+  --text-dim:#8a92ad;
+  --blue:#3b82f6;
+  --blue-soft:#60a8ff;
+  --purple:#8b5cf6;
+  --purple-soft:#b48cff;
+  --teal:#14b8a6;
+  --teal-soft:#5eead4;
+  --green:#10b981;
+  --green-soft:#5dd4a8;
+  --amber:#f59e0b;
+  --amber-soft:#fbbf24;
+  --gold:#fcd34d;
+  --red:#ef4444;
+  --red-soft:#ff8a96;
+}
+html{scroll-behavior:smooth;color-scheme:dark;background-color:#1c1e22;}
+body{
+  font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  background-color:#1c1e22 !important;
+  color:#e8ecf5;line-height:1.65;font-size:15.5px;margin:0;min-height:100vh;
+}
+
+.hero{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139,92,246,0.13), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(20,184,166,0.10), transparent 50%),
+    linear-gradient(135deg,#0a1428 0%,#1a1060 50%,#0a1f1c 100%);
+  padding:72px 40px 56px;text-align:center;border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:18px;
+}
+h1.hero-title{
+  font-size:44px;font-weight:700;line-height:1.08;
+  background:linear-gradient(135deg,#fff 0%,#c0a8ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:14px;letter-spacing:-1px;
+}
+.hero-sub{font-size:18px;color:#c8cdd8;max-width:640px;margin:0 auto;line-height:1.55;}
+
+/* SITE NAV */
+.site-nav{background:#26292f;border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:50;}
+.site-nav-inner{max-width:920px;margin:0 auto;padding:0 32px;display:flex;gap:0;align-items:center;}
+.site-nav a{
+  color:var(--text-mid);text-decoration:none;padding:14px 18px;
+  font-size:13px;font-weight:600;letter-spacing:0.3px;
+  border-bottom:2px solid transparent;transition:color .15s, border-color .15s;
+}
+.site-nav a:hover{color:#fff;}
+.site-nav a.active{color:var(--purple-soft);border-bottom-color:var(--purple);}
+.site-nav-brand{
+  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);padding:14px 18px 14px 0;margin-right:auto;
+}
+@media(max-width:680px){
+  .site-nav-inner{padding:0 18px;flex-wrap:wrap;}
+  .site-nav-brand{display:none;}
+  .site-nav a{padding:12px 12px;font-size:12px;}
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:48px 32px;}
+
+.section{margin-bottom:64px;scroll-margin-top:80px;}
+.section-num{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:10px;text-align:center;
+}
+h2.section-title{font-size:28px;font-weight:700;line-height:1.2;margin-bottom:14px;letter-spacing:-0.5px;text-align:center;}
+.section-sub{font-size:16px;color:var(--text-mid);text-align:center;max-width:600px;margin:0 auto 28px;line-height:1.55;}
+
+/* ARCHITECTURE VENN */
+.venn-container{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  padding:32px 24px 28px;margin:0 0 24px;
+}
+.venn-svg-wrap{
+  display:flex;justify-content:center;align-items:center;
+  margin:0 auto;max-width:560px;
+}
+.venn-svg{width:100%;height:auto;}
+
+/* Annotation under the Venn */
+.venn-annotation{
+  margin-top:24px;padding-top:24px;border-top:1px solid var(--border);
+  text-align:center;
+}
+.venn-annotation-title{
+  font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.venn-annotation-headline{
+  font-size:18px;font-weight:600;color:#fff;margin-bottom:14px;letter-spacing:-0.3px;
+}
+.venn-annotation-list{
+  list-style:none;display:flex;flex-direction:column;gap:8px;
+  max-width:640px;margin:0 auto;
+}
+.venn-annotation-list li{
+  font-size:14px;color:var(--text-mid);line-height:1.55;padding:6px 0;
+  position:relative;padding-left:22px;text-align:left;
+}
+.venn-annotation-list li::before{
+  content:'';position:absolute;left:6px;top:14px;width:6px;height:6px;
+  background:var(--gold);border-radius:50%;
+}
+.venn-annotation-list li strong{color:#fff;font-weight:600;}
+
+/* PLAYBOOK */
+.playbook{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+.step{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;
+  transition:border-color .2s, background .2s;
+}
+.step:hover{border-color:var(--border-bright);}
+.step-num{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:800;color:#fff;letter-spacing:-1px;
+  background:linear-gradient(135deg,#8b5cf6,#3b82f6);
+}
+.step:nth-child(2) .step-num{background:linear-gradient(135deg,#3b82f6,#14b8a6);}
+.step:nth-child(3) .step-num{background:linear-gradient(135deg,#14b8a6,#10b981);}
+.step:nth-child(4) .step-num{background:linear-gradient(135deg,#10b981,#f59e0b);}
+.step:nth-child(5) .step-num{background:linear-gradient(135deg,#f59e0b,#ef4444);}
+.step:nth-child(6) .step-num{background:linear-gradient(135deg,#ef4444,#8b5cf6);}
+.step-content h3{
+  font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-0.2px;
+}
+.step-content p{font-size:14.5px;color:#d2d8e6;line-height:1.65;}
+.step-content p strong{color:#fff;font-weight:600;}
+.step-content p em{color:var(--purple-soft);font-style:normal;font-weight:500;}
+.step-tag{
+  display:inline-block;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:6px;
+}
+
+/* CALLOUT */
+.callout{
+  background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(59,130,246,.06));
+  border-left:3px solid var(--purple);border-radius:0 10px 10px 0;
+  padding:18px 22px;margin:24px 0;
+}
+.callout-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--purple-soft);margin-bottom:6px;
+}
+.callout-body{font-size:14.5px;color:#d2d8e6;line-height:1.65;}
+
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border-bright),transparent);
+  margin:0 0 56px;
+}
+
+.footer{
+  border-top:1px solid var(--border);padding:32px;margin-top:32px;
+  text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;
+}
+.footer span{color:var(--purple-soft);}
+
+@media(max-width:680px){
+  h1.hero-title{font-size:32px;}
+  .hero{padding:56px 22px 44px;}
+  .wrap{padding:36px 20px;}
+  h2.section-title{font-size:23px;}
+  .step{grid-template-columns:1fr;gap:14px;}
+  .step-num{justify-self:start;}
+  .venn-container{padding:20px 14px;}
+}
+@media print{
+  .site-nav{display:none;}
+  body{background:#fff;color:#000;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Carle Health · The Strategy at a Glance</div>
+  <h1 class="hero-title">How it Fits Together</h1>
+  <p class="hero-sub">The architecture in one picture, and the six-step playbook that follows from it.</p>
+</div>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <span class="site-nav-brand">Carle AI Strategy</span>
+    <a href="index.html">Primer</a>
+    <a href="workday.html">Workday</a>
+    <a href="ai-cost.html">AI Cost</a>
+    <a href="diagram.html" class="active">At a Glance</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ========== ARCHITECTURE VENN ========== -->
+<div class="section">
+  <div class="section-num">Diagram 01</div>
+  <h2 class="section-title">The Architecture</h2>
+  <p class="section-sub">Vendor systems do what vendor systems do best. The Carle Orchestrator is the connective tissue between them — and the front door for everyone using AI.</p>
+
+  <div class="venn-container">
+    <div class="venn-svg-wrap">
+      <svg class="venn-svg" viewBox="0 0 560 480" xmlns="http://www.w3.org/2000/svg">
+        <!-- Definitions -->
+        <defs>
+          <radialGradient id="epicGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a8ff" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.35"/>
+          </radialGradient>
+          <radialGradient id="workdayGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a8ff" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.35"/>
+          </radialGradient>
+          <radialGradient id="cloudGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a8ff" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.35"/>
+          </radialGradient>
+          <radialGradient id="ivantiGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a8ff" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.35"/>
+          </radialGradient>
+          <linearGradient id="diamondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient>
+          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Four overlapping circles (the vendor blobs) -->
+        <!-- Epic: top -->
+        <circle cx="280" cy="140" r="115" fill="url(#epicGrad)" stroke="rgba(96,168,255,0.45)" stroke-width="1.5"/>
+        <!-- Workday: left -->
+        <circle cx="195" cy="225" r="115" fill="url(#workdayGrad)" stroke="rgba(96,168,255,0.45)" stroke-width="1.5"/>
+        <!-- Carle Cloud: right -->
+        <circle cx="365" cy="225" r="115" fill="url(#cloudGrad)" stroke="rgba(96,168,255,0.45)" stroke-width="1.5"/>
+        <!-- Ivanti: bottom -->
+        <circle cx="280" cy="310" r="115" fill="url(#ivantiGrad)" stroke="rgba(96,168,255,0.45)" stroke-width="1.5"/>
+
+        <!-- Labels for each blob (positioned away from overlap zone) -->
+        <text x="280" y="60" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Epic</text>
+        <text x="100" y="225" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Workday</text>
+        <text x="460" y="218" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Carle</text>
+        <text x="460" y="238" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Cloud</text>
+        <text x="280" y="395" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Ivanti</text>
+
+        <!-- Center diamond (Carle Orchestrator) -->
+        <g transform="translate(280, 225)">
+          <rect x="-44" y="-44" width="88" height="88" fill="url(#diamondGrad)" transform="rotate(45)" stroke="#fcd34d" stroke-width="1.5"/>
+          <text x="0" y="-4" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#1c1e22" text-anchor="middle" letter-spacing="0.5">CARLE</text>
+          <text x="0" y="12" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#1c1e22" text-anchor="middle" letter-spacing="0.5">ORCHESTRATOR</text>
+        </g>
+
+        <!-- Annotation arrow + caption underneath -->
+        <line x1="180" y1="455" x2="265" y2="270" stroke="rgba(252,211,77,0.7)" stroke-width="1.5" stroke-dasharray="0"/>
+        <polygon points="262,267 270,272 263,275" fill="rgba(252,211,77,0.9)"/>
+        <text x="170" y="470" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" fill="#fcd34d" text-anchor="end">The orchestration layer</text>
+      </svg>
+    </div>
+
+    <div class="venn-annotation">
+      <div class="venn-annotation-title">About the Orchestrator</div>
+      <div class="venn-annotation-headline">Governed front door. Owned by Carle. Connects everything else.</div>
+      <ul class="venn-annotation-list">
+        <li><strong>MCP, A2A, and APIs</strong> — speaks every protocol the vendor agents speak, and a few they don't yet.</li>
+        <li><strong>Doesn't preclude vendor-to-vendor connections</strong> where they make sense — just gives Carle the option not to depend on them.</li>
+        <li><strong>Governed and cost-controlled</strong> through Microsoft E5 and Azure AI Foundry. Existing tooling, existing security posture.</li>
+        <li><strong>Maintained, extended, and supported</strong> by Carle's full-stack development team. No vendor consulting required for changes.</li>
+        <li><strong>Issue isolation, model selection, cost control</strong> — the levers that vendor agent platforms don't expose to customers.</li>
+        <li><strong>Reduces "AI-as-FTE-config" pressure</strong> — the orchestrator handles the prompt engineering and translation work that vendor pitches typically push onto Carle staff.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">The picture in one sentence</div>
+    <div class="callout-body">Vendor systems do their vertical work deeply. The Carle Orchestrator sits where they overlap — the connecting tissue, the front door, and the layer where the cost and capability levers live. <strong>Without it, Carle is a collection of vendor agents that don't talk to each other.</strong></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== PLAYBOOK ========== -->
+<div class="section">
+  <div class="section-num">Diagram 02</div>
+  <h2 class="section-title">The Six-Step Playbook</h2>
+  <p class="section-sub">If the architecture is right, this is the operational sequence that follows. Roughly the order things happen in — though several run in parallel.</p>
+
+  <div class="playbook">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-tag">Foundation</div>
+        <h3>Continue centralizing Carle knowledge in SharePoint</h3>
+        <p>SharePoint is the working surface for business knowledge — the place where policies, procedures, and process documentation live and stay current. <strong>Without a centralized, governed knowledge base, AI agents have nothing to read.</strong> Every other step depends on this one continuing.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-tag">Prioritization</div>
+        <h3>Identify key areas of augmentation need — keep a rolling priority list</h3>
+        <p>Maintain a business-prioritized queue of roughly ten augmentation candidates, updated monthly. <strong>Discipline beats opportunism here.</strong> The list creates a steady cadence of high-value work and prevents the team from being pulled into one-off vendor pitches that don't compound. <em>Every quarter, ask: is the top of the list actually the highest-leverage thing we could do?</em></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-tag">Vendor Strategy</div>
+        <h3>Identify where vendors are most mature — buy vertical, not horizontal</h3>
+        <p>Each major vendor has areas where their AI is genuinely mature and areas where it's marketing. <strong>Buy the vertical depth. Don't buy the horizontal reach.</strong> Workday's payroll agent inside Workday is fair game; Workday as the orchestration layer across non-Workday systems isn't. Same rule applies to every vendor.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-tag">Process Discipline</div>
+        <h3>Review, document, and optimize processes around what we'll buy, build, or augment</h3>
+        <p>Before adopting a vendor agent or building a Carle agent, the underlying process needs to be documented and intentionally designed — not just captured as it currently runs. <strong>Documenting workarounds and then automating them perfectly is worse than no automation.</strong> Process owners commit to the target state, not just the current state.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-tag">Architecture</div>
+        <h3>For everything that doesn't play together well — build agent-to-agent connections</h3>
+        <p>Where systems are redundant, where vendor pricing is unreasonable, or where committing further would mortgage too much of Carle's flexibility, the answer is <em>build a Carle agent that talks to their agent</em>. Lighter than a direct integration, easier to maintain, and portable when the underlying system changes or gets replaced.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <div class="step-tag">Knowledge Pipeline</div>
+        <h3>Refine SharePoint knowledge into Dataverse — only clean data reaches Workday</h3>
+        <p>Raw business knowledge starts in SharePoint. Once a process or rule is fully evolved, it gets structured in Dataverse. Only then does it touch Workday's systems of record. <strong>Workday stays squeaky clean</strong> — only refined data and processes touch the Workday agents. <em>Minimizes risk. Minimizes the training burden on the Workday team. Keeps canonical data canonical.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">The reading order</div>
+    <div class="callout-body">These aren't strictly sequential — Steps 1, 2, and 6 are continuous. Steps 3, 4, and 5 happen per use case as opportunities arise. <strong>The discipline isn't doing them in order. It's making sure none of them get skipped.</strong></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span>Carle Health · Enterprise Digital Solutions</span> · The Strategy at a Glance · 2026
+</div>
+
+</body>
+</html>
