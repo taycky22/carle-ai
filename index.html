@@ -597,6 +597,24 @@ summary:hover{color:#fff;}
   .site-nav a{padding:12px 12px;font-size:12px;}
 }
 
+
+/* GLOSSARY TOOLTIPS */
+.g-term{position:relative;border-bottom:1px dotted rgba(125,211,252,0.55);cursor:help;}
+.g-term a{color:inherit;text-decoration:none;border-bottom:none;}
+.g-term::after{
+  content:attr(data-def);
+  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:#1a2138;border:1px solid rgba(255,255,255,0.18);
+  padding:12px 16px;border-radius:8px;width:280px;
+  font-size:12.5px;font-weight:400;color:#d2d8e6;line-height:1.55;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5);
+  pointer-events:none;opacity:0;visibility:hidden;
+  transition:opacity .15s,visibility .15s;z-index:100;
+  white-space:normal;text-align:left;letter-spacing:normal;text-transform:none;
+}
+.g-term:hover::after{opacity:1;visibility:visible;}
+@media(max-width:768px){.g-term::after{display:none;}}
+
 @media print{
   .site-nav{display:none;}
   body{background:#fff;color:#000;}
@@ -622,6 +640,8 @@ summary:hover{color:#fff;}
     <a href="workday.html">Workday</a>
     <a href="ai-cost.html">AI Cost</a>
     <a href="diagram.html">At a Glance</a>
+    <a href="epic.html">Epic</a>
+    <a href="glossary.html">Glossary</a>
   </div>
 </nav>
 
@@ -698,7 +718,7 @@ summary:hover{color:#fff;}
     <div class="ws-row vendors">
       <div class="ws-tag">Vendors building wrappers around the above</div>
       <div class="ws-list">
-        <span class="ws-pill">Workday Sana</span>
+        <span class="ws-pill">Workday <span class="g-term" data-def="Workday's AI agent product. Sana for Workday is fair territory; Sana Enterprise tries to extend across non-Workday systems. Click to read more."><a href="glossary.html#sana">Sana</a></span></span>
         <span class="ws-pill">Epic agents</span>
         <span class="ws-pill">ServiceNow AI</span>
         <span class="ws-pill">Notable</span>
@@ -720,18 +740,18 @@ summary:hover{color:#fff;}
 
   <p class="pull">Vendors aren't building AI. They're reselling it. The same AI we can call directly.</p>
 
-  <p class="lede">This matters in two ways. First, when we build with raw tools — Foundry, Claude Code, Copilot Studio — we get the same intelligence the vendor wrappers do, at a fraction of the cost. Second, <strong>vendor wrappers lock in a moment-in-time version of the underlying model</strong>. The model improves; the wrapper doesn't keep pace.</p>
+  <p class="lede">This matters in two ways. First, when we build with raw tools — <span class="g-term" data-def="Azure AI Foundry, Microsoft's AI orchestration platform. Foundation for the Carle Orchestrator. Click to read more."><a href="glossary.html#foundry">Foundry</a></span>, Claude Code, Copilot Studio — we get the same intelligence the vendor wrappers do, at a fraction of the cost. Second, <strong>vendor wrappers lock in a moment-in-time version of the underlying model</strong>. The model improves; the wrapper doesn't keep pace.</p>
 
   <details>
     <summary>The compounding capability gap — why "buying AI" is buying yesterday's AI</summary>
     <div class="deep">
-      <p>Foundation models update every three to six months with meaningful capability improvements. The gap between this year's frontier model and last year's is not small — it's the difference between "drafts okay summaries" and "reasons across multiple documents and flags subtle conflicts."</p>
+      <p>Foundation models update every three to six months with meaningful capability improvements. The gap between this year's <span class="g-term" data-def="The most capable foundation model available at any given moment. Frontier is a moving target. Click to read more."><a href="glossary.html#frontier-model">frontier model</a></span> and last year's is not small — it's the difference between "drafts okay summaries" and "reasons across multiple documents and flags subtle conflicts."</p>
 
       <p>Vendor wrappers don't update at that cadence. Most vendor agent platforms ship significant releases every 6-18 months. Their underlying model often lags 12+ months behind the frontier on the day they ship. By the time we adopt their next release, the frontier has moved again.</p>
 
       <h4>What that looks like in practice</h4>
       <ul>
-        <li>A vendor agent demo today might be running on a foundation model from <em>last summer</em>. Plenty good for the demo. Already behind on hard tasks.</li>
+        <li>A vendor agent demo today might be running on a <span class="g-term" data-def="The large AI models everything else is built on. Roughly four companies build them: Anthropic, OpenAI, Google, Microsoft. Click to read more."><a href="glossary.html#foundation-model">foundation model</a></span> from <em>last summer</em>. Plenty good for the demo. Already behind on hard tasks.</li>
         <li>Two more frontier model releases happen during the typical vendor implementation window. We finish onboarding their AI and it's already two generations old.</li>
         <li>The gap doesn't close. The rate of frontier improvement is accelerating, not slowing. What's a 6-month lag today is an 18-month lag in two years.</li>
       </ul>
@@ -782,7 +802,7 @@ summary:hover{color:#fff;}
 
   <p class="lede"><strong>Epic is the front door for clinical work and that's the right answer.</strong> Epic's clinical platform is genuinely exceptional at what it's built to do, and clinicians belong inside it. Carle's strategy is not anti-Epic — it's a sharper view of where each tool belongs, including Epic's clinical core.</p>
 
-  <p class="lede">A related nuance for Workday and other transactional systems: <strong>becoming more central as a system of record is not the same as becoming the front door.</strong> Workday holds canonical business data — payroll, HR records, financial transactions. As we adopt Workday's vertical AI agents, Workday legitimately becomes more central for those domains. <em>But it remains a destination, not the orchestrator.</em> The orchestrator routes <em>to</em> Workday when Workday is the right answer; it does not route <em>through</em> Workday to reach other systems.</p>
+  <p class="lede">A related nuance for Workday and other transactional systems: <strong>becoming more central as a system of record is not the same as becoming the front door.</strong> Workday holds canonical business data — payroll, HR records, financial transactions. As we adopt Workday's <span class="g-term" data-def="AI that does one job inside one system, on that system's own data. Generally fair to buy from a vendor. Click to read more."><a href="glossary.html#vertical-ai">vertical AI</a></span> agents, Workday legitimately becomes more central for those domains. <em>But it remains a destination, not the orchestrator.</em> The orchestrator routes <em>to</em> Workday when Workday is the right answer; it does not route <em>through</em> Workday to reach other systems.</p>
 
   <details>
     <summary>Why the front door question is architectural, not aesthetic</summary>
@@ -965,13 +985,13 @@ summary:hover{color:#fff;}
   <details>
     <summary>The RAG sweet spot — where building decisively wins</summary>
     <div class="deep">
-      <p>RAG — retrieval-augmented generation — is the AI pattern where an agent answers a question by first looking up information from a knowledge base, then using it to generate the answer. Knowledge assistants. Policy lookups. "Ask anything about our company" tools. It's the most common enterprise AI use case. It's also where the build math is most clearly in Carle's favor.</p>
+      <p><span class="g-term" data-def="Retrieval-Augmented Generation. AI looks up relevant information from a knowledge base before answering. Click to read more."><a href="glossary.html#rag">RAG</a></span> — retrieval-augmented generation — is the AI pattern where an agent answers a question by first looking up information from a knowledge base, then using it to generate the answer. Knowledge assistants. Policy lookups. "Ask anything about our company" tools. It's the most common enterprise AI use case. It's also where the build math is most clearly in Carle's favor.</p>
 
       <h4>What RAG actually requires</h4>
       <ul>
         <li>A place where knowledge is stored and governed — <em>SharePoint with E5/Entra access controls.</em> ✓</li>
         <li>An embedding model — <em>commodity, native to Foundry.</em> ✓</li>
-        <li>A vector store — <em>commodity, built into Foundry.</em> ✓</li>
+        <li>A <span class="g-term" data-def="Database optimized for AI knowledge search. SharePoint and Foundry both have vector stores built in. Click to read more."><a href="glossary.html#vector-store">vector store</a></span> — <em>commodity, built into Foundry.</em> ✓</li>
         <li>A retrieval algorithm — <em>commodity.</em> ✓</li>
         <li>A wrapper that puts retrieved chunks in front of an LLM — <em>this is the actual engineering, and it's small.</em></li>
       </ul>
@@ -1039,7 +1059,7 @@ summary:hover{color:#fff;}
       <p>This is the part that turns the conversation.</p>
       <ul>
         <li>Workday has had REST APIs for years. Every piece of Workday data and most actions are reachable programmatically.</li>
-        <li>Workday does <em>not</em> currently offer an official MCP server. Their VP of Agent System of Record said at DevCon 2025 that MCP and A2A are coming. Future tense.</li>
+        <li>Workday does <em>not</em> currently offer an official <span class="g-term" data-def="Model Context Protocol. An open standard that lets AI agents call external tools and data sources. Click to read more."><a href="glossary.html#mcp">MCP</a></span> server. Their VP of Agent System of Record said at DevCon 2025 that MCP and <span class="g-term" data-def="Agent-to-Agent. A protocol for AI agents to communicate with each other. Click to read more."><a href="glossary.html#a2a">A2A</a></span> are coming. Future tense.</li>
         <li>Third parties already wrap Workday as MCP — Composio, Knit, Merge, Zapier, CData. Working products today.</li>
       </ul>
 
@@ -1194,7 +1214,7 @@ summary:hover{color:#fff;}
 
   <div class="stat-hero">
     <div class="stat-num">30 : 1</div>
-    <div class="stat-caption"><strong>The build advantage</strong> — once hidden costs are priced in. Works because we already own the kitchen: Azure, Fabric, Dataverse, the engineering team, and the connector library.</div>
+    <div class="stat-caption"><strong>The build advantage</strong> — once hidden costs are priced in. Works because we already own the kitchen: Azure, Fabric, <span class="g-term" data-def="Microsoft's structured data platform, sitting between SharePoint (working) and Workday (canonical). Click to read more."><a href="glossary.html#dataverse">Dataverse</a></span>, the engineering team, and the connector library.</div>
   </div>
 
   <div class="iceberg">
@@ -1292,7 +1312,7 @@ summary:hover{color:#fff;}
 
   <p class="pull">Build costs are real. They're different costs than the ones a vendor invoice shows.</p>
 
-  <p class="lede">Our approach is to <strong>build deliberately, in places where capability compounds, with the differential costs explicitly in the budget.</strong> A vendor invoice shows half the picture; the rest of the work — monitoring, documentation, cyber review — falls to us regardless. And vendor agent builders carry their own training cost: every hour staff spend learning Workday Build or Epic's agent tooling is an hour invested in vendor-specific skills that don't transfer.</p>
+  <p class="lede">Our approach is to <strong>build deliberately, in places where capability compounds, with the differential costs explicitly in the budget.</strong> A vendor invoice shows half the picture; the rest of the work — monitoring, documentation, cyber review — falls to us regardless. And vendor agent builders carry their own staffing cost. Every vendor-specific tooling stack — Workday Build, Epic agent tooling, ServiceNow AI, whatever comes next — requires staff to invest in vendor-specific skills that don't transfer outside the platform. <strong>We're too lean for that math.</strong> Finding developers and product managers with the time to keep up with AI advances and earn the required vendor certifications, at mid-range pay, is rare. Building with raw tools concentrates skill investment on durable, transferable capabilities — the kind that survive vendor transitions and grow more valuable over time.</p>
 
   <details>
     <summary>Where we lean toward building</summary>
@@ -1354,7 +1374,7 @@ summary:hover{color:#fff;}
   <h2 class="section-title">The target architecture</h2>
   <p class="lede"><strong>Teams is where work begins. Workday and Epic are where transactions happen. Dataverse is where business knowledge lives.</strong> AI ties them together.</p>
   <p class="lede">A staff member asks a question in Teams. Carle's AI looks up the policy in Dataverse, calls Workday to do the transaction, returns the answer in Teams. Three systems, one experience. The user doesn't need to know which system did what.</p>
-  <p class="lede">Alongside the production architecture, <strong>Carle Cloud</strong> is our research-grade innovation surface — where capability is proven before it joins the production stack. Designed so Carle's analytics and AI futures are never single-threaded through any vendor's roadmap.</p>
+  <p class="lede">Alongside the production architecture, <strong><span class="g-term" data-def="Carle's research-grade innovation surface where capability is proven before joining the production stack. Click to read more."><a href="glossary.html#carle-cloud">Carle Cloud</a></span></strong> is our research-grade innovation surface — where capability is proven before it joins the production stack. Designed so Carle's analytics and AI futures are never single-threaded through any vendor's roadmap.</p>
 
   <details>
     <summary>The four-layer architecture (technical view)</summary>
@@ -1406,7 +1426,7 @@ summary:hover{color:#fff;}
       <div class="carle-cloud-block">
         <div class="cc-label">Parallel · Carle Cloud (Innovation Surface)</div>
         <div class="cc-headline">Where capability is proven before joining the production stack</div>
-        <div class="cc-body">Research, the College of Medicine, and the development team experiment here with frontier model evaluation, bleeding-edge clinical AI, and research-grade analytics that aren't yet ready for production routing. <strong>Capability graduates from Carle Cloud into the production architecture as it matures.</strong> The Fabric F-SKU capacity already partially earmarked for Catalyst and Power BI workloads serves a dual role — production analytics today, strategic optionality if any vendor's analytics roadmap stalls.</div>
+        <div class="cc-body">Research, the College of Medicine, and the development team experiment here with frontier model evaluation, bleeding-edge clinical AI, and research-grade analytics that aren't yet ready for production routing. <strong>Capability graduates from Carle Cloud into the production architecture as it matures.</strong> The Fabric <span class="g-term" data-def="A capacity tier in Microsoft Fabric licensing. Provides analytics and AI capacity for production and Carle Cloud. Click to read more."><a href="glossary.html#f-sku">F-SKU</a></span> capacity already partially earmarked for Catalyst and Power BI workloads serves a dual role — production analytics today, strategic optionality if any vendor's analytics roadmap stalls.</div>
         <div class="cc-systems">
           <span class="arch-chip">Microsoft Fabric (research-grade)</span>
           <span class="arch-chip">C4HC research environment</span>

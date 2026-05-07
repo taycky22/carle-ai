@@ -336,6 +336,24 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
   .decision{grid-template-columns:1fr;}
   .metaphor{grid-template-columns:1fr;text-align:center;}
 }
+
+/* GLOSSARY TOOLTIPS */
+.g-term{position:relative;border-bottom:1px dotted rgba(125,211,252,0.55);cursor:help;}
+.g-term a{color:inherit;text-decoration:none;border-bottom:none;}
+.g-term::after{
+  content:attr(data-def);
+  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:#1a2138;border:1px solid rgba(255,255,255,0.18);
+  padding:12px 16px;border-radius:8px;width:280px;
+  font-size:12.5px;font-weight:400;color:#d2d8e6;line-height:1.55;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5);
+  pointer-events:none;opacity:0;visibility:hidden;
+  transition:opacity .15s,visibility .15s;z-index:100;
+  white-space:normal;text-align:left;letter-spacing:normal;text-transform:none;
+}
+.g-term:hover::after{opacity:1;visibility:visible;}
+@media(max-width:768px){.g-term::after{display:none;}}
+
 @media print{
   .site-nav{display:none;}
   body{background:#fff;color:#000;}
@@ -357,6 +375,8 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
     <a href="workday.html">Workday</a>
     <a href="ai-cost.html" class="active">AI Cost</a>
     <a href="diagram.html">At a Glance</a>
+    <a href="epic.html">Epic</a>
+    <a href="glossary.html">Glossary</a>
   </div>
 </nav>
 
@@ -428,7 +448,7 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
       <div class="lever-num green">85%</div>
       <div class="lever-content">
         <h4>Prompt caching</h4>
-        <p>System context — policies, SOPs, SharePoint knowledge — gets cached at the session level. Each subsequent reuse costs about <em>10 cents on the dollar</em> compared to full inference. The more we use it, the cheaper it gets.</p>
+        <p>System context — policies, SOPs, SharePoint knowledge — gets cached at the session level. Each subsequent reuse costs about <em>10 cents on the dollar</em> compared to full <span class="g-term" data-def="When an AI model actually runs and produces an answer. Inference is what costs money in AI billing. Click to read more."><a href="glossary.html#inference">inference</a></span>. The more we use it, the cheaper it gets.</p>
       </div>
     </div>
     <div class="lever">
@@ -441,7 +461,7 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
     <div class="lever">
       <div class="lever-num blue">50%</div>
       <div class="lever-content">
-        <h4>Batch API discount</h4>
+        <h4><span class="g-term" data-def="A discount tier for AI work that doesn't need to be real-time. Roughly half price. Click to read more."><a href="glossary.html#batch-api">Batch API</a></span> discount</h4>
         <p>Non-real-time work — nightly analytics, document processing, bulk enrichment — routed through batch endpoints at <em>half price</em>. No quality penalty. Just requires async-first architecture, which we already have.</p>
       </div>
     </div>
@@ -620,7 +640,7 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
       <div class="decision-num">3</div>
       <div class="decision-content">
         <h4>Establish AI cost governance before spend reaches the CFO desk</h4>
-        <p>Usage-based AI billing means agent costs reach finance leadership within 12-18 months. Define token budget allocations per agent and per department now. Build the cost dashboards. Make AI spend visible before it becomes a reactive conversation. The governance is cheap; the alternative is expensive surprise.</p>
+        <p>Usage-based AI billing means agent costs reach finance leadership within 12-18 months. Define <span class="g-term" data-def="The unit AI models use to read and write text. About 3/4 of a word in English. AI pricing is per-token. Click to read more."><a href="glossary.html#token">token</a></span> budget allocations per agent and per department now. Build the cost dashboards. Make AI spend visible before it becomes a reactive conversation. The governance is cheap; the alternative is expensive surprise.</p>
       </div>
     </div>
   </div>
