@@ -306,7 +306,7 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
 
   <p class="lede">Epic is moving aggressively into AI: clinical agents, patient-facing AI (<span class="g-term" data-def="Epic's patient-facing AI assistant. Built with intelligent model orchestration and adding open protocols. Click to read more."><a href="glossary.html#emmie">EMMIE</a></span>), agent builders, and (planned) voice and call center technology. Some of this is genuinely well-architected — open protocols, intelligent model orchestration, allowance for external knowledge bases. Some is Epic stretching beyond its core competency into territory where their track record is mixed.</p>
 
-  <p class="pull">If AI in clinical workflow is inevitable, we own it. We map it to Carle's clinical standards — not Epic's, with flavors of ours.</p>
+  <p class="pull">Clinical AI is already part of clinical work. Epic owns some of it. Third parties own a lot. The Carle-specific layer is ours to own — on Carle's clinical standards, not Epic's with flavors of ours.</p>
 
   <p class="lede">That posture is the spine of this document. Partnership where partnership works. Clear lines where it doesn't. And readiness for either outcome.</p>
 </div>
@@ -365,28 +365,18 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
 
   <div class="emmie-grid">
     <div class="emmie-col in">
-      <div class="emmie-tag">Lean In</div>
+      <div class="emmie-tag">Vertical Depth</div>
       <div class="emmie-headline">Where EMMIE plays to Epic's strengths</div>
-      <ul class="emmie-list">
-        <li><strong>Patient scheduling.</strong> Native Epic data, well-defined transactions, mature workflow. Epic's vertical depth shows.</li>
-        <li><strong>Patient payment workflows.</strong> Same logic — transactional, inside Epic's domain, integrated with the billing systems Epic already governs.</li>
-        <li><strong>MyChart-adjacent patient inquiries.</strong> Where the patient is already in Epic's ecosystem and the question stays within it.</li>
-        <li><strong>Clinical-context patient questions.</strong> Test results, appointment prep, medication questions where Epic's clinical data integration is the genuine differentiator.</li>
-      </ul>
+      <p style="font-size:13.5px;color:var(--text-mid);line-height:1.65;margin:0;">Patient-facing AI that stays inside Epic's clinical and transactional domain — bounded interactions like scheduling, payments, and clinical-context questions grounded in the patient's record. Epic's vertical depth is the genuine differentiator here.</p>
     </div>
     <div class="emmie-col out">
-      <div class="emmie-tag">Don't Lean In</div>
+      <div class="emmie-tag">Track Record</div>
       <div class="emmie-headline">Where Epic's track record is mixed</div>
-      <ul class="emmie-list">
-        <li><strong>Front-end patient-facing website.</strong> Public web experiences are not Epic's competency. Pure-play vendors have years of head start on patient acquisition and engagement experience.</li>
-        <li><strong>Call center technology.</strong> Voice agents are technically harder than text — latency, error recovery, telephony integration. Mature pure-play vendors exist with five years of operational learning.</li>
-        <li><strong>Voice EMMIE specifically.</strong> Until proven in production at health systems Carle's size, voice deserves the same scrutiny as any vendor's first-generation product.</li>
-        <li><strong>Anything reaching outside Epic's clinical domain.</strong> If EMMIE wants to act on data Epic doesn't govern, that's where Carle's orchestrator does the bridging — not EMMIE reaching out.</li>
-      </ul>
+      <p style="font-size:13.5px;color:var(--text-mid);line-height:1.65;margin:0;">Capabilities reaching outside that core — public-facing patient website, call center technology, free-form voice. Disciplines where pure-play vendors have years of operational head start, and where Epic's expansion record beyond the clinical core has been uneven.</p>
     </div>
   </div>
 
-  <p class="lede">The line is whether the use case is <em>transactional inside Epic's natural domain</em> or <em>reaching beyond Epic's clinical-adjacent strengths</em>. Same lens Carle applies to Workday vertical agents. Consistent doctrine, applied to Epic's patient-facing AI.</p>
+  <p class="lede">The line is whether the use case is <em>bounded inside Epic's natural domain</em> or <em>reaching beyond Epic's clinical-adjacent strengths</em>. Same lens Carle applies to Workday vertical agents — consistent doctrine, applied to Epic's patient-facing AI.</p>
 </div>
 
 <div class="divider"></div>
@@ -433,23 +423,25 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
 
 <div class="divider"></div>
 
-<!-- ========== SECTION 05 — PHYSICIAN SIGNAL ========== -->
+<!-- ========== SECTION 05 — WHERE CLINICAL CAUTION BELONGS ========== -->
 <div class="section">
   <div class="section-num">Section 05</div>
-  <h2 class="section-title">Physician input is signal, not obstacle</h2>
-  <p class="lede">In the EMMIE triage demo, physicians on the call pushed back on the AI giving advice. Epic was steadfast — they see this as inevitable. <strong>Both can be true: Epic may be directionally right that AI-assisted triage becomes standard, and the physicians may be right that Epic's specific implementation isn't the right answer for Carle.</strong></p>
+  <h2 class="section-title">Where clinical caution belongs</h2>
+  <p class="lede">Clinical AI is not one thing. <strong>A constrained agent that schedules an appointment, surfaces a test result, or prepares a patient for a procedure is fundamentally different from an open-ended conversational AI that talks with patients behind MyChart login about how they're feeling.</strong> The first is a bounded transaction with defined scope and clear failure modes. The second is something much closer to a private clinical conversation — feeling like medical guidance to the patient, but not anchored to the patient's record, Carle's clinical decision support, or the standards Carle's clinical leadership has built into the rest of clinical workflow.</p>
+
+  <p class="lede">Open-ended, conversational AI for patients drawing on generalized training data sits in a different risk category than the rest. The patient experiences it as guidance from someone qualified to give it. The AI is producing answers from generalized knowledge, not from the patient's specific clinical context. <em>That's where the legitimate clinical concern lives — not AI in clinical workflow broadly, but this specific class of AI behavior.</em></p>
 
   <div class="signal-box">
-    <div class="signal-tag">Why physician hesitation matters</div>
-    <div class="signal-headline">The physicians on that call are the people who'd absorb the consequences of the AI being wrong.</div>
-    <div class="signal-body">Their hesitation is calibrated by clinical experience that vendors don't have. <strong>That makes physician input a calibration signal — not an obstacle to overcome.</strong> The question isn't how to convince physicians to accept Epic's design. It's how to design AI-assisted triage that meets Carle's clinical standards, with physician judgment central to the design itself.</div>
+    <div class="signal-tag">Why the distinction matters</div>
+    <div class="signal-headline">The technology to have free-form medical conversations with patients exists. The clinical and liability framework for any health system to do it responsibly does not yet fully exist.</div>
+    <div class="signal-body">That gap is not Carle's to close through faster adoption. It belongs to clinical leadership, regulatory bodies, and liability carriers working through what responsible deployment looks like. <strong>Until those questions resolve, this category of AI deserves more scrutiny than vendors moving aggressively to ship it tend to acknowledge.</strong></div>
   </div>
 
-  <p class="lede">"Inevitable" is also a sales frame. Vendors who say "this is inevitable" are usually the ones positioned to benefit if customers accept the inevitability and start adopting on the vendor's schedule. The clinical liability questions — who's liable when the AI is wrong, what guardrails are required, who's accountable on record — are real and unresolved. They deserve serious work before adoption, not after.</p>
+  <p class="lede">Vendors that frame this as inevitable are signaling that they want customers to accept the inevitability and start adopting on the vendor's schedule. Inevitability is a sales frame. <strong>The clinical liability questions — accountability when an AI gives a patient something resembling medical guidance, what guardrails are required, what the escalation path looks like — are real and unresolved across the industry.</strong> Serious work here belongs before adoption, not after.</p>
 
   <div class="callout">
     <div class="callout-label">The position to hold</div>
-    <div class="callout-body">If AI in clinical workflow is inevitable, Carle adopts it on <strong>Carle's clinical standards and Carle's governance</strong> — not Epic's, with flavors of ours layered on. We use their tooling where it fits our standards. We substitute our own where it doesn't. <em>That's a stronger argument than blanket resistance.</em></div>
+    <div class="callout-body">Where Carle adopts AI in patient-facing clinical contexts, <strong>Carle's clinical leadership owns the standards governing it</strong> — not the vendor, with flavors of ours layered on. Bounded transactional AI inside Epic's vertical strengths makes sense and is already familiar territory. Open-ended conversational AI with patients gets handled with significantly more care, much more design work, and Carle's clinical leadership at the center of it. <em>That's calibration, not resistance.</em></div>
   </div>
 </div>
 
@@ -529,7 +521,7 @@ h2.section-title{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20
     </li>
   </ul>
 
-  <p class="pull">If clinical AI is inevitable, Carle owns it. Mapped to our standards. Built to survive whichever way Epic's roadmap unfolds.</p>
+  <p class="pull">Clinical AI is already part of clinical work. Epic owns some. Third parties own a lot. The Carle-specific layer — how AI behaves with our patients, in our flows, on our standards — is ours to own.</p>
 
   <div class="callout">
     <div class="callout-label">The closing thought</div>
