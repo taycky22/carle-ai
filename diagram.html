@@ -205,6 +205,41 @@ h2.section-title{font-size:28px;font-weight:700;line-height:1.2;margin-bottom:14
 .g-term:hover::after{opacity:1;visibility:visible;}
 @media(max-width:768px){.g-term::after{display:none;}}
 
+
+/* VALUE BULLETS */
+.value-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;
+}
+.value-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  transition:border-color .2s;
+}
+.value-card:hover{border-color:var(--border-bright);}
+.value-icon{
+  width:44px;height:44px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:#1c1e22;letter-spacing:-0.5px;
+  background:linear-gradient(135deg,#fcd34d,#f59e0b);
+  flex-shrink:0;
+}
+.value-card:nth-child(2) .value-icon{background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;}
+.value-card:nth-child(3) .value-icon{background:linear-gradient(135deg,#14b8a6,#5eead4);color:#1c1e22;}
+.value-card:nth-child(4) .value-icon{background:linear-gradient(135deg,#3b82f6,#60a8ff);color:#fff;}
+.value-card:nth-child(5) .value-icon{background:linear-gradient(135deg,#10b981,#5dd4a8);color:#1c1e22;}
+.value-card:nth-child(6) .value-icon{background:linear-gradient(135deg,#ef4444,#ff8a96);color:#fff;}
+.value-content h4{
+  font-size:15.5px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.2px;line-height:1.35;
+}
+.value-content p{
+  font-size:13.5px;color:var(--text-mid);line-height:1.6;
+}
+.value-content p strong{color:#fff;font-weight:600;}
+@media(max-width:680px){
+  .value-grid{grid-template-columns:1fr;}
+  .value-card{padding:18px 20px;}
+}
+
 @media print{
   .site-nav{display:none;}
   body{background:#fff;color:#000;}
@@ -326,9 +361,73 @@ h2.section-title{font-size:28px;font-weight:700;line-height:1.2;margin-bottom:14
 
 <div class="divider"></div>
 
-<!-- ========== PLAYBOOK ========== -->
+<!-- ========== WHY IT MATTERS ========== -->
 <div class="section">
   <div class="section-num">Diagram 02</div>
+  <h2 class="section-title">Why this matters</h2>
+  <p class="section-sub">Six reasons the orchestration layer is worth building and protecting — at executive altitude, without the technical detail.</p>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-icon">$</div>
+      <div class="value-content">
+        <h4>We control the AI bill, not the vendor</h4>
+        <p>Every vendor selling us an "AI agent" is reselling the same underlying AI models we can access directly. <strong>When we own the orchestration layer, we choose which model handles which task</strong> — cheap models for simple work, premium models only where they matter. Vendors charge a flat rate either way and keep the difference.</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-icon">⚙</div>
+      <div class="value-content">
+        <h4>One governed front door instead of a dozen</h4>
+        <p>Without a central layer, every vendor agent has its own login, its own rules, its own data access, and its own AI policies. <strong>The orchestration layer lets cyber, compliance, and IT govern AI once</strong> — at the front door — instead of negotiating with every vendor separately every time a new agent shows up.</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-icon">↺</div>
+      <div class="value-content">
+        <h4>Freedom to change our minds</h4>
+        <p>Vendors release new AI capabilities every few months. Some land well; some don't. Some vendors get acquired; others change pricing dramatically. <strong>The orchestration layer lets us swap pieces underneath without disrupting the people using AI day to day.</strong> Without it, every vendor switch is an enterprise-scale project.</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-icon">⚡</div>
+      <div class="value-content">
+        <h4>A force multiplier for a lean team</h4>
+        <p>Each connector we build — to Workday, Epic, Ivanti, SharePoint — becomes reusable infrastructure. <strong>The fifth AI agent costs a fraction of the first one</strong> because the connectors already exist. Vendor agent platforms show no such compounding — the fifth vendor agent costs as much as the first.</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-icon">⌂</div>
+      <div class="value-content">
+        <h4>One consistent experience for staff and patients</h4>
+        <p>Without orchestration, every system has its own AI assistant — staff learn five different chatbots, patients encounter different AI behaviors across MyChart, scheduling, and billing. <strong>The orchestration layer is what makes "Carle AI" feel like one thing instead of five vendors' best guesses.</strong></p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-icon">⟶</div>
+      <div class="value-content">
+        <h4>Strategic optionality as AI keeps changing</h4>
+        <p>AI capability is moving fast and no one knows exactly where it lands in three years. <strong>The orchestration layer is how we stay positioned to take advantage of whatever comes next</strong> — new models, new patterns, new vendors — without being locked into decisions we made when the technology looked different.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">What it costs us not to have it</div>
+    <div class="callout-body">Vendors charge full retail for AI they're reselling. Every system has its own ungoverned AI front door. Every vendor switch is a major project. Connectors get rebuilt every time. Staff and patients get five different AI experiences. And we have no leverage when AI capability shifts. <strong>The orchestration layer isn't an additional cost — it's what makes everything else affordable, governable, and changeable.</strong></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== PLAYBOOK ========== -->
+<div class="section">
+  <div class="section-num">Diagram 03</div>
   <h2 class="section-title">The Six-Step Playbook</h2>
   <p class="section-sub">If the architecture is right, this is the operational sequence that follows. Roughly the order things happen in — though several run in parallel.</p>
 
